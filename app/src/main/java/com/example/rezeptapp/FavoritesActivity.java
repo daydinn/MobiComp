@@ -7,31 +7,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
-
+public class FavoritesActivity extends AppCompatActivity {
 
     ImageView homeButton;
     ImageView recipiesButton;
     ImageView favoritesButton;
-    ImageView searchButton;
-
+    ImageView searchButton;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_favorites);
         homeButton = findViewById(R.id.homeIcon);
         recipiesButton = findViewById(R.id.recipiesIcon);
         favoritesButton= findViewById(R.id.favoritesIcon);
         searchButton= findViewById(R.id.searchIcon);
 
-
-
         //navigate to HomePage
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,MainActivity.class));
+                startActivity(new Intent(FavoritesActivity.this,MainActivity.class));
             }
         });
 
@@ -40,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,SearchActivity.class));
+                startActivity(new Intent(FavoritesActivity.this,SearchActivity.class));
             }
         });
 
@@ -50,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         recipiesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,RecipiesActivity.class));
+                startActivity(new Intent(FavoritesActivity.this,RecipiesActivity.class));
             }
         });
 
@@ -59,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
         favoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,FavoritesActivity.class));
+                startActivity(new Intent(FavoritesActivity.this,FavoritesActivity.class));
             }
         });
 
-    }
 
+    }
 }

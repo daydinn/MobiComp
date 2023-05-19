@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecipiesActivity">
-
-
+    tools:context=".SearchActivity">
 
     <RelativeLayout
         android:id="@+id/relLayout1"
@@ -22,7 +20,7 @@
         android:id="@+id/RecipieTitel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recipies"
+        android:text="Search Page"
         android:textSize="25dp"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,8 +28,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </TextView>
-
-
 
 
 
