@@ -30,40 +30,54 @@
 
         </TextView>
 
-        <SearchView
+    <SearchView
 
-            android:id="@+id/simpleSearchView"
-            android:layout_width="330dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search here"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/simpleSearchView"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search here"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+    </SearchView>
 
-
-        <!-- set iconified by default to false -->
-
-    <LinearLayout
-        android:weightSum="4"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/homeIcon"
+    <Button
+        android:id="@+id/buttonGoToRandomRecipeActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginTop="600dp"
-        android:layout_weight="1"
-        android:src="@drawable/baseline_home_32"
+        android:text="TestButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/simpleSearchView"
-        tools:layout_editor_absoluteX="77dp" />
+        app:layout_constraintVertical_bias="0.06999999" />
+
+
+    <!-- set iconified by default to false -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:id="@+id/homeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="600dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_home_32"
+            app:layout_constraintTop_toBottomOf="@+id/simpleSearchView"
+            tools:layout_editor_absoluteX="77dp" />
 
 
         <ImageView
@@ -77,16 +91,16 @@
             app:layout_constraintTop_toBottomOf="@+id/simpleSearchView"
             tools:layout_editor_absoluteX="77dp" />
 
-    <ImageView
-        android:id="@+id/recipiesIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="600dp"
-        android:layout_weight="1"
-        android:src="@drawable/baseline_cookie_32"
-        app:layout_constraintLeft_toLeftOf="@+id/homeIcon"
-        app:layout_constraintTop_toBottomOf="@+id/simpleSearchView"
-        tools:layout_editor_absoluteX="260dp" />
+        <ImageView
+            android:id="@+id/recipiesIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="600dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_cookie_32"
+            app:layout_constraintLeft_toLeftOf="@+id/homeIcon"
+            app:layout_constraintTop_toBottomOf="@+id/simpleSearchView"
+            tools:layout_editor_absoluteX="260dp" />
 
         <ImageView
             android:id="@+id/favoritesIcon"
