@@ -20,7 +20,8 @@
         android:id="@+id/RecipieTitel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search Page"
+        android:textColor="@color/black"
+        android:text="Search a Recipie"
         android:textSize="25dp"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,10 +30,124 @@
 
     </TextView>
 
+    <EditText
+        android:id="@+id/editTextSearchById"
+        android:layout_width="334dp"
+        android:layout_height="47dp"
+        android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/baseline_numbers_24"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Search by Id"
+        android:inputType="text"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.369" />
+
+    <EditText
+        android:id="@+id/editTextSearchByName"
+        android:layout_width="334dp"
+        android:layout_height="47dp"
+        android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/baseline_sort_by_alpha_24"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Search by Name"
+        android:inputType="text"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.457" />
+
+    <EditText
+        android:id="@+id/editSearchByMeasurement"
+        android:layout_width="334dp"
+        android:layout_height="47dp"
+        android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/baseline_person_add_24"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Search by Measurement"
+        android:inputType="text"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.562" />
+
+    <EditText
+        android:id="@+id/editTextSearchByIngredient"
+        android:layout_width="334dp"
+        android:layout_height="47dp"
+        android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/baseline_fastfood_24"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:inputType="text"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:hint="Search by Ingredient"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.663" />
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="308dp"
+        android:layout_height="40dp"
+        android:background="@drawable/input_bg"
+        android:text="Search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.748"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+
+        />
+
+
+
 
 
     <!-- set iconified by default to false -->
-
     <LinearLayout
         android:weightSum="4"
         android:orientation="horizontal"
