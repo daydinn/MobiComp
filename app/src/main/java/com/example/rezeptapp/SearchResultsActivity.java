@@ -30,9 +30,15 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
         backButton = findViewById(R.id.backButton);
+        Recipe recipe = recipes.get(0);
+        //recipeIdTest.setText(recipe.getId());
+        //recipeCategoryTest.setText(recipe.getCategory());
+        //recipeNameTest.setText(recipe.getName());
+        //loadFoundRecipe();
 
 
 
@@ -58,12 +64,14 @@ public class SearchResultsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    /*
                     recipeIdTest.setText(recipeManager.getRandomRecipe().get(0).getId());
                     recipeNameTest.setText(recipeManager.getRandomRecipe().get(0).getName());
                     recipeCategoryTest.setText(recipeManager.getRandomRecipe().get(0).getCategory());
+ */
+                    loadFoundRecipe();
 
-
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
 
@@ -96,3 +104,4 @@ public class SearchResultsActivity extends AppCompatActivity {
         });
     }
 }
+
