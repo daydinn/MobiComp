@@ -2,6 +2,8 @@ package com.example.rezeptapp;
 
 import android.util.Log;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,39 +26,12 @@ public class RecipeManager {
     private Request request;
 
     public void setUpHttpClient( String url){
-        //http request with okhttp (Dependency in gradle Module:app + Permission Internet in Manifest)
+        //http request with okhttp
         //Set up http client
         client = new OkHttpClient();
-        //String url = "https://www.themealdb.com/api/json/v1/1/random.php";
         request = new Request.Builder().url(url).build();
     }
 
-    public ArrayList<Recipe> getRandomRecipe() throws InterruptedException {
-
-        setUpHttpClient("https://www.themealdb.com/api/json/v1/1/random.php");
-
-        //Make http Request
-        //CountDownLatch -> Wartet bis Response komplett ist.
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                e.printStackTrace();
-                countDownLatch.countDown();
-            }
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if(response.isSuccessful()){
-                    String myResponse = response.body().string();
-                    recipes=parseRecipe(myResponse);
-                    response.close();
-                    countDownLatch.countDown();
-                }
-            }
-        });
-        countDownLatch.await();
-        return recipes;
-    }
     public ArrayList<Recipe> parseRecipe(String jsonString){
         ArrayList<Recipe> newRecipes = new ArrayList<Recipe>();
 
@@ -93,7 +68,6 @@ public class RecipeManager {
                     newRecipes.get(newRecipes.size() - 1).setSourceURL(jsonInside.getString("strSource"));
                 }
             }
-
         } catch (JSONException e) {
             Log.e("Error","Error loading data.");
             throw new RuntimeException(e);
@@ -102,6 +76,72 @@ public class RecipeManager {
 
         return newRecipes;
     }
+
+    public ArrayList<Recipe> makeAPIRequest(String url) throws InterruptedException {
+        //Set Up Http Client
+        setUpHttpClient(url);
+        //CountDownLatch -> Wartet bis Response komplett ist.
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        //Make http Request
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                recipes=new ArrayList<Recipe>();
+                e.printStackTrace();
+                countDownLatch.countDown();
+            }
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if(response.isSuccessful()){
+                    String myResponse = response.body().string();
+                    recipes=parseRecipe(myResponse);
+                    response.close();
+                    countDownLatch.countDown();
+                }
+            }
+        });
+        countDownLatch.await();
+        return recipes;
+    }
+
+    //Abfrage: Zufallsrezept
+    public ArrayList<Recipe> getRandomRecipe() throws InterruptedException {
+        return makeAPIRequest("https://www.themealdb.com/api/json/v1/1/random.php");
+    }
+
+    //Abfrage: Rezepte nach Namen
+    public ArrayList<Recipe> getRecipesByName(String name) throws InterruptedException {
+        return makeAPIRequest("https://www.themealdb.com/api/json/v1/1/search.php?s="+name);
+    }
+
+    //Abfrage: Rezepte nach Zutaten
+    public ArrayList<Recipe> getRecipesByIngredient(String ingredient) throws InterruptedException {
+        return makeAPIRequest("www.themealdb.com/api/json/v1/1/filter.php?i="+ingredient);
+    }
+
+    //Abfrage: Rezepte nach Kategorie
+    public ArrayList<Recipe> getRecipesByCategory(String category) throws InterruptedException {
+        return makeAPIRequest("www.themealdb.com/api/json/v1/1/filter.php?c="+category);
+    }
+
+    //Abfrage: Rezepte nach Gebiet
+    public ArrayList<Recipe> getRecipesByArea(String area) throws InterruptedException {
+        return makeAPIRequest("www.themealdb.com/api/json/v1/1/filter.php?a="+area);
+    }
+
+    //Rezept nach ID
+    public ArrayList<Recipe> getRecipesByID(String id) throws InterruptedException {
+        return makeAPIRequest("www.themealdb.com/api/json/v1/1/lookup.php?i="+id);
+    }
+
+    //Liste aller Kategorien (Mit/ohne Beschreibung)
+
+    //Liste aller Gebiete
+
+    //Liste aller Zutaten
+
+
+
 
 
 
