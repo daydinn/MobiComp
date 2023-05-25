@@ -69,9 +69,9 @@ public class RandomRecipeDemoActivity extends AppCompatActivity {
         Log.d("number","1:"+recipes.size());
 
         //Write first recipe into activity
-        RandomRecipeDemoActivity.this.runOnUiThread(new Runnable() {
+        /*RandomRecipeDemoActivity.this.runOnUiThread(new Runnable() {
             @Override
-            public void run() {
+            public void run() {*/
                 Recipe recipe = recipes.get(0);
                 textviewName.setText(recipe.getName());
                 textviewCategory.setText(recipe.getCategory());
@@ -91,7 +91,7 @@ public class RandomRecipeDemoActivity extends AppCompatActivity {
                     textviewIngredient.append(recipe.getIngredient().get(i) + "\n");
                     textviewMeasurement.append(recipe.getMeasurement().get(i) + "\n");
                 }
-            }
-        });
+            /*}
+        });*/
     }
 }

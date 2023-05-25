@@ -30,16 +30,15 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
         backButton = findViewById(R.id.backButton);
-        Recipe recipe = recipes.get(0);
-        //recipeIdTest.setText(recipe.getId());
-        //recipeCategoryTest.setText(recipe.getCategory());
-        //recipeNameTest.setText(recipe.getName());
-        //loadFoundRecipe();
+        recipeIdTest = findViewById(R.id.RecipeIdTest);
+        recipeNameTest = findViewById(R.id.RecipeNameTest);
+        recipeCategoryTest = findViewById(R.id.RecipeCategoryTest);
 
+        reloadButton = findViewById(R.id.reloadButton);
+        loadFoundRecipe();
 
 
 
@@ -52,11 +51,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             }
 
         });
-        recipeIdTest = findViewById(R.id.RecipeIdTest);
-        recipeNameTest = findViewById(R.id.RecipeNameTest);
-        recipeCategoryTest = findViewById(R.id.RecipeCategoryTest);
 
-        reloadButton = findViewById(R.id.reloadButton);
 
 
         reloadButton.setOnClickListener(new View.OnClickListener(){
@@ -91,17 +86,11 @@ public class SearchResultsActivity extends AppCompatActivity {
         }
 
         //Write first recipe into activity
-        SearchResultsActivity.this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
                 Recipe recipe = recipes.get(0);
                 recipeIdTest.setText(recipe.getId());
                 recipeCategoryTest.setText(recipe.getCategory());
                 recipeNameTest.setText(recipe.getName());
 
-
-            }
-        });
     }
 }
 
