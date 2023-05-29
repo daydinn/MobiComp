@@ -27,8 +27,9 @@ public class RandomRecipeDemoActivity extends AppCompatActivity {
     private TextView textviewSource;
     private Button newRecipeButton;
 
-    private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-    private RecipeManager recipeManager = new RecipeManager();
+    private ArrayList<Recipe> recipes = new ArrayList<>();
+    private ArrayList<ShortRecipe> shortRecipes = new ArrayList<>();
+    private SearchManager searchManager = new SearchManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,16 +63,20 @@ public class RandomRecipeDemoActivity extends AppCompatActivity {
 
     private void loadRandomRecipe(){
         try {
-            recipes = recipeManager.getRandomRecipe();
+            recipes = searchManager.getRandomRecipe();
+            /*ArrayList<String> ingr = new ArrayList<String>();
+            ingr.add("rice");
+            ingr.add("chicken");
+            shortRecipes = recipeManager.getRecipesByMultipleIngredients(ingr);*/
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        Log.d("number","1:"+recipes.size());
+        Log.d("number","1:"+shortRecipes.size());
+        for(int i=0; i<shortRecipes.size();i++){
+            Log.d("R" , "Rezept "+i+": "+shortRecipes.get(i).getName());
+        }
 
         //Write first recipe into activity
-        /*RandomRecipeDemoActivity.this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {*/
                 Recipe recipe = recipes.get(0);
                 textviewName.setText(recipe.getName());
                 textviewCategory.setText(recipe.getCategory());
@@ -91,7 +96,5 @@ public class RandomRecipeDemoActivity extends AppCompatActivity {
                     textviewIngredient.append(recipe.getIngredient().get(i) + "\n");
                     textviewMeasurement.append(recipe.getMeasurement().get(i) + "\n");
                 }
-            /*}
-        });*/
     }
 }

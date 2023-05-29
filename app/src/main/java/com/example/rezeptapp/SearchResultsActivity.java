@@ -4,13 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,7 +23,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 
-    private RecipeManager recipeManager = new RecipeManager();
+    private SearchManager searchManager = new SearchManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +77,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     private void loadFoundRecipe(){
         try {
-            recipes = recipeManager.getRandomRecipe();
+            recipes = searchManager.getRandomRecipe();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
