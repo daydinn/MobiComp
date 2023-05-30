@@ -1,20 +1,37 @@
 package com.example.rezeptapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 public class MainActivity extends AppCompatActivity {
 
+    BottomNavigationView bottomNavigationView;
 
+    HomeFragment homeFragment= new HomeFragment();
+    SearchFragment searchFragment = new SearchFragment();
+    RecipesFragment recipesFragment = new RecipesFragment();
+    FavoritesFragment favoritesFragment= new FavoritesFragment();
+
+/*
     ImageView homeButton;
     ImageView recipiesButton;
     ImageView favoritesButton;
     ImageView searchButton;
+
+    
+ */
 
     //Nur für Testzwecke
     Button goToRandomRecipe;
@@ -24,10 +41,65 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        homeButton = findViewById(R.id.homeIcon);
-        recipiesButton = findViewById(R.id.recipiesIcon);
-        favoritesButton= findViewById(R.id.favoritesIcon);
-        searchButton= findViewById(R.id.searchIcon);
+        bottomNavigationView=findViewById(R.id.bottom_navigation);
+
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
+        //helps to replace the container without the homeFragment while we open the App
+        //getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
+
+/*
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                switch(item.getItemId()){
+                    case R.id.home:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+                        return true;
+                    case R.id.search:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
+                        return true;
+                    case R.id.recipes:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, recipesFragment).commit();
+                        return true;
+                    case R.id.favorites:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, favoritesFragment).commit();
+                        return true;
+                }
+
+                return false;
+            }
+        });
+
+*/
+
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.home) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+                    return true;
+                } else if (itemId == R.id.search) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
+                    return true;
+                } else if (itemId == R.id.recipes) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, recipesFragment).commit();
+                    return true;
+                } else if (itemId == R.id.favorites) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, favoritesFragment).commit();
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
+
+
+
 
         //Nur für Testzwecke
         goToRandomRecipe = findViewById(R.id.buttonGoToRandomRecipeActivity);
@@ -38,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+/*
         //navigate to HomePage
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,FavoritesActivity.class));
             }
         });
+
+        */
 
     }
 
