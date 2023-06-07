@@ -15,14 +15,22 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import androidx.fragment.app.FragmentManager;
+
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
     HomeFragment homeFragment= new HomeFragment();
     SearchFragment searchFragment = new SearchFragment();
+    SearchFragment searchResultsFragment = new SearchFragment();
+
     RecipesFragment recipesFragment = new RecipesFragment();
     FavoritesFragment favoritesFragment= new FavoritesFragment();
+
+
+
+
 
 /*
     ImageView homeButton;
@@ -44,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView=findViewById(R.id.bottom_navigation);
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,searchFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,searchResultsFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit(); //erste Page muss immer unten sein
         //helps to replace the container without the homeFragment while we open the App
         //getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
 
@@ -100,8 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-        //Nur für Testzwecke
+/*        //Nur für Testzwecke
         goToRandomRecipe = findViewById(R.id.buttonGoToRandomRecipeActivity);
         goToRandomRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,RandomRecipeDemoActivity.class));
             }
         });
-
+*/
 /*
         //navigate to HomePage
         homeButton.setOnClickListener(new View.OnClickListener() {
