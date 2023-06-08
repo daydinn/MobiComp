@@ -88,17 +88,31 @@ public class SearchResultsFragment extends Fragment {
     }
 
     private void loadFoundRecipe(){
-        try {
-            recipes = searchManager.getRandomRecipe();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Thread thread = new Thread(){
+            public void run(){
+                try {
 
-        //Write first recipe into activity
-        Recipe recipe = recipes.get(0);
-        recipeIdTest.setText(recipe.getId());
-        recipeCategoryTest.setText(recipe.getCategory());
-        recipeNameTest.setText(recipe.getName());
+                    recipes = searchManager.getRandomRecipe();
+                    //Write first recipe into activity
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        public void run() {
+                            Recipe recipe = recipes.get(0);
+                            recipeIdTest.setText(recipe.getId());
+                            recipeCategoryTest.setText(recipe.getCategory());
+                            recipeNameTest.setText(recipe.getName());
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+
+        thread.start();
+
+
+
 
     }
 
