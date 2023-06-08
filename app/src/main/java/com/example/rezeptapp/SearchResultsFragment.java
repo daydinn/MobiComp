@@ -1,18 +1,20 @@
 package com.example.rezeptapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class SearchResultsActivity extends AppCompatActivity {
 
+public class SearchResultsFragment extends Fragment {
 
     ImageButton backButton;
     TextView recipeIdTest;
@@ -21,32 +23,41 @@ public class SearchResultsActivity extends AppCompatActivity {
 
     Button reloadButton;
 
+
     private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 
     private SearchManager searchManager = new SearchManager();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_results);
-        backButton = findViewById(R.id.backButton);
-        recipeIdTest = findViewById(R.id.RecipeIdTest);
-        recipeNameTest = findViewById(R.id.RecipeNameTest);
-        recipeCategoryTest = findViewById(R.id.RecipeCategoryTest);
 
-        reloadButton = findViewById(R.id.reloadButton);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+    }
+
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+
+
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_search_results, container, false);
+         backButton = (ImageButton) view.findViewById(R.id.backButton);
+         reloadButton = (Button) view.findViewById(R.id.reloadButton);
+         recipeIdTest= (TextView) view.findViewById(R.id.recipeIdTest);
+         recipeNameTest= (TextView) view.findViewById(R.id.recipeNameTest);
+         recipeCategoryTest= (TextView) view.findViewById(R.id.recipeCategoryTest);
         loadFoundRecipe();
 
-
-
         backButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(SearchResultsActivity.this, SearchActivity.class));
-            }
-
+                SearchFragment searchFragment = new SearchFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,searchFragment).commit();            }
         });
 
 
@@ -71,6 +82,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             }
         });
 
+        return view;
 
 
     }
@@ -83,11 +95,13 @@ public class SearchResultsActivity extends AppCompatActivity {
         }
 
         //Write first recipe into activity
-                Recipe recipe = recipes.get(0);
-                recipeIdTest.setText(recipe.getId());
-                recipeCategoryTest.setText(recipe.getCategory());
-                recipeNameTest.setText(recipe.getName());
+        Recipe recipe = recipes.get(0);
+        recipeIdTest.setText(recipe.getId());
+        recipeCategoryTest.setText(recipe.getCategory());
+        recipeNameTest.setText(recipe.getName());
 
     }
-}
 
+
+
+}
