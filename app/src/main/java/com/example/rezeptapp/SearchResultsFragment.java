@@ -66,19 +66,8 @@ public class SearchResultsFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                try {
-                    /*
-                    recipeIdTest.setText(recipeManager.getRandomRecipe().get(0).getId());
-                    recipeNameTest.setText(recipeManager.getRandomRecipe().get(0).getName());
-                    recipeCategoryTest.setText(recipeManager.getRandomRecipe().get(0).getCategory());
- */
-                    loadFoundRecipe();
 
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-
-
+                loadFoundRecipe();
             }
         });
 

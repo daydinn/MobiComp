@@ -121,6 +121,9 @@ public class SearchManager {
                     response.close();
                     countDownLatch.countDown();
                 }
+                else {
+                    Log.d("error", response.message());
+                }
             }
         });
         countDownLatch.await();
