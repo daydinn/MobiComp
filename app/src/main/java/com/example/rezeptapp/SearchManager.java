@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 
@@ -221,6 +222,26 @@ public class SearchManager {
         countDownLatch.await();
         return newList;
     }
+
+
+public ArrayList<Recipe> getTestData(){
+
+    ArrayList<Recipe> Testdata = new ArrayList<>();
+    Recipe recipe1 = new Recipe("01","rene","beef","51","Rene ist ziemlich cool",new ArrayList<String>( Arrays.asList("wasser","beef","salz")),new ArrayList<String>( Arrays.asList("70","29","1")));
+    recipe1.setImageURL("https://upload.wikimedia.org/wikipedia/commons/a/a3/Ren%C3%A9_Angelil.jpg");
+    Recipe recipe2 = new Recipe("02","marc","chicken","52","Marc ist ziemlich cool",new ArrayList<String>( Arrays.asList("wasser","chicken","salz")),new ArrayList<String>( Arrays.asList("60","39","1")));
+    recipe2.setImageURL("https://cdn-4.motorsport.com/images/mgl/YXRxrld0/s8/marc-marquez-repsol-honda-team-1.jpg");
+    Recipe recipe3 = new Recipe("03","diyar","vegetables","53","Diyar ist ziemlich cool",new ArrayList<String>( Arrays.asList("wasser","gemüse","salz")),new ArrayList<String>( Arrays.asList("80","19","1")));
+    recipe3.setImageURL("https://img.a.transfermarkt.technology/portrait/big/347735-1643120498.jpg?lm=1");
+    Testdata.add(recipe1);
+    Testdata.add(recipe2);
+
+    Testdata.add(recipe3);
+    return Testdata;
+
+}
+
+
 
 
 

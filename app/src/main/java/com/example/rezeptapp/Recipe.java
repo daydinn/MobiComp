@@ -14,6 +14,9 @@ public class Recipe {
     private ArrayList<String> measurement;
     private String sourceURL="";
 
+
+
+
     public Recipe(String id, String name, String category, String area, String instruction, ArrayList<String> ingredient, ArrayList<String> measurement){
         this.id = id;
         this. name = name;
@@ -23,6 +26,7 @@ public class Recipe {
         this.ingredient=ingredient;
         this.measurement=measurement;
     }
+
 
 
     public String getId() {

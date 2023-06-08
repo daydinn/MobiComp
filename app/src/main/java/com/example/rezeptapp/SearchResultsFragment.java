@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,9 +80,11 @@ public class SearchResultsFragment extends Fragment {
     private void loadFoundRecipe(){
         Thread thread = new Thread(){
             public void run(){
-                try {
 
-                    recipes = searchManager.getRandomRecipe();
+                //try {
+
+                    recipes = searchManager.getTestData();
+                    Log.d("test", "nachricht");
                     //Write first recipe into activity
 
                     getActivity().runOnUiThread(new Runnable() {
@@ -92,9 +95,9 @@ public class SearchResultsFragment extends Fragment {
                             recipeNameTest.setText(recipe.getName());
                         }
                     });
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+               // } catch (InterruptedException e) {
+                //    throw new RuntimeException(e);
+               // }
             }
         };
 
