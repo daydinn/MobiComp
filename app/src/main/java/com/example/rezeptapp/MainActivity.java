@@ -1,21 +1,15 @@
 package com.example.rezeptapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import androidx.fragment.app.FragmentManager;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     RecipesFragment recipesFragment = new RecipesFragment();
     FavoritesFragment favoritesFragment= new FavoritesFragment();
-
 
 
 

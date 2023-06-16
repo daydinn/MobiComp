@@ -2,14 +2,17 @@ package com.example.rezeptapp;
 
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
 import androidx.annotation.NonNull;
@@ -21,87 +24,23 @@ import okhttp3.Response;
 
 
 public class SearchManager {
-    private ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
-    private ArrayList<ShortRecipe> shortRecipeList = new ArrayList<>();
+    private Recipe recipe = new Recipe();
+    private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private OkHttpClient client;
     private Request request;
+    private String apiKey = "?apiKey=3a12fe000cda4985aec81ce863d180d9";
 
-    public void setUpHttpClient( String url){
+    public void setUpHttpClient(String url) {
         //http request with okhttp
         //Set up http client
         client = new OkHttpClient();
         request = new Request.Builder().url(url).build();
     }
 
-    //Parse Recipes
-    public ArrayList<Recipe> parseRecipe(String jsonString){
-        ArrayList<Recipe> newRecipes = new ArrayList<Recipe>();
-
-        //parse json
-        try {
-            JSONObject jsonObject = new JSONObject(jsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray("meals");
-            for(int i=0; i<jsonArray.length(); i++){
-                JSONObject jsonInside = jsonArray.getJSONObject(i);
-                ArrayList<String> ingredient= new ArrayList<String>();
-                ArrayList<String> measurement= new ArrayList<String>();
-                for(int j=0; j<20; j++){ //20 = max number of ingredients
-                    if(!jsonInside.getString("strIngredient"+(j + 1)).isEmpty() && !jsonInside.getString("strMeasure"+(j + 1)).isEmpty()){
-                        ingredient.add(jsonInside.getString("strIngredient"+(j + 1)));
-                        measurement.add(jsonInside.getString("strMeasure" + (j + 1)));
-                    }
-                }
-                //create Recipe
-                newRecipes.add(new Recipe(jsonInside.getString("idMeal"),
-                        jsonInside.getString("strMeal"),
-                        jsonInside.getString("strCategory"),
-                        jsonInside.getString("strArea"),
-                        jsonInside.getString("strInstructions"),
-                        ingredient,
-                        measurement
-                ));
-                if(!jsonInside.getString("strMealThumb").isEmpty()){
-                    newRecipes.get(newRecipes.size() - 1).setImageURL(jsonInside.getString("strMealThumb"));
-                }
-                if(!jsonInside.getString("strYoutube").isEmpty()){
-                    newRecipes.get(newRecipes.size() - 1).setYoutubeURL(jsonInside.getString("strYoutube"));
-                }
-                if(!jsonInside.getString("strSource").isEmpty()){
-                    newRecipes.get(newRecipes.size() - 1).setSourceURL(jsonInside.getString("strSource"));
-                }
-            }
-        } catch (JSONException e) {
-            Log.e("Error","Error loading data.");
-            throw new RuntimeException(e);
-        }
-        return newRecipes;
-    }
-
-    //Parse Short Recipes
-    public ArrayList<ShortRecipe> parseShortRecipe(String jsonString){
-        ArrayList<ShortRecipe> newRecipes = new ArrayList<>();
-
-        //parse json
-        try {
-            JSONObject jsonObject = new JSONObject(jsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray("meals");
-            for(int i=0; i<jsonArray.length(); i++){
-                JSONObject jsonInside = jsonArray.getJSONObject(i);
-                newRecipes.add(new ShortRecipe(jsonInside.getString("idMeal"),
-                        jsonInside.getString("strMeal"),
-                        jsonInside.getString("strMealThumb")
-                ));
-            }
-        } catch (JSONException e) {
-            Log.e("Error","Error loading data.");
-            throw new RuntimeException(e);
-        }
-        return newRecipes;
-    }
-
-
-    public ArrayList<Recipe> getRecipeFromAPI(String url) throws InterruptedException {
-        recipeList = new ArrayList<>();
+    public ArrayList<ShortInfo> searchRecipes(HashMap<String, String> general, HashMap<String, Double> macronurtients, HashMap<String, Double> micronutrients, HashMap<String, Double> vitamins) throws InterruptedException {
+        shortInfoList = new ArrayList<>();
+        String url = "https://api.spoonacular.com/recipes/complexSearch"+apiKey+ buildURL(general, macronurtients, micronutrients, vitamins);
+        Log.d("search", url);
         //Set Up Http Client
         setUpHttpClient(url);
         //CountDownLatch -> Wartet bis Response komplett ist.
@@ -110,109 +49,26 @@ public class SearchManager {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                recipeList=new ArrayList<Recipe>();
+                shortInfoList = new ArrayList<ShortInfo>();
                 e.printStackTrace();
                 countDownLatch.countDown();
             }
+
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if(response.isSuccessful()&&response.body()!=null){
+                if (response.isSuccessful() && response.body() != null) {
                     String myResponse = response.body().string();
-                    recipeList=parseRecipe(myResponse);
-                    response.close();
-                    countDownLatch.countDown();
-                }
-                else {
-                    Log.d("error", response.message());
-                }
-            }
-        });
-        countDownLatch.await();
-        return recipeList;
-    }
-
-    public ArrayList<ShortRecipe> getShortRecipeFromAPI(String url)throws InterruptedException {
-        shortRecipeList = new ArrayList<>();
-        //Set Up Http Client
-        setUpHttpClient(url);
-        //CountDownLatch -> Wartet bis Response komplett ist.
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        //Make http Request
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                shortRecipeList = new ArrayList<ShortRecipe>();
-                e.printStackTrace();
-                countDownLatch.countDown();
-            }
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if(response.isSuccessful()&&response.body()!=null){
-                    String myResponse = response.body().string();
-                    shortRecipeList=parseShortRecipe(myResponse);
-                    response.close();
-                    countDownLatch.countDown();
-                }
-            }
-        });
-        countDownLatch.await();
-        return shortRecipeList;
-
-    }
-
-    //Liste an Kategorien/Gebieten/Zutaten
-    public ArrayList<String> getListfromAPI(int category) throws InterruptedException {
-        ArrayList<String> newList = new ArrayList<>();
-        String url="https://www.themealdb.com/api/json/v1/1/list.php?a=list";
-        String keyword = "strArea";
-        if(category!=0 && category!=1 && category!=2){
-            return newList;
-        }
-        switch (category){
-            //Category
-            case 0:
-                url="https://www.themealdb.com/api/json/v1/1/list.php?c=list";
-                keyword="strCategory";
-                break;
-            //Area
-            case 1:
-                url="https://www.themealdb.com/api/json/v1/1/list.php?a=list";
-                keyword = "strArea";
-                break;
-            //Ingredients
-            case 2:
-                url="https://www.themealdb.com/api/json/v1/1/list.php?i=list";
-                keyword="strIngredient";
-                break;
-        }
-        String finalKeyword = keyword;
-        //Set Up Http Client
-        setUpHttpClient(url);
-        //CountDownLatch -> Wartet bis Response komplett ist.
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-        //Make http Request
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                //shortRecipeList = new ArrayList<ShortRecipe>();
-                e.printStackTrace();
-                countDownLatch.countDown();
-            }
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if(response.isSuccessful()&&response.body()!=null){
-                    String myResponse = response.body().string();
-                    //parse json
-                    try {
-                        JSONObject jsonObject = new JSONObject(myResponse);
-                        JSONArray jsonArray = jsonObject.getJSONArray("meals");
-                        for(int i=0; i<jsonArray.length(); i++){
-                            JSONObject jsonInside = jsonArray.getJSONObject(i);
-                            newList.add(jsonInside.getString(finalKeyword));
-                        }
-                    } catch (JSONException e) {
-                        Log.e("Error","Error loading data.");
-                        throw new RuntimeException(e);
+                    //shortInfoList=parseShortRecipe(myResponse);
+                    Log.d("Json Parse", myResponse);
+                    JsonObject jo = (JsonObject) JsonParser.parseString(myResponse);
+                    JsonArray jsonArr = jo.getAsJsonArray("results");
+                    Gson gson = new Gson();
+                    shortInfoList = gson.fromJson(jsonArr, new TypeToken<ArrayList<ShortInfo>>() {
+                    }.getType());
+                    for (int i = 0; i < shortInfoList.size(); i++) {
+                        Log.d("Json Parse", shortInfoList.get(i).getTitle());
+                        Log.d("Json Parse", String.valueOf(shortInfoList.get(i).getId()));
+                        Log.d("Json Parse", shortInfoList.get(i).getImage());
                     }
                     response.close();
                     countDownLatch.countDown();
@@ -220,119 +76,98 @@ public class SearchManager {
             }
         });
         countDownLatch.await();
-        return newList;
+        return shortInfoList;
+
     }
 
-
-public ArrayList<Recipe> getTestData(){
-
-    ArrayList<Recipe> Testdata = new ArrayList<>();
-    Recipe recipe1 = new Recipe("01","rene","beef","51","Rene ist ziemlich cool",new ArrayList<String>( Arrays.asList("wasser","beef","salz")),new ArrayList<String>( Arrays.asList("70","29","1")));
-    recipe1.setImageURL("https://upload.wikimedia.org/wikipedia/commons/a/a3/Ren%C3%A9_Angelil.jpg");
-    Recipe recipe2 = new Recipe("02","marc","chicken","52","Marc ist ziemlich cool",new ArrayList<String>( Arrays.asList("wasser","chicken","salz")),new ArrayList<String>( Arrays.asList("60","39","1")));
-    recipe2.setImageURL("https://cdn-4.motorsport.com/images/mgl/YXRxrld0/s8/marc-marquez-repsol-honda-team-1.jpg");
-    Recipe recipe3 = new Recipe("03","diyar","vegetables","53","Diyar ist ziemlich cool",new ArrayList<String>( Arrays.asList("wasser","gemüse","salz")),new ArrayList<String>( Arrays.asList("80","19","1")));
-    recipe3.setImageURL("https://img.a.transfermarkt.technology/portrait/big/347735-1643120498.jpg?lm=1");
-    Testdata.add(recipe1);
-    Testdata.add(recipe2);
-
-    Testdata.add(recipe3);
-    return Testdata;
-
-}
-
-
-
-
-
-
-    //Abfrage: Zufallsrezept
-    //Rezept
-    public ArrayList<Recipe> getRandomRecipe() throws InterruptedException {
-        return getRecipeFromAPI("https://www.themealdb.com/api/json/v1/1/random.php");
-    }
-
-    //Abfrage: Rezepte nach Namen
-    //Rezept
-    public ArrayList<Recipe> getRecipesByName(String name) throws InterruptedException {
-        return getRecipeFromAPI("https://www.themealdb.com/api/json/v1/1/search.php?s="+name);
-    }
-
-    //Abfrage: Rezepte nach Zutaten
-    //Liste
-    public ArrayList<ShortRecipe> getRecipesByIngredient(String ingredient) throws InterruptedException {
-        return getShortRecipeFromAPI("https://www.themealdb.com/api/json/v1/1/filter.php?i="+ingredient);
-    }
-
-    //Abfrage: Rezepte nach Kategorie
-    //Liste
-    public ArrayList<ShortRecipe> getRecipesByCategory(String category) throws InterruptedException {
-        return getShortRecipeFromAPI("https://www.themealdb.com/api/json/v1/1/filter.php?c="+category);
-    }
-
-    //Abfrage: Rezepte nach Gebiet
-    //Liste
-    public ArrayList<ShortRecipe> getRecipesByArea(String area) throws InterruptedException {
-        return getShortRecipeFromAPI("www.themealdb.com/api/json/v1/1/filter.php?a="+area);
-    }
-
-    //Rezept nach ID
-    //Rezept
-    public Recipe getRecipesByID(String id) throws InterruptedException {
-        return getRecipeFromAPI("www.themealdb.com/api/json/v1/1/lookup.php?i="+id).get(0);
-    }
-
-
-
-
-
-
-
-
-    //Suche nach mehreren Zutaten
-    //Liste
-    public ArrayList<ShortRecipe> getRecipesByMultipleIngredients(ArrayList<String> ingredients) throws InterruptedException {
-        ArrayList<ShortRecipe> newRecipes = new ArrayList<>();
-        for(int i=0; i<ingredients.size(); i++){
-            newRecipes.addAll(getRecipesByIngredient(ingredients.get(i)));
-        }
-        ArrayList<String> idList = new ArrayList<>();
-        for(int i=0;i<newRecipes.size();i++){
-            idList.add(newRecipes.get(i).getId());
-        }
-        //Filtere die Rezepte heraus, die alle Zutaten enthalten.
-        ArrayList<ShortRecipe> recipeSet = new ArrayList<>();
-        for (ShortRecipe loopRecipe: newRecipes) {
-            //Wenn das aktuelle Rezept genau so oft in der newRecipe Liste enthalten ist wie es Zutaten gibt
-            if(Collections.frequency(idList, loopRecipe.getId())==ingredients.size()){
-                //Gibt noch Duplikate zurück
-                recipeSet.add(loopRecipe);
+    public Recipe getRecipeByID(String id) throws InterruptedException {
+        recipe = new Recipe();
+        String url = "https://api.spoonacular.com/recipes/" + id + "/information" + apiKey + "&includeNutrition=true";
+        //Set Up Http Client
+        setUpHttpClient(url);
+        //CountDownLatch -> Wartet bis Response komplett ist.
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        //Make http Request
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                recipe = new Recipe();
+                e.printStackTrace();
+                countDownLatch.countDown();
             }
-        }
-        return recipeSet;
-    }
 
-
-    //Unerwünschte Zutaten herausfiltern
-    public ArrayList<Recipe> filterUnwantedIngredients(ArrayList<Recipe> recipeList, ArrayList<String> ingredientList){
-        ArrayList<Recipe> newRecipeList = new ArrayList<>();
-        for(int i=0; i<recipeList.size(); i++){
-            for(int j=0; j<ingredientList.size(); j++){
-                if(recipeList.get(i).getIngredient().contains(ingredientList.get(j))){
-                    recipeList.remove(i);
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful() && response.body() != null) {
+                    String myResponse = response.body().string();
+                    //shortInfoList=parseShortRecipe(myResponse);
+                    Log.d("Json Parse", myResponse);
+                    Gson gson = new Gson();
+                    recipe = gson.fromJson(myResponse, Recipe.class);
+                    Log.d("Json Parse", recipe.getTitle());
+                    Log.d("Json Parse", String.valueOf(recipe.getId()));
+                    Log.d("Json Parse", recipe.getImage());
+                    Log.d("Json Parse", recipe.getExtendedIngredients().get(0).getName());
+                    Log.d("Json Parse", String.valueOf(recipe.getExtendedIngredients().get(0).getAmount()));
+                    Log.d("Json Parse", recipe.getExtendedIngredients().get(0).getUnit());
+                    Log.d("Json Parse", recipe.getNutrition().getNutrients().get(0).getName());
+                    Log.d("Json Parse", String.valueOf(recipe.getNutrition().getNutrients().get(0).getAmount()));
+                    Log.d("Json Parse", recipe.getNutrition().getNutrients().get(0).getUnit());
+                    response.close();
+                    countDownLatch.countDown();
                 }
             }
+        });
+        countDownLatch.await();
+        return recipe;
+
+    }
+
+    private String buildURL(HashMap<String, String> general, HashMap<String, Double> macronurtients, HashMap<String, Double> micronutrients, HashMap<String, Double> vitamins){
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<String, String> entry : general.entrySet()) {
+            if(!entry.getValue().isEmpty()&& !Objects.equals(entry.getValue(), "null")){
+                result.append("&").append(entry.getKey()).append("=").append(entry.getValue());
+            }
         }
-
-
-        return newRecipeList;
+        for (Map.Entry<String, Double> entry : macronurtients.entrySet()) {
+            if(entry.getValue()!=-1.0){
+                result.append("&").append(entry.getKey()).append("=").append(entry.getValue());
+            }
+        }
+        for (Map.Entry<String, Double> entry : micronutrients.entrySet()) {
+            if(entry.getValue()!=-1.0){
+                result.append("&").append(entry.getKey()).append("=").append(entry.getValue());
+            }
+        }
+        for (Map.Entry<String, Double> entry : vitamins.entrySet()) {
+            if(entry.getValue()!=-1.0){
+                result.append("&").append(entry.getKey()).append("=").append(entry.getValue());
+            }
+        }
+        Log.d("search", result.toString());
+        return result.toString();
     }
 
 
-    //Duplikate entfernen
 
 
-    //Suche mit mehreren Parametern
+
+
+
+
+
+
+    public ArrayList<ShortInfo> getTestData(){
+
+        ArrayList<ShortInfo> testdata = new ArrayList<>();
+        for(int i=0; i<10; i++){
+            testdata.add(new ShortInfo(i, ("Recipe "+i), "https://spoonacular.com/recipeImages/638148-312x231.jpg"));
+        }
+        return testdata;
+
+    }
+
 
 }
 

@@ -1,131 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchFragment">
 
-    <TextView
-        android:id="@+id/RecipieTitel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
-        android:text="Search Page"
-        android:textSize="25dp">
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="123dp"
+        android:layout_height="49dp"
+        android:background="@drawable/input_bg"
+        android:text="Search"
+        android:textColor="@color/white"
 
-    </TextView>
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
     <TextView
         android:id="@+id/SearchaRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:text="Search a Recipie"
-        android:textSize="25dp"
-        android:layout_marginTop="150dp"
+        android:textColor="@color/black"
 
-        android:layout_centerHorizontal="true">
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.00999999">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/RecipieTitel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Search Page"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.16000003">
 
     </TextView>
 
     <EditText
-        android:id="@+id/editTextSearchById"
-        android:layout_width="334dp"
-        android:layout_height="47dp"
-        android:background="@drawable/input_bg"
-        android:drawableLeft="@drawable/baseline_numbers_24"
-        android:drawablePadding="10dp"
+        android:id="@+id/editTextName"
+        android:layout_width="227dp"
+        android:layout_height="55dp"
         android:ems="10"
-        android:hint="Search by Id"
+        android:hint="Recipe Name"
         android:inputType="text"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:layout_marginTop="200dp"
-        android:layout_centerHorizontal="true" />
+        app:layout_constraintBottom_toTopOf="@+id/buttonSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RecipieTitel"
+        app:layout_constraintVertical_bias="0.060000002" />
 
     <EditText
-        android:id="@+id/editTextSearchByName"
-        android:layout_width="334dp"
-        android:layout_height="47dp"
-        android:background="@drawable/input_bg"
-        android:drawableLeft="@drawable/baseline_sort_by_alpha_24"
-        android:drawablePadding="10dp"
+        android:id="@+id/editTextIngredient"
+        android:layout_width="227dp"
+        android:layout_height="49dp"
         android:ems="10"
-        android:hint="Search by Name"
+        android:hint="Ingredient"
         android:inputType="text"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:layout_marginTop="260dp"
-        android:layout_centerHorizontal="true" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editSearchByMeasurement"
-        android:layout_width="334dp"
-        android:layout_height="47dp"
-        android:background="@drawable/input_bg"
-        android:drawableLeft="@drawable/baseline_person_add_24"
-        android:drawablePadding="10dp"
+        android:id="@+id/editTextExcludedIngredient"
+        android:layout_width="227dp"
+        android:layout_height="55dp"
         android:ems="10"
-        android:hint="Search by Measurement"
+        android:hint="Excluded Ingredient"
         android:inputType="text"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:layout_marginTop="320dp"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:id="@+id/editTextSearchByIngredient"
-        android:layout_width="334dp"
-        android:layout_height="47dp"
-        android:background="@drawable/input_bg"
-        android:drawableLeft="@drawable/baseline_fastfood_24"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:inputType="text"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:hint="Search by Ingredient"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:layout_marginTop="380dp"
-        android:layout_centerHorizontal="true" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextIngredient"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/buttonSearch"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:background="@drawable/input_bg"
-        android:text="Search"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:layout_marginTop="440dp"
-        android:layout_centerHorizontal="true"
+        android:id="@+id/CuisineButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cuisine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextExcludedIngredient"
+        app:layout_constraintVertical_bias="0.050000012" />
 
-        />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_end="205dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/DietButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diet"
+        app:layout_constraintBaseline_toBaselineOf="@+id/CuisineButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
 
-
-
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

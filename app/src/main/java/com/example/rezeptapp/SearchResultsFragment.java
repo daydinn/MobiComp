@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SearchResultsFragment extends Fragment {
@@ -21,14 +23,11 @@ public class SearchResultsFragment extends Fragment {
     TextView recipeIdTest;
     TextView recipeNameTest;
     TextView recipeCategoryTest;
-
     Button reloadButton;
 
 
-    private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-
+    private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private SearchManager searchManager = new SearchManager();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,19 +39,21 @@ public class SearchResultsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
-         backButton = (ImageButton) view.findViewById(R.id.backButton);
-         reloadButton = (Button) view.findViewById(R.id.reloadButton);
-         recipeIdTest= (TextView) view.findViewById(R.id.recipeIdTest);
-         recipeNameTest= (TextView) view.findViewById(R.id.recipeNameTest);
-         recipeCategoryTest= (TextView) view.findViewById(R.id.recipeCategoryTest);
+         backButton = view.findViewById(R.id.backButton);
+         reloadButton = view.findViewById(R.id.reloadButton);
+         recipeIdTest= view.findViewById(R.id.recipeIdTest);
+         recipeNameTest= view.findViewById(R.id.recipeNameTest);
+         recipeCategoryTest= view.findViewById(R.id.recipeCategoryTest);
         loadFoundRecipe();
+
+
+
+
+
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,31 +78,31 @@ public class SearchResultsFragment extends Fragment {
 
     }
 
+
+
     private void loadFoundRecipe(){
         Thread thread = new Thread(){
             public void run(){
 
                 //try {
 
-                    recipes = searchManager.getTestData();
+                    shortInfoList = searchManager.getTestData();
                     Log.d("test", "nachricht");
                     //Write first recipe into activity
 
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
-                            Recipe recipe = recipes.get(0);
-                            recipeIdTest.setText(recipe.getId());
-                            recipeCategoryTest.setText(recipe.getCategory());
-                            recipeNameTest.setText(recipe.getName());
+                            ShortInfo shortinfo = shortInfoList.get(5);
+                            recipeIdTest.setText(String.valueOf(shortinfo.getId()));
+                            recipeNameTest.setText(shortinfo.getTitle());
+                            recipeCategoryTest.setText(shortinfo.getImage());
                         }
                     });
                // } catch (InterruptedException e) {
                 //    throw new RuntimeException(e);
                // }
             }
-        };
-
-        thread.start();
+        };thread.start();
 
 
 
