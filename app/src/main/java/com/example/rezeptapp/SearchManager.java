@@ -37,9 +37,9 @@ public class SearchManager {
         request = new Request.Builder().url(url).build();
     }
 
-    public ArrayList<ShortInfo> searchRecipes(HashMap<String, String> general, HashMap<String, Double> macronurtients, HashMap<String, Double> micronutrients, HashMap<String, Double> vitamins) throws InterruptedException {
+    public ArrayList<ShortInfo> searchRecipes(HashMap<String, String> general, HashMap<String, Double> macronutrients, HashMap<String, Double> micronutrients, HashMap<String, Double> vitamins) throws InterruptedException {
         shortInfoList = new ArrayList<>();
-        String url = "https://api.spoonacular.com/recipes/complexSearch"+apiKey+ buildURL(general, macronurtients, micronutrients, vitamins);
+        String url = "https://api.spoonacular.com/recipes/complexSearch"+apiKey+ buildURL(general, macronutrients, micronutrients, vitamins);
         Log.d("search", url);
         //Set Up Http Client
         setUpHttpClient(url);
@@ -123,14 +123,14 @@ public class SearchManager {
 
     }
 
-    private String buildURL(HashMap<String, String> general, HashMap<String, Double> macronurtients, HashMap<String, Double> micronutrients, HashMap<String, Double> vitamins){
+    private String buildURL(HashMap<String, String> general, HashMap<String, Double> macronutrients, HashMap<String, Double> micronutrients, HashMap<String, Double> vitamins){
         StringBuilder result = new StringBuilder();
         for (Map.Entry<String, String> entry : general.entrySet()) {
             if(!entry.getValue().isEmpty()&& !Objects.equals(entry.getValue(), "null")){
                 result.append("&").append(entry.getKey()).append("=").append(entry.getValue());
             }
         }
-        for (Map.Entry<String, Double> entry : macronurtients.entrySet()) {
+        for (Map.Entry<String, Double> entry : macronutrients.entrySet()) {
             if(entry.getValue()!=-1.0){
                 result.append("&").append(entry.getKey()).append("=").append(entry.getValue());
             }
@@ -145,7 +145,7 @@ public class SearchManager {
                 result.append("&").append(entry.getKey()).append("=").append(entry.getValue());
             }
         }
-        Log.d("search", result.toString());
+        Log.d("search", String.valueOf(result));
         return result.toString();
     }
 

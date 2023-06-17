@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbarAlwaysDrawHorizontalTrack="true"
     tools:context=".SearchFragment">
 
-    <Button
-        android:id="@+id/buttonSearch"
-        android:layout_width="123dp"
-        android:layout_height="49dp"
-        android:background="@drawable/input_bg"
-        android:text="Search"
-        android:textColor="@color/white"
-
-        android:textColorHint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
-
     <TextView
-        android:id="@+id/SearchaRecipe"
+        android:id="@+id/SearchRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search a Recipie"
@@ -38,22 +27,6 @@
 
     </TextView>
 
-    <TextView
-        android:id="@+id/RecipieTitel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Search Page"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16000003">
-
-    </TextView>
-
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="227dp"
@@ -61,70 +34,360 @@
         android:ems="10"
         android:hint="Recipe Name"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RecipieTitel"
-        app:layout_constraintVertical_bias="0.060000002" />
-
-    <EditText
-        android:id="@+id/editTextIngredient"
-        android:layout_width="227dp"
-        android:layout_height="49dp"
-        android:ems="10"
-        android:hint="Ingredient"
-        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/SearchRecipe"
+        app:layout_constraintVertical_bias="0.04000002" />
 
-    <EditText
-        android:id="@+id/editTextExcludedIngredient"
-        android:layout_width="227dp"
-        android:layout_height="55dp"
-        android:ems="10"
-        android:hint="Excluded Ingredient"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextIngredient"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/CuisineButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cuisine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.79"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextExcludedIngredient"
-        app:layout_constraintVertical_bias="0.050000012" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+    <LinearLayout
+        android:id="@+id/ingredientsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_end="205dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextName"
+        app:layout_constraintVertical_bias="0.060000002">
 
-    <Button
-        android:id="@+id/DietButton"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/editTextIngredient"
+            android:layout_width="227dp"
+            android:layout_height="49dp"
+            android:ems="10"
+            android:hint="Ingredient"
+            android:inputType="text" />
+
+        <Space
+            android:id="@+id/spaceIngredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/removeIngredientButton"
+                android:layout_width="55dp"
+                android:layout_height="60dp"
+                android:enabled="false"
+                android:text="-"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/addIngredientButton"
+                android:layout_width="55dp"
+                android:layout_height="60dp"
+                android:text="+" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/excludeIngredientsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Diet"
-        app:layout_constraintBaseline_toBaselineOf="@+id/CuisineButton"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ingredientsLayout"
+        app:layout_constraintVertical_bias="0.060000002">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Excluded Ingredients"
+            android:textSize="20sp"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/editTextExcludedIngredient"
+            android:layout_width="227dp"
+            android:layout_height="55dp"
+            android:ems="10"
+            android:hint="Excluded Ingredient"
+            android:inputType="text" />
+
+        <Space
+            android:id="@+id/spaceExcludeIngredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/removeExcludeIngredientButton"
+                android:layout_width="55dp"
+                android:layout_height="60dp"
+                android:enabled="false"
+                android:text="-"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/addExcludeIngredientButton"
+                android:layout_width="55dp"
+                android:layout_height="60dp"
+                android:text="+" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/selectableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/excludeIngredientsLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/IntolerancesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Intolerances" />
+
+            <Button
+                android:id="@+id/DietButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diet" />
+
+            <Button
+                android:id="@+id/CuisineButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cuisine" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/MacroLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectableLayout"
+        app:layout_constraintVertical_bias="0.24000001"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Macronutrients"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/CarbLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="94dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Carb"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="min."
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextNumberDecimal3"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="-12dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="mg"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="max."
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editTextNumberDecimal4"
+                android:layout_width="43dp"
+                android:layout_height="match_parent"
+                android:layout_margin="-12dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="mg"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ProteinLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/proteinText"
+                android:layout_width="94dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Protein"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/proteinMinText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="min."
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/proteinMinEditText"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="-12dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="mg"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="max."
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/ProteinMaxEditText"
+                android:layout_width="43dp"
+                android:layout_height="match_parent"
+                android:layout_margin="-12dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="mg"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MacroLayout">
+
+        <Button
+            android:id="@+id/buttonSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_bg"
+            android:text="Search"
+            android:textColor="@color/white"
+
+            android:textColorHint="@color/white" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

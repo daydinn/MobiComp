@@ -12,10 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Space;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class SearchFragment extends Fragment {
@@ -31,12 +32,34 @@ public class SearchFragment extends Fragment {
     EditText name;
     EditText ingredient;
     EditText excludedIngredient;
-    Button cuisine;
+
+    //Diet
     Button diet;
+    String[] dietItems;
+    boolean[] checkedDiets;
+    ArrayList<Integer> selectedDietsList = new ArrayList<>();
+    boolean dietOr = false;
+
+    //Cuisine
+    Button cuisine;
     String[] cuisineItems;
     boolean[] checkedCuisines;
     ArrayList<Integer> selectedCuisineList = new ArrayList<>();
-    boolean excludeCuisine =false;
+    boolean excludeCuisine = false;
+
+    //Ingredient
+    Button addIngredientButton;
+    Button removeIngredientButton;
+    LinearLayout ingredientLayout;
+    Space spaceIngredient;
+    ArrayList<EditText> ingredientEditList = new ArrayList<>();
+
+    //Exclude Ingredient
+    Button addExcludeIngredientButton;
+    Button removeExcludeIngredientButton;
+    LinearLayout excludeIngredientLayout;
+    Space spaceExcludeIngredient;
+    ArrayList<EditText> excludeIngredientEditList = new ArrayList<>();
 
 
     @Override
@@ -48,12 +71,105 @@ public class SearchFragment extends Fragment {
         createSearchHashmaps();
 
         name = view.findViewById(R.id.editTextName);
-        ingredient = view.findViewById(R.id.editTextIngredient);
-        excludedIngredient = view.findViewById(R.id.editTextExcludedIngredient);
+
+        //Diet
+        diet  = view.findViewById(R.id.DietButton);
+        dietItems = getResources().getStringArray(R.array.diet_list);
+        checkedDiets = new boolean[dietItems.length];
+
+        //Cuisine
         cuisine = view.findViewById(R.id.CuisineButton);
-        diet = view.findViewById(R.id.DietButton);
         cuisineItems = getResources().getStringArray(R.array.cuisine_list);
         checkedCuisines = new boolean[cuisineItems.length];
+
+        //Ingredients
+        ingredient = view.findViewById(R.id.editTextIngredient);
+        addIngredientButton = view.findViewById(R.id.addIngredientButton);
+        removeIngredientButton = view. findViewById(R.id.removeIngredientButton);
+        ingredientLayout = view.findViewById(R.id.ingredientsLayout);
+        spaceIngredient = view.findViewById(R.id.spaceIngredient);
+
+        //Excluded Ingredients
+        excludedIngredient = view.findViewById(R.id.editTextExcludedIngredient);
+        addExcludeIngredientButton = view.findViewById(R.id.addExcludeIngredientButton);
+        removeExcludeIngredientButton = view.findViewById(R.id.removeExcludeIngredientButton);
+        excludeIngredientLayout = view.findViewById(R.id.excludeIngredientsLayout);
+        spaceExcludeIngredient = view.findViewById(R.id.spaceExcludeIngredient);
+
+//Buttons: Add/Remove Ingredient Edit Text Fields -------------------------------------------------------------------
+        removeIngredientButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ingredientEditList.size()>0){
+                    ingredientLayout.removeView(ingredientEditList.get(ingredientEditList.size()-1));
+                    ingredientEditList.remove(ingredientEditList.get(ingredientEditList.size()-1));
+                }
+                if(ingredientEditList.size()==0){
+                    removeIngredientButton.setEnabled(false);
+                    removeIngredientButton.setVisibility(View.GONE);
+                }
+
+            }
+        });
+        addIngredientButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText newEditText = new EditText(getActivity());
+                newEditText.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                newEditText.setHint("Ingredient");
+                ingredientLayout.addView(newEditText, ingredientLayout.indexOfChild(spaceIngredient));
+                ingredientEditList.add(newEditText);
+                Log.d("sizep ingredient", String.valueOf(ingredientLayout.indexOfChild(spaceIngredient)));
+                Log.d("sizep button", String.valueOf(ingredientLayout.indexOfChild(removeIngredientButton)));
+                Log.d("sizep editlist", String.valueOf(ingredientLayout.indexOfChild(ingredientEditList.get(0))));
+                if(ingredientEditList.size()==1){
+                    removeIngredientButton.setEnabled(true);
+                    removeIngredientButton.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+//-----------------------------------------------------------------------------------------------------------------------
+
+
+//Buttons: Add/Remove Excluded Ingredient Edit Text Fields -------------------------------------------------------------------
+        removeExcludeIngredientButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(excludeIngredientEditList.size()>0){
+                    excludeIngredientLayout.removeView(excludeIngredientEditList.get(excludeIngredientEditList.size()-1));
+                    excludeIngredientEditList.remove(excludeIngredientEditList.get(excludeIngredientEditList.size()-1));
+                }
+                if(excludeIngredientEditList.size()==0){
+                    removeExcludeIngredientButton.setEnabled(false);
+                    removeExcludeIngredientButton.setVisibility(View.GONE);
+                }
+
+            }
+        });
+        addExcludeIngredientButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText newEditText = new EditText(getActivity());
+                newEditText.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                newEditText.setHint("Excluded Ingredient");
+                excludeIngredientLayout.addView(newEditText, excludeIngredientLayout.indexOfChild(spaceExcludeIngredient));
+                excludeIngredientEditList.add(newEditText);
+                if(excludeIngredientEditList.size()==1){
+                    removeExcludeIngredientButton.setEnabled(true);
+                    removeExcludeIngredientButton.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+//-----------------------------------------------------------------------------------------------------------------------
+
+
+//Button: Cuisine Selection -----------------------------------------------------------------------------------------------------
         cuisine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,9 +185,12 @@ public class SearchFragment extends Fragment {
                             if(!selectedCuisineList.contains(itemPosition)){
                                 selectedCuisineList.add(itemPosition);
                             }
-                            else{
-                                selectedCuisineList.remove(itemPosition);
-                            }
+                        }
+                        else{
+                            for (int i = 0; i < selectedCuisineList.size(); i++)
+                                if (selectedCuisineList.get(i) == itemPosition) {
+                                    selectedCuisineList.remove(i);
+                                    break;}
                         }
                     }
 
@@ -80,22 +199,22 @@ public class SearchFragment extends Fragment {
                 cuisineAlert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String cuisineString="";
+                        StringBuilder cuisineString= new StringBuilder();
                         for(int i=0;i<selectedCuisineList.size(); i++){
-                            cuisineString= cuisineString + cuisineItems[selectedCuisineList.get(i)];
+                            cuisineString.append(cuisineItems[selectedCuisineList.get(i)]);
                             if(i != selectedCuisineList.size()-1){
-                                cuisineString = cuisineString + ",";
+                                cuisineString.append(",");
                             }
                         }
                         if(excludeCuisine){
-                            general.put("excludedCuisine", cuisineString);
+                            general.put("excludedCuisine", cuisineString.toString());
                             general.put("cuisine", "");
                         }
                         else{
-                            general.put("cuisine", cuisineString);
+                            general.put("cuisine", cuisineString.toString());
                             general.put("excludedCuisine", "");
                         }
-                        Log.d("Selected Cuisines", cuisineString);
+                        Log.d("Selected Cuisines", cuisineString.toString());
                         Log.d("hash Cuisines", general.get("cuisine"));
                         Log.d("hash ExcludedCuisines", general.get("excludedCuisine"));
                     }
@@ -103,10 +222,10 @@ public class SearchFragment extends Fragment {
                 cuisineAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                        dialog.dismiss();
                     }
                 });
-                cuisineAlert.setNeutralButton("Include/Exclude", new DialogInterface.OnClickListener() {
+                cuisineAlert.setNeutralButton("In-/Exclude", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(excludeCuisine){
@@ -125,10 +244,85 @@ public class SearchFragment extends Fragment {
             }
         });
 
+//-----------------------------------------------------------------------------------------------------------------------
+
+//Button: Diet Selection -----------------------------------------------------------------------------------------------------
+        diet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dietAlert = new AlertDialog.Builder(getActivity());
+                if(!dietOr)
+                    dietAlert.setTitle("Include all Diets");
+                else
+                    dietAlert.setTitle("Include at least one Diet");
+                dietAlert.setMultiChoiceItems(dietItems, checkedDiets, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int itemPosition, boolean isChecked) {
+                        if(isChecked){
+                            if(!selectedDietsList.contains(itemPosition)){
+                                selectedDietsList.add(itemPosition);
+                            }
+                        }
+                        else{
+                            for (int i = 0; i < selectedDietsList.size(); i++)
+                                if (selectedDietsList.get(i) == itemPosition) {
+                                    selectedDietsList.remove(i);
+                                    break;}
+                        }
+                    }
+                });
+                dietAlert.setCancelable(true);
+                dietAlert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        StringBuilder dietString= new StringBuilder();
+                        for(int i=0;i<selectedDietsList.size(); i++){
+                            dietString.append(dietItems[selectedDietsList.get(i)]);
+                            if(i != selectedDietsList.size()-1){
+                                dietString.append(",");
+                            }
+                        }
+                        if(dietOr){
+                            //Befehl für OR Suche anhängen
+                            general.put("diet", String.valueOf(dietString));
+                        }
+                        else{
+                            //Befehl für AND Suche anhängen
+                            general.put("diet", String.valueOf(dietString));
+                        }
+                        Log.d("search diet",general.get("diet") );
+                    }
+                });
+                dietAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dietAlert.setNeutralButton("Mode", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(dietOr){
+                            dietAlert.setTitle("Include all Diets");
+                            dietOr=false;
+                        }
+                        else{
+                            dietAlert.setTitle("Include at least one Diet");
+                            dietOr=true;
+                        }
+                        dietAlert.show();
+
+                    }
+                });
+                dietAlert.show();
+            }
+        });
+
+//-----------------------------------------------------------------------------------------------------------------------
 
 
 
-
+// Button: Search -------------------------------------------------------------------------------------------------------------------
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,24 +351,36 @@ public class SearchFragment extends Fragment {
         };
         thread.start();*/
 
-
-
                 SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
             }
         });
-
-
         return view;
-
-
     }
 
+//-----------------------------------------------------------------------------------------------------------------------
+
+
+//HashMaps: Creating/Updating-----------------------------------------------------------------------------------------------------------------------
     private void putValuesInHashmap() {
-        general = new HashMap<>();
         general.put("query", String.valueOf(name.getText()));
-        general.put("includeIngredients", String.valueOf(ingredient.getText()));
-        general.put("excludeIngredients", String.valueOf(excludedIngredient.getText()));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(ingredient.getText());
+        for(int i=0; i<ingredientEditList.size();i++){
+            if(!String.valueOf(ingredientEditList.get(i).getText()).equals("")){
+                stringBuilder.append(",").append(ingredientEditList.get(i).getText());
+            }
+        }
+        general.put("includeIngredients", String.valueOf(stringBuilder));
+
+        stringBuilder = new StringBuilder();
+        stringBuilder.append(excludedIngredient.getText());
+        for(int i=0; i<excludeIngredientEditList.size();i++){
+            if(!String.valueOf(excludeIngredientEditList.get(i).getText()).equals("")){
+                stringBuilder.append(",").append(excludeIngredientEditList.get(i).getText());
+            }
+        }
+        general.put("excludeIngredients", String.valueOf(stringBuilder));
     }
 
 
@@ -261,6 +467,8 @@ public class SearchFragment extends Fragment {
 
 
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 }
 
 
