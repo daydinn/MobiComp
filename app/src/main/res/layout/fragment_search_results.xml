@@ -4,10 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchResultsActivity">
+    tools:context=".SearchResultsActivity
+">
 
 
 
+
+    <ImageView
+        android:layout_marginTop="90dp"
+        android:id="@+id/recipeImage"
+        android:layout_width="402dp"
+        android:layout_height="184dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
 
 
@@ -38,35 +50,196 @@
         android:orientation="horizontal"
         android:layout_weight="1"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="280dp"
+        android:gravity="center"
+
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-
+<!---
     <TextView
         android:id="@+id/RecipeID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
-        android:text="RecpieID"
+        android:text="ID"
+        android:layout_gravity="left"
         android:textColor="@color/black"
-
-        android:textSize="15dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="100dp"
-        >
-
-    </TextView>
+        android:textSize="12dp">
+</TextView>
+    -->
 
         <TextView
-            android:id="@+id/recipeIdTest"
+            android:id="@+id/recipeMinutes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="276dp"
-            android:text="test"
+
+            android:text="16 Minuten"
 
             android:textColor="@color/black"
+            android:textSize="12dp">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="310dp"
+        android:gravity="center"
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+            <TextView
+                android:id="@+id/ingredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingredients:"
+                android:layout_gravity="left"
+                android:textColor="@color/black"
+                android:textSize="14dp">
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="335dp"
+        android:gravity="center"
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+        <TextView
+            android:id="@+id/recipeIngredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+
+
+            android:text="Mehl Ei Pasta Brocoli Lacs Some random Results  "
+
+            android:textColor="@color/black"
+            android:textSize="12dp">
+
+        </TextView>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+
+
+
+
+
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="240dp"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+<!--
+        <TextView
+            android:id="@+id/RecipeTitel"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Titel"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+
+            >
+
+        </TextView>
+-->
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/recipeTitel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Titel"
+
+            android:textColor="@color/white"
+            android:textSize="25dp">
+
+        </TextView>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="249dp"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+<!--
+        <TextView
+            android:id="@+id/RecipeHealthScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+
+            >
+
+        </TextView>
+
+
+-->
+        <TextView
+            android:id="@+id/recipeHealthScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="380dp"
+
+            android:text="80"
+
+            android:textColor="@color/white"
             android:textSize="15dp">
 
         </TextView>
@@ -74,86 +247,11 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_centerHorizontal="true"
-
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-
-    <TextView
-        android:id="@+id/RecipeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="212dp"
-        android:text="Recpie Name"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        android:layout_marginLeft="100dp"
-       >
-
-    </TextView>
-
-    <TextView
-        android:id="@+id/recipeNameTest"
-        android:layout_toRightOf="@+id/RecipeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="212dp"
-        android:layout_marginLeft="50dp"
-        android:text="test"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        >
-
-    </TextView>
-</LinearLayout>
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_centerHorizontal="true"
-
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-    <TextView
-        android:id="@+id/RecipeCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:layout_marginLeft="100dp"
-        android:text="Recpie Category"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        android:layout_centerHorizontal="true">
-
-    </TextView>
-
-    <TextView
-        android:id="@+id/recipeCategoryTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:layout_marginLeft="30dp"
-        android:text="test"
-        android:textColor="@color/black"
-
-        android:textSize="15dp"
-        android:layout_centerHorizontal="true">
-
-    </TextView>
 
 
-    </LinearLayout>
 
     <Button
 
@@ -163,7 +261,7 @@
 
         android:shadowColor="@color/white"
         android:text="Reload"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="650dp"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
@@ -179,6 +277,7 @@
 
 
         />
+
 
 
 </RelativeLayout>

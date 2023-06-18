@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,11 +20,20 @@ import java.util.Map;
 
 public class SearchResultsFragment extends Fragment {
 
+
+    ImageView recipeImage;
     ImageButton backButton;
-    TextView recipeIdTest;
-    TextView recipeNameTest;
-    TextView recipeCategoryTest;
+
+    TextView recipeMinutes;
+    TextView recipeHealthScore;
+
+    TextView recipeIngredients;
+
+    TextView recipeTitel;
+
     Button reloadButton;
+
+
 
 
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
@@ -45,9 +55,10 @@ public class SearchResultsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
          backButton = view.findViewById(R.id.backButton);
          reloadButton = view.findViewById(R.id.reloadButton);
-         recipeIdTest= view.findViewById(R.id.recipeIdTest);
-         recipeNameTest= view.findViewById(R.id.recipeNameTest);
-         recipeCategoryTest= view.findViewById(R.id.recipeCategoryTest);
+         recipeMinutes= view.findViewById(R.id.recipeMinutes);
+         recipeTitel= view.findViewById(R.id.recipeTitel);
+         recipeHealthScore= view.findViewById(R.id.recipeHealthScore);
+         recipeIngredients= view.findViewById(R.id.recipeIngredients);
         loadFoundRecipe();
 
 
@@ -93,9 +104,17 @@ public class SearchResultsFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
                             ShortInfo shortinfo = shortInfoList.get(5);
-                            recipeIdTest.setText(String.valueOf(shortinfo.getId()));
-                            recipeNameTest.setText(shortinfo.getTitle());
-                            recipeCategoryTest.setText(shortinfo.getImage());
+
+                            //recipeIdTest.setText(String.valueOf(shortinfo.getId())); no need?
+
+                            //recipeImage  ?
+
+                            //noch nicht fertig
+                            recipeMinutes.setText(shortinfo.getTitle());
+                            recipeHealthScore.setText(shortinfo.getTitle());
+                            recipeIngredients.setText(shortinfo.getTitle());
+                            recipeTitel.setText(shortinfo.getTitle());
+                            recipeHealthScore.setText(shortinfo.getImage());
                         }
                     });
                // } catch (InterruptedException e) {
