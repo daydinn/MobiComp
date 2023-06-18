@@ -59,6 +59,7 @@ public class SearchResultsFragment extends Fragment {
          recipeTitel= view.findViewById(R.id.recipeTitel);
          recipeHealthScore= view.findViewById(R.id.recipeHealthScore);
          recipeIngredients= view.findViewById(R.id.recipeIngredients);
+         recipeImage= view.findViewById(R.id.recipeImage);
         loadFoundRecipe();
 
 
