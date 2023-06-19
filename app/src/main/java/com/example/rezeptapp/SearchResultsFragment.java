@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -105,6 +107,8 @@ public class SearchResultsFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
                             ShortInfo shortinfo = shortInfoList.get(5);
+
+                            Picasso.get().load(shortinfo.getImage()).into(recipeImage);
 
                             //recipeIdTest.setText(String.valueOf(shortinfo.getId())); no need?
 
