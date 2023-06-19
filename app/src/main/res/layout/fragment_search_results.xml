@@ -261,7 +261,7 @@
 
         android:shadowColor="@color/white"
         android:text="Reload"
-        android:layout_marginTop="650dp"
+        android:layout_marginTop="450dp"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
