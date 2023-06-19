@@ -38,35 +38,162 @@
 
     </TextView>
 
-    <!--RecipeID Field-->
 
-    <!--RecipeName Field-->
+    <LinearLayout
 
 
-    <!--RecipeCategory Field-->
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="240dp"
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+
+        >
+
+
+        <TextView
+            android:id="@+id/recipeTitel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Titel"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            >
+
+        </TextView>
+
+
+        <TextView
+            android:id="@+id/recipeHealthScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80"
+            android:layout_marginLeft="-70dp"
+            android:textColor="@color/white"
+
+            android:textSize="15sp">
+
+        </TextView>
+
+
+        <ImageView
+
+            android:id="@+id/recipeHealthScoreIcon"
+            android:layout_width="10dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="-20dp"
+            android:layout_toRightOf="@+id/recipeHealthScore"
+            android:layout_weight="1"
+            android:src="@drawable/herz" />
+
+
+    </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="275dp"
+            android:gravity="center"
+           >
+
+
+            <ImageView
+
+                android:id="@+id/veganIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/recipeHealthScore"
+                android:layout_weight="1"
+                android:src="@drawable/plantbased" />
+            <ImageView
+
+                android:id="@+id/vegetarianIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/recipeHealthScore"
+                android:layout_weight="1"
+                android:src="@drawable/leaf" />
+
+
+            <ImageView
+
+                android:id="@+id/lactosefreeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+
+                android:layout_marginRight="10dp"
+
+
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/recipeHealthScore"
+                android:layout_weight="1"
+                android:src="@drawable/glutenfree" />
+            <ImageView
+
+                android:id="@+id/glutenFreeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+
+                android:layout_marginRight="55dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/recipeHealthScore"
+                android:layout_weight="1"
+                android:src="@drawable/dariyfree" />
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+        <!--RecipeCategory Field-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_weight="1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="320dp"
         android:gravity="center"
 
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-<!---
-    <TextView
-        android:id="@+id/RecipeID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ID"
-        android:layout_gravity="left"
-        android:textColor="@color/black"
-        android:textSize="12dp">
-</TextView>
-    -->
+
+
+        <ImageView
+
+            android:id="@+id/timeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_access_time_24"
+            android:layout_marginTop="0.8dp"
+            android:layout_marginRight="1dp"
+            />
+
+
+
 
         <TextView
             android:id="@+id/recipeMinutes"
@@ -74,10 +201,10 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
 
-            android:text="16 Minuten"
+            android:text="16 Minutes"
 
             android:textColor="@color/black"
-            android:textSize="12dp">
+            android:textSize="12sp">
 
         </TextView>
 
@@ -89,7 +216,7 @@
         android:orientation="horizontal"
         android:layout_weight="1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="310dp"
+        android:layout_marginTop="360dp"
         android:gravity="center"
 
         tools:layout_editor_absoluteX="0dp"
@@ -103,7 +230,7 @@
                 android:text="Ingredients:"
                 android:layout_gravity="left"
                 android:textColor="@color/black"
-                android:textSize="14dp">
+                android:textSize="14sp">
         </TextView>
 
     </LinearLayout>
@@ -114,7 +241,7 @@
         android:orientation="horizontal"
         android:layout_weight="1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="335dp"
+        android:layout_marginTop="385dp"
         android:gravity="center"
 
         tools:layout_editor_absoluteX="0dp"
@@ -129,127 +256,11 @@
             android:text="Mehl Ei Pasta Brocoli Lacs Some random Results  "
 
             android:textColor="@color/black"
-            android:textSize="12dp">
+            android:textSize="12sp">
 
         </TextView>
 
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <LinearLayout
-
-
-
-
-
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="240dp"
-        android:gravity="center"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-<!--
-        <TextView
-            android:id="@+id/RecipeTitel"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Titel"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-
-            >
-
-        </TextView>
--->
-
-
-
-
-
-
-
-        <TextView
-            android:id="@+id/recipeTitel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Titel"
-
-            android:textColor="@color/white"
-            android:textSize="25dp">
-
-        </TextView>
-
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="249dp"
-        android:gravity="center"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
-
-<!--
-        <TextView
-            android:id="@+id/RecipeHealthScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Score"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-
-            >
-
-        </TextView>
-
-
--->
-        <TextView
-            android:id="@+id/recipeHealthScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="380dp"
-
-            android:text="80"
-
-            android:textColor="@color/white"
-            android:textSize="15dp">
-
-        </TextView>
-
-    </LinearLayout>
-
-
-
-
-
 
 
 

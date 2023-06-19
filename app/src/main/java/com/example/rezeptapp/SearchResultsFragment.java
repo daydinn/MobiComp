@@ -116,10 +116,10 @@ public class SearchResultsFragment extends Fragment {
 
                             //noch nicht fertig
                             recipeMinutes.setText(shortinfo.getTitle());
-                            recipeHealthScore.setText(shortinfo.getTitle());
+                            //recipeHealthScore.setText(shortinfo.getTitle());
                             recipeIngredients.setText(shortinfo.getTitle());
                             recipeTitel.setText(shortinfo.getTitle());
-                            recipeHealthScore.setText(shortinfo.getImage());
+                            //recipeHealthScore.setText(shortinfo.getImage());
                         }
                     });
                // } catch (InterruptedException e) {
