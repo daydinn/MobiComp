@@ -217,46 +217,35 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="360dp"
-        android:gravity="center"
-
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
 
 
-            <TextView
+       <TextView
                 android:id="@+id/ingredients"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ingredients:"
                 android:layout_gravity="left"
                 android:textColor="@color/black"
-                android:textSize="14sp">
+                android:textSize="14sp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="360dp"
+                android:gravity="center"
+                >
         </TextView>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="385dp"
-        android:gravity="center"
 
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+
         <TextView
-            android:id="@+id/recipeIngredients"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:layout_marginTop="385dp"
+            android:gravity="center"
+            android:id="@+id/recipeIngredients"
+
             android:layout_centerHorizontal="true"
 
 
@@ -267,7 +256,37 @@
 
         </TextView>
 
-    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ingredientsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        >
+
+
+    <Space
+        android:id="@+id/spaceNewRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        />
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>
+
 
 
 
