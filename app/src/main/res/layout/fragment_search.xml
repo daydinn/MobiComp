@@ -29,8 +29,8 @@
 
     <EditText
         android:id="@+id/editTextName"
-        android:layout_width="227dp"
-        android:layout_height="55dp"
+        android:layout_width="210dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:hint="Recipe Name"
         android:inputType="text"
@@ -50,20 +50,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextName"
         app:layout_constraintVertical_bias="0.060000002">
-
+<!--
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ingredients"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:gravity="center"/>
+          -->
 
         <EditText
             android:id="@+id/editTextIngredient"
-            android:layout_width="227dp"
-            android:layout_height="49dp"
+            android:layout_width="210dp"
+            android:layout_height="40dp"
             android:ems="10"
             android:hint="Ingredient"
             android:inputType="text" />
@@ -85,16 +86,16 @@
 
             <Button
                 android:id="@+id/removeIngredientButton"
-                android:layout_width="55dp"
-                android:layout_height="60dp"
+                android:layout_width="56dp"
+                android:layout_height="36dp"
                 android:enabled="false"
                 android:text="-"
                 android:visibility="gone" />
 
             <Button
                 android:id="@+id/addIngredientButton"
-                android:layout_width="55dp"
-                android:layout_height="60dp"
+                android:layout_width="56dp"
+                android:layout_height="36dp"
                 android:text="+" />
 
         </LinearLayout>
@@ -110,20 +111,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredientsLayout"
-        app:layout_constraintVertical_bias="0.060000002">
+        app:layout_constraintVertical_bias="0.060000002"
+        >
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Excluded Ingredients"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:textSize="16sp"
+            android:gravity="center"/>-->
 
         <EditText
             android:id="@+id/editTextExcludedIngredient"
-            android:layout_width="227dp"
-            android:layout_height="55dp"
+            android:layout_width="210dp"
+            android:layout_height="40dp"
             android:ems="10"
             android:hint="Excluded Ingredient"
             android:inputType="text" />
@@ -145,17 +147,19 @@
 
             <Button
                 android:id="@+id/removeExcludeIngredientButton"
-                android:layout_width="55dp"
-                android:layout_height="60dp"
+                android:layout_width="56dp"
+                android:layout_height="36dp"
                 android:enabled="false"
                 android:text="-"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_marginBottom="25sp"/>
 
             <Button
                 android:id="@+id/addExcludeIngredientButton"
-                android:layout_width="55dp"
-                android:layout_height="60dp"
-                android:text="+" />
+                android:layout_width="56dp"
+                android:layout_height="36dp"
+                android:text="+"
+                android:layout_marginBottom="25sp"/>
 
         </LinearLayout>
 
@@ -180,20 +184,26 @@
 
             <Button
                 android:id="@+id/IntolerancesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Intolerances" />
+                android:layout_width="110sp"
+                android:layout_height="35sp"
+                android:textSize="12sp"
+                android:text="Intolerances"
+
+
+                />
 
             <Button
                 android:id="@+id/DietButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="110sp"
+                android:layout_height="35sp"
+                android:textSize="12sp"
                 android:text="Diet" />
 
             <Button
                 android:id="@+id/CuisineButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="110sp"
+                android:layout_height="35sp"
+                android:textSize="12sp"
                 android:text="Cuisine" />
         </LinearLayout>
 
@@ -214,8 +224,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginTop="15sp"
+            android:layout_marginBottom="15sp"
             android:text="Macronutrients"
-            android:textSize="20sp" />
+            android:textSize="19sp" />
 
         <LinearLayout
             android:id="@+id/CarbLayout"
@@ -229,8 +241,9 @@
                 android:layout_width="94dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Carb"
-                android:textSize="20sp" />
+                android:text="Carb:"
+                android:layout_marginLeft="20sp"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -238,7 +251,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="min."
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/editTextNumberDecimal3"
@@ -248,8 +261,10 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:padding="12dp"
-                android:text="0" />
+                android:padding="9dp"
+                android:text="0"
+                android:textSize="14sp"
+                />
 
             <TextView
                 android:id="@+id/textView9"
@@ -257,7 +272,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="mg"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <Space
                 android:layout_width="56dp"
@@ -270,7 +285,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="max."
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/editTextNumberDecimal4"
@@ -280,16 +295,19 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:padding="12dp"
-                android:text="0" />
+                android:padding="9dp"
+                android:text="0"
+                android:textSize="14sp"
+                />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginRight="20sp"
                 android:text="mg"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -303,9 +321,10 @@
                 android:id="@+id/proteinText"
                 android:layout_width="94dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
                 android:layout_weight="1"
-                android:text="Protein"
-                android:textSize="20sp" />
+                android:text="Protein:"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/proteinMinText"
@@ -313,7 +332,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="min."
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/proteinMinEditText"
@@ -323,15 +342,17 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:padding="12dp"
-                android:text="0" />
+                android:padding="9dp"
+                android:text="0"
+                android:textSize="14dp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="mg"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <Space
                 android:layout_width="56dp"
@@ -343,7 +364,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="max."
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/ProteinMaxEditText"
@@ -353,15 +374,20 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="numberDecimal"
-                android:padding="12dp"
+                android:padding="9dp"
+                android:textSize="14sp"
                 android:text="0" />
+
+
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginRight="20sp"
                 android:text="mg"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -378,8 +404,9 @@
 
         <Button
             android:id="@+id/buttonSearch"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
             android:background="@drawable/input_bg"
             android:text="Search"
             android:textColor="@color/white"
