@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchResultsActivity
@@ -16,10 +16,115 @@
 
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="52dp"
+        android:layout_weight="1"
+        android:layout_centerHorizontal="true"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+
+            android:textColor="@color/black"
+            android:textSize="15sp">
+        </TextView>
+        <TextView
+            android:id="@+id/of"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="of"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/ofResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="10"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/black"
+            android:textSize="15sp">
+        </TextView>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text=" results "
+
+            android:textColor="@color/black"
+            android:textSize="12sp">
+
+        </TextView>
+
+        <ImageButton
+
+            android:id="@+id/reloadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_navigate_next_24"
+
+            android:shadowColor="@color/white"
+            android:text="Next"
+
+            android:layout_centerHorizontal="true" />
+
+
+    </LinearLayout>
+
+
+
+    <ImageButton
+
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:layout_toLeftOf="@+id/RecipieTitel"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="75dp"
+
+
+
+        />
+
+
+
+
+
+    <TextView
+        android:id="@+id/RecipieTitel"
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Results"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+
+        >
+
+    </TextView>
+
+    <!---chard1-->
 
     <ImageView
-        android:layout_marginTop="90dp"
         android:id="@+id/recipeImage"
+        android:layout_marginTop="90dp"
         android:layout_width="402dp"
         android:layout_height="284dp"
         android:scaleType="centerCrop"
@@ -31,19 +136,7 @@
 
 
 
-    <TextView
-        android:id="@+id/RecipieTitel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Search Results"
-        android:textColor="@color/black"
-        android:layout_centerHorizontal="true"
-        android:textSize="25dp"
 
-        >
-
-    </TextView>
 
 
     <LinearLayout
@@ -290,104 +383,317 @@
 
 
 
-
-
-
-
-
-
-
-</LinearLayout>
-
-
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="52dp"
-        android:layout_weight="1"
-        android:layout_centerHorizontal="true"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"
-
-            android:textColor="@color/black"
-            android:textSize="15sp">
-        </TextView>
-        <TextView
-            android:id="@+id/of"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="of"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            >
-        </TextView>
-
-        <TextView
-            android:id="@+id/ofResults"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="10"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textColor="@color/black"
-            android:textSize="15sp">
-        </TextView>
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text=" results "
-
-            android:textColor="@color/black"
-            android:textSize="12sp">
-
-        </TextView>
-
-        <ImageButton
-
-            android:id="@+id/reloadButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_navigate_next_24"
-
-            android:shadowColor="@color/white"
-            android:text="Next"
-
-            android:layout_centerHorizontal="true" />
-
-
     </LinearLayout>
 
 
 
-    <ImageButton
 
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
+    <!---chard2-->
+    <ImageView
+        android:id="@+id/recipeImage2"
+        android:layout_marginTop="600dp"
+        android:layout_width="402dp"
+        android:layout_height="284dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/recipeTitel2"
+        android:layout_marginTop="850dp"
+        android:text="Titel"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_arrow_back_ios_24"
-        android:layout_toLeftOf="@+id/RecipieTitel"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="75dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+
+        >
+    </TextView>
+    <!---end of chard2-->
 
 
 
-        />
+    <!---chard3-->
+    <ImageView
+        android:id="@+id/recipeImage3"
+        android:layout_marginTop="1100dp"
+        android:layout_width="402dp"
+        android:layout_height="284dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/recipeTitel3"
+        android:layout_marginTop="1360dp"
+        android:text="Titel"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+
+        >
+    </TextView>
+    <!---end of chard3-->
+
+
+    <!---chard4-->
+
+    <ImageView
+        android:id="@+id/recipeImage4"
+        android:layout_marginTop="1610dp"
+        android:layout_width="402dp"
+        android:layout_height="284dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/recipeTitel4"
+        android:layout_marginTop="1870dp"
+        android:text="Titel"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+
+        >
+    </TextView>
+    <!---end of chard3-->
+
+
+    <!---chard5-->
+    <ImageView
+        android:id="@+id/recipeImage5"
+        android:layout_marginTop="2130dp"
+        android:layout_width="402dp"
+        android:layout_height="284dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/recipeTitel5"
+        android:layout_marginTop="2380dp"
+        android:text="Titel"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+
+        >
+    </TextView>
+    <!---end of chard5-->
+
+    <!---chard6-->
+    <ImageView
+        android:id="@+id/recipeImage6"
+        android:layout_marginTop="2640dp"
+        android:layout_width="402dp"
+        android:layout_height="284dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/recipeTitel6"
+        android:layout_marginTop="2890dp"
+        android:text="Titel"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+
+        >
+    </TextView>
+    <!---end of chard6-->
+
+    <!---chard7-->
+
+    <ImageView
+        android:id="@+id/recipeImage7"
+        android:layout_width="402dp"
+        android:layout_height="284dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginTop="3150dp"
+        android:layout_marginEnd="3dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/recipeTitel7"
+        android:layout_marginTop="3400dp"
+        android:text="Titel"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+
+        >
+    </TextView>
+    <!---end of chard7-->
+
+    <!---chard8-->
+    <ImageView
+        android:id="@+id/recipeImage8"
+        android:layout_marginTop="3660dp"
+        android:layout_width="402dp"
+        android:layout_height="284dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/recipeTitel8"
+        android:layout_marginTop="3910dp"
+        android:text="Titel"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+
+        >
+    </TextView>
+    <!---end of chard8-->
+
+    <!---chard9-->
+    <ImageView
+        android:id="@+id/recipeImage9"
+        android:layout_marginTop="4170dp"
+        android:layout_width="402dp"
+        android:layout_height="284dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/recipeTitel9"
+        android:layout_marginTop="4420dp"
+        android:text="Titel"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+
+        >
+    </TextView>
+    <!---end of chard9-->
+
+    <!---chard10-->
+    <ImageView
+        android:id="@+id/recipeImage10"
+        android:layout_marginTop="4680dp"
+        android:layout_width="402dp"
+        android:layout_height="284dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/recipeTitel10"
+        android:layout_marginTop="4930dp"
+        android:text="Titel"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+
+        >
+    </TextView>
+    <!---end of chard10-->
+
+
+    <!---end of chard11-->
+
+
+
+
+
+
+
+
+
+
 
 
 
