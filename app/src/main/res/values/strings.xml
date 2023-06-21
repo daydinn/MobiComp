@@ -64,6 +64,43 @@
         <item>Thai</item>
         <item>Vietnamese</item>
     </string-array>string-array>
+    <string-array name="macronutrient_list">
+        <item>Carbs</item>
+        <item>Protein</item>
+        <item>Fat</item>
+        <item>Sat. Fat</item>
+        <item>Fiber</item>
+        <item>Sugar</item>
+    </string-array>
+    <string-array name="micronutrient_list">
+        <item>Calcium</item>
+        <item>Copper</item>
+        <item>Iron</item>
+        <item>Magnesium</item>
+        <item>Manganese</item>
+        <item>Phosphorus</item>
+        <item>Potassium</item>
+        <item>Selenium</item>
+        <item>Sodium</item>
+        <item>Zinc</item>
+        <item>Choline</item>
+        <item>Folate</item>
+        <item>FolicAcid</item>
+        <item>Iodine</item>
+    </string-array>
+    <string-array name="vitamin_list">
+        <item>Vitamin A</item>
+        <item>Vitamin C</item>
+        <item>Vitamin D</item>
+        <item>Vitamin E</item>
+        <item>Vitamin K</item>
+        <item>Vitamin B1</item>
+        <item>Vitamin B2</item>
+        <item>Vitamin B3</item>
+        <item>Vitamin B5</item>
+        <item>Vitamin B6</item>
+        <item>Vitamin B12</item>
+    </string-array>
     
     
     
