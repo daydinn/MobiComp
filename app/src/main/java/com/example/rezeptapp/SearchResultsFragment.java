@@ -35,9 +35,13 @@ public class SearchResultsFragment extends Fragment {
 
     TextView recipeTitel;
 
-    Button reloadButton;
+    ImageButton reloadButton;
 
     Space spaceNewRecipe;
+
+    TextView result;
+
+    TextView ofresults;
 
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private SearchManager searchManager = new SearchManager();
@@ -63,6 +67,8 @@ public class SearchResultsFragment extends Fragment {
         recipeIngredients = view.findViewById(R.id.recipeIngredients);
         recipeImage = view.findViewById(R.id.recipeImage);
         spaceNewRecipe = view.findViewById(R.id.spaceNewRecipe);
+        result = view.findViewById(R.id.result);
+        ofresults = view.findViewById(R.id.ofResults);
         loadFoundRecipe();
 
 
@@ -80,6 +86,8 @@ public class SearchResultsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+
+
                 loadFoundRecipe();
             }
         });
@@ -89,16 +97,29 @@ public class SearchResultsFragment extends Fragment {
 
     }
 
+    //random zahl generator
     public int RandInt() {
+
+
+
+
         Random rand = new Random();
-        int i = rand.nextInt(10); //gives random in range [0..9]
+        int i = rand.nextInt(shortInfoList.size()); //gives random in range [0..9]
         return i;
+
     }
+
+
+
+
 
 
     private void loadFoundRecipe() {
 
-            Thread thread = new Thread() {
+
+
+
+        Thread thread = new Thread() {
 
                 public void run() {
 
@@ -113,12 +134,13 @@ public class SearchResultsFragment extends Fragment {
 
 
                         public void run() {
-                           for (int i = 0; i < 10; i++) {
-
-                                
 
 
-                                ShortInfo shortinfo = shortInfoList.get(i);
+
+
+
+
+                                ShortInfo shortinfo = shortInfoList.get(RandInt());
                                 Picasso.get().load(shortinfo.getImage()).into(recipeImage);
 
                                 //recipeIdTest.setText(String.valueOf(shortinfo.getId())); no need?
@@ -134,8 +156,16 @@ public class SearchResultsFragment extends Fragment {
 
                                 recipeTitel.setText(shortinfo.getTitle());
                                 //recipeHealthScore.setText(shortinfo.getImage());
+
+
+                                result.setText(id);
+
+                                String sizeofList= String.valueOf(shortInfoList.size());
+                                ofresults.setText(sizeofList);
+
+
                             }
-                        }
+
 
                     });
                     // } catch (InterruptedException e) {

@@ -21,7 +21,7 @@
         android:layout_marginTop="90dp"
         android:id="@+id/recipeImage"
         android:layout_width="402dp"
-        android:layout_height="184dp"
+        android:layout_height="284dp"
         android:scaleType="centerCrop"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -54,7 +54,7 @@
         android:orientation="horizontal"
         android:layout_weight="1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="340dp"
 
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
@@ -111,7 +111,7 @@
             android:orientation="horizontal"
             android:layout_weight="1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="275dp"
+            android:layout_marginTop="375dp"
             android:gravity="center"
            >
 
@@ -181,7 +181,7 @@
         android:orientation="horizontal"
         android:layout_weight="1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="420dp"
         android:gravity="center"
 
         tools:layout_editor_absoluteX="0dp"
@@ -208,7 +208,19 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
 
-            android:text="16 Minutes"
+            android:text="16"
+
+            android:textColor="@color/black"
+            android:textSize="12sp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/Minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+
+            android:text=" Minutes"
 
             android:textColor="@color/black"
             android:textSize="12sp">
@@ -230,7 +242,7 @@
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="360dp"
+                android:layout_marginTop="460dp"
                 android:gravity="center"
                 >
         </TextView>
@@ -242,7 +254,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="385dp"
+            android:layout_marginTop="485dp"
             android:gravity="center"
             android:id="@+id/recipeIngredients"
 
@@ -290,16 +302,78 @@
 
 
 
-    <Button
 
-        android:id="@+id/reloadButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="52dp"
+        android:layout_weight="1"
+        android:layout_centerHorizontal="true"
+        android:gravity="center">
 
-        android:shadowColor="@color/white"
-        android:text="Reload"
-        android:layout_marginTop="450dp"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+
+            android:textColor="@color/black"
+            android:textSize="15sp">
+        </TextView>
+        <TextView
+            android:id="@+id/of"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="of"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/ofResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="10"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/black"
+            android:textSize="15sp">
+        </TextView>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text=" results "
+
+            android:textColor="@color/black"
+            android:textSize="12sp">
+
+        </TextView>
+
+        <ImageButton
+
+            android:id="@+id/reloadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_navigate_next_24"
+
+            android:shadowColor="@color/white"
+            android:text="Next"
+
+            android:layout_centerHorizontal="true" />
+
+
+    </LinearLayout>
+
+
 
     <ImageButton
 
