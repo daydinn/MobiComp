@@ -1,6 +1,7 @@
 package com.example.rezeptapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import com.squareup.picasso.Picasso;
 
 public class SR_RecyclerViewAdapter extends RecyclerView.Adapter<SR_RecyclerViewAdapter.SR_ViewHolder> {
     Context context;
@@ -40,6 +43,9 @@ public class SR_RecyclerViewAdapter extends RecyclerView.Adapter<SR_RecyclerView
         holder.tvID.setText(String.valueOf(shortInfoList.get(position).getId()));
         holder.tvTitle.setText(shortInfoList.get(position).getTitle());
         //holder.imageView.setImageResource(shortInfoList.get(position).getImage());
+        //Picasso.get().load(shortInfoList.get(position).getImage()).into(holder.imageView);
+        Picasso.get().load("https://medien.bremen.de/media/w/480/dsc06740-unionbrauerei-gruenkohl-ikrause-smbd1-bd1.jpg").into(holder.imageView);
+        Log.d("value: ",shortInfoList.get(position).getImage());
         //TODO: proper image format
     }
 
