@@ -199,68 +199,144 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/MacroLayout"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/MacroCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/cardview_dark_background"
+            android:elevation="24dp"
+            android:outlineProvider="bounds"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/MicroCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selectableLayout"
-            app:layout_constraintVertical_bias="0.04000002">
+            app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Macro Nutrients"
-                android:textSize="20sp" />
+            <LinearLayout
+                android:id="@+id/MacroLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selectableLayout"
+                app:layout_constraintVertical_bias="0.04000002">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_weight="1"
+                        android:text="Macro Nutrients"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toTopOf="@+id/macroButton"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <Button
+                        android:id="@+id/macroButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="V"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/textView11" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/MicroLayout"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/MicroCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/cardview_dark_background"
+            android:elevation="24dp"
+            android:outlineProvider="bounds"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/VitaminCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/MacroLayout"
-            app:layout_constraintVertical_bias="0.18">
+            app:layout_constraintTop_toBottomOf="@id/MacroCard"
+            app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:id="@+id/MicroLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Micro Nutrients"
-                android:textSize="20sp" />
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/MacroLayout"
+                app:layout_constraintVertical_bias="0.18">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        </LinearLayout>
+                    <Button
+                        android:id="@+id/microButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="V"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/textView12" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_weight="1"
+                        android:text="Micro Nutrients"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/VitaminCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginTop="21dp"
-            android:outlineProvider="bounds"
-            android:elevation="24dp"
-            app:cardElevation="24dp"
             android:background="@color/cardview_dark_background"
+            android:elevation="24dp"
+            android:outlineProvider="bounds"
             app:cardCornerRadius="24dp"
+            app:cardElevation="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/searchLayout"
             app:layout_constraintStart_toEndOf="@+id/searchLayout"
-            app:layout_constraintTop_toBottomOf="@+id/MicroLayout"
+            app:layout_constraintTop_toBottomOf="@id/MicroCard"
             app:layout_constraintVertical_bias="0.01999998">
 
             <LinearLayout
@@ -274,11 +350,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <Button
+                        android:id="@+id/vitaminButton"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="V"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/textView13" />
+
                     <TextView
                         android:id="@+id/textView13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="21dp"
                         android:layout_marginTop="16dp"
                         android:text="Vitamins"
                         android:textSize="20sp"
@@ -287,17 +372,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0" />
-
-                    <Button
-                        android:id="@+id/button"
-                        android:layout_width="99dp"
-                        android:layout_height="49dp"
-                        android:layout_weight="1"
-                        android:text="Button"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/textView13" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>

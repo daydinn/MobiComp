@@ -4,10 +4,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
+import android.transition.AutoTransition;
+import android.transition.Fade;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -68,14 +72,18 @@ public class SearchFragment extends Fragment {
     //Macro Nutrients
     LinearLayout macroLayout ;
     ArrayList<LinearLayout> macroNutrientList = new ArrayList<>();
+    Button macroButton;
 
     //Micro Nutrients
     LinearLayout microLayout ;
     ArrayList<LinearLayout> microNutrientList = new ArrayList<>();
+    Button microButton;
+    CardView microCard;
 
     //Vitamins
     LinearLayout vitaminLayout ;
     ArrayList<LinearLayout> vitaminList = new ArrayList<>();
+    Button vitaminButton;
 
 
 
@@ -115,8 +123,13 @@ public class SearchFragment extends Fragment {
 
         //Nutrients+Vitamins
         macroLayout = view.findViewById(R.id.MacroLayout);
+        macroButton = view. findViewById(R.id.macroButton);
         microLayout = view.findViewById(R.id.MicroLayout);
+        microButton = view.findViewById(R.id.microButton);
+        microCard = view.findViewById(R.id.MicroCard);
         vitaminLayout = view.findViewById(R.id.VitaminLayout);
+        vitaminButton = view.findViewById(R.id.vitaminButton);
+
 
 
 //Buttons: Add/Remove Ingredient Edit Text Fields -------------------------------------------------------------------
@@ -381,11 +394,67 @@ public class SearchFragment extends Fragment {
 //-----------------------------------------------------------------------------------------------------------------------
 
 //Create Nutrient Fields-----------------------------------------------------------------------------------------------
-
         createMacroNutrientList();
         createMicroNutrientList();
         createVitaminList();
 
+//-----------------------------------------------------------------------------------------------------------------------
+
+//Nutrient Buttons-----------------------------------------------------------------------------------------------
+        macroButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(macroNutrientList.get(0).getVisibility()==View.GONE){
+                    for(int i=0; i<macroNutrientList.size(); i++){
+                        macroNutrientList.get(i).setVisibility(view.VISIBLE);
+                    }
+                    macroButton.setText("/\\");
+                }
+                else{
+                    for(int i=0; i<macroNutrientList.size(); i++){
+                        macroNutrientList.get(i).setVisibility(view.GONE);
+                    }
+                    macroButton.setText("V");
+                }
+            }
+        });
+
+        microButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(microNutrientList.get(0).getVisibility()==View.GONE){
+                    //TransitionManager.beginDelayedTransition(view.findViewById(R.id.MicroCard), new AutoTransition());
+                    for(int i=0; i<microNutrientList.size(); i++){
+                        microNutrientList.get(i).setVisibility(view.VISIBLE);
+                    }
+                    microButton.setText("/\\");
+                }
+                else{
+                    for(int i=0; i<microNutrientList.size(); i++){
+                        microNutrientList.get(i).setVisibility(view.GONE);
+                    }
+                    microButton.setText("V");
+                }
+            }
+        });
+
+        vitaminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(vitaminList.get(0).getVisibility()==View.GONE){
+                    for(int i=0; i<vitaminList.size(); i++){
+                        vitaminList.get(i).setVisibility(view.VISIBLE);
+                    }
+                    vitaminButton.setText("/\\");
+                }
+                else{
+                    for(int i=0; i<vitaminList.size(); i++){
+                        vitaminList.get(i).setVisibility(view.GONE);
+                    }
+                    vitaminButton.setText("V");
+                }
+            }
+        });
 
 //-----------------------------------------------------------------------------------------------------------------------
 
@@ -519,6 +588,7 @@ public class SearchFragment extends Fragment {
         linear.addView(textView5);
 
         layout.addView(linear);
+        linear.setVisibility(View.GONE);
         return linear;
     }
 //------------------------------------------------------------------------------------------------------------------
