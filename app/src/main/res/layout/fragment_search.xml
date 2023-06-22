@@ -257,7 +257,6 @@
             app:cardElevation="24dp"
             android:background="@color/cardview_dark_background"
             app:cardCornerRadius="24dp"
-            android:paddingRight="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/searchLayout"
             app:layout_constraintStart_toEndOf="@+id/searchLayout"
@@ -271,12 +270,35 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vitamins"
-                    android:textSize="20sp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="21dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Vitamins"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <Button
+                        android:id="@+id/button"
+                        android:layout_width="99dp"
+                        android:layout_height="49dp"
+                        android:layout_weight="1"
+                        android:text="Button"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/textView13" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
