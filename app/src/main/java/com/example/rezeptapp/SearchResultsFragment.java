@@ -24,7 +24,6 @@ import java.util.Random;
 
 public class SearchResultsFragment extends Fragment {
 
-
     ImageView recipeImage;
     ImageButton backButton;
 
@@ -71,6 +70,7 @@ public class SearchResultsFragment extends Fragment {
 
 
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
+    private ArrayList<ShortInfo> searchResults = new ArrayList<>();
     private SearchManager searchManager = new SearchManager();
 
     @Override
@@ -114,6 +114,16 @@ public class SearchResultsFragment extends Fragment {
         recipeImage9 = view.findViewById(R.id.recipeImage9);
         recipeTitel10 = view.findViewById(R.id.recipeTitel10);
         recipeImage10 = view.findViewById(R.id.recipeImage10);
+
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            searchResults = (ArrayList<ShortInfo>) bundle.getSerializable("searchResults");
+            for(int i=0; i<searchResults.size();i++){
+                Log.d("result5", searchResults.get(i).getTitle());
+                Log.d("result5", String.valueOf(searchResults.get(i).getId()));
+                Log.d("result5", searchResults.get(i).getImage());
+            }
+        }
 
 
 

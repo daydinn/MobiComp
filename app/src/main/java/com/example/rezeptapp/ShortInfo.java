@@ -1,6 +1,8 @@
 package com.example.rezeptapp;
 
-public class ShortInfo {
+import java.io.Serializable;
+
+public class ShortInfo implements Serializable {
 
     private int id;
     private String title;

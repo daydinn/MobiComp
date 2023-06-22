@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.transition.AutoTransition;
@@ -368,27 +369,17 @@ public class SearchFragment extends Fragment {
                         try {
                             putValuesInHashmap();
                             shortInfoList = searchmanager.searchRecipes(general, macronutrients, micronutrients, vitamins);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("searchResults",  shortInfoList);
+                            SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
+                            searchResultsFragment.setArguments(bundle);
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
                     }
                 };
                 thread.start();
-
-        /*Thread thread = new Thread(){
-            public void run(){
-
-                try {
-                    recipe = searchmanager.getRecipeByID("637897");
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        };
-        thread.start();*/
-
-                SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
             }
         });
 //-----------------------------------------------------------------------------------------------------------------------
