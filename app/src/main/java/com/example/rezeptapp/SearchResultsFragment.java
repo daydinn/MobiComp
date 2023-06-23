@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Space;
@@ -17,8 +16,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 
@@ -124,6 +121,17 @@ public class SearchResultsFragment extends Fragment {
                 Log.d("result5", searchResults.get(i).getImage());
             }
         }
+
+        recipeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(shortInfoList.get(0).getId()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).commit();
+            }
+        });
 
 
 

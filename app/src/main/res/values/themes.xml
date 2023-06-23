@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.RezeptApp" parent="Base.Theme.RezeptApp" />
+
 </resources>

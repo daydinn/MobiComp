@@ -1,6 +1,7 @@
 package com.example.rezeptapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,8 +9,6 @@ import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     RecipesFragment recipesFragment = new RecipesFragment();
     FavoritesFragment favoritesFragment= new FavoritesFragment();
 
+    //Testzwecke
+    RecipePageFragment recipePageFragment = new RecipePageFragment();
 
 
 
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomNavigationView=findViewById(R.id.bottom_navigation);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
 
 
 
@@ -90,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
                     return true;
                 } else if (itemId == R.id.recipes) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, recipesFragment).commit();
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.container, recipesFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).commit();
                     return true;
                 } else if (itemId == R.id.favorites) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, favoritesFragment).commit();

@@ -2,8 +2,10 @@ package com.example.rezeptapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -21,11 +23,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.Space;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 
 public class SearchFragment extends Fragment {
@@ -42,6 +46,13 @@ public class SearchFragment extends Fragment {
     EditText ingredient;
     EditText excludedIngredient;
 
+    //Cuisine
+    Button cuisine;
+    String[] cuisineItems;
+    boolean[] checkedCuisines;
+    ArrayList<Integer> selectedCuisineList = new ArrayList<>();
+    boolean excludeCuisine = false;
+
     //Diet
     Button diet;
     String[] dietItems;
@@ -49,12 +60,18 @@ public class SearchFragment extends Fragment {
     ArrayList<Integer> selectedDietsList = new ArrayList<>();
     boolean dietOr = false;
 
-    //Cuisine
-    Button cuisine;
-    String[] cuisineItems;
-    boolean[] checkedCuisines;
-    ArrayList<Integer> selectedCuisineList = new ArrayList<>();
-    boolean excludeCuisine = false;
+    //Intolerances
+    Button intolerances;
+    String[] intolerancesItems;
+    boolean[] checkedIntolerances;
+    ArrayList<Integer> selectedIntolerancesList = new ArrayList<>();
+
+    //Intolerances
+    Button type;
+    String[] typeItems;
+    boolean[] checkedTypes;
+    ArrayList<Integer> selectedTypeList = new ArrayList<>();
+
 
     //Ingredient
     Button addIngredientButton;
@@ -86,6 +103,9 @@ public class SearchFragment extends Fragment {
     ArrayList<LinearLayout> vitaminList = new ArrayList<>();
     Button vitaminButton;
 
+    //Max. Cooking Time
+    NumberPicker timePicker;
+
 
 
     @Override
@@ -98,15 +118,26 @@ public class SearchFragment extends Fragment {
 
         name = view.findViewById(R.id.editTextName);
 
-        //Diet
-        diet  = view.findViewById(R.id.DietButton);
-        dietItems = getResources().getStringArray(R.array.diet_list);
-        checkedDiets = new boolean[dietItems.length];
 
         //Cuisine
         cuisine = view.findViewById(R.id.CuisineButton);
         cuisineItems = getResources().getStringArray(R.array.cuisine_list);
         checkedCuisines = new boolean[cuisineItems.length];
+
+        //Diet
+        diet  = view.findViewById(R.id.DietButton);
+        dietItems = getResources().getStringArray(R.array.diet_list);
+        checkedDiets = new boolean[dietItems.length];
+
+        //Intolerances
+        intolerances = view.findViewById(R.id.IntolerancesButton);
+        intolerancesItems = getResources().getStringArray(R.array.intolerance_list);
+        checkedIntolerances = new boolean [intolerancesItems.length];
+
+        //Type
+        type = view.findViewById(R.id.TypeButton);
+        typeItems =getResources().getStringArray(R.array.type_list);
+        checkedTypes = new boolean[typeItems.length];
 
         //Ingredients
         ingredient = view.findViewById(R.id.editTextIngredient);
@@ -131,7 +162,11 @@ public class SearchFragment extends Fragment {
         vitaminLayout = view.findViewById(R.id.VitaminLayout);
         vitaminButton = view.findViewById(R.id.vitaminButton);
 
-
+        //Timepicker
+        timePicker = view.findViewById(R.id.minutePicker);
+        timePicker.setMinValue(0);
+        timePicker.setMaxValue(360);
+        timePicker.setValue(0);
 
 //Buttons: Add/Remove Ingredient Edit Text Fields -------------------------------------------------------------------
         removeIngredientButton.setOnClickListener(new View.OnClickListener() {
@@ -348,7 +383,6 @@ public class SearchFragment extends Fragment {
                             dietOr=true;
                         }
                         dietAlert.show();
-
                     }
                 });
                 dietAlert.show();
@@ -357,6 +391,102 @@ public class SearchFragment extends Fragment {
 
 //-----------------------------------------------------------------------------------------------------------------------
 
+//Button: Intolerance Selection -----------------------------------------------------------------------------------------------------
+        intolerances.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder intolerancesAlert = new AlertDialog.Builder(getActivity());
+                intolerancesAlert.setTitle("Select Intolerances");
+                intolerancesAlert.setMultiChoiceItems(intolerancesItems, checkedIntolerances, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int itemPosition, boolean isChecked) {
+                        if(isChecked){
+                            if(!selectedIntolerancesList.contains(itemPosition)){
+                                selectedIntolerancesList.add(itemPosition);
+                            }
+                        }
+                        else{
+                            for (int i = 0; i < selectedIntolerancesList.size(); i++)
+                                if (selectedIntolerancesList.get(i) == itemPosition) {
+                                    selectedIntolerancesList.remove(i);
+                                    break;}
+                        }
+                    }
+                });
+                intolerancesAlert.setCancelable(true);
+                intolerancesAlert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        StringBuilder intolerancesString= new StringBuilder();
+                        for(int i=0;i<selectedIntolerancesList.size(); i++){
+                            intolerancesString.append(intolerancesItems[selectedIntolerancesList.get(i)]);
+                            if(i != selectedIntolerancesList.size()-1){
+                                intolerancesString.append(",");
+                            }
+                        }
+                        general.put("intolerances", String.valueOf(intolerancesString));
+                    }
+                });
+                intolerancesAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                intolerancesAlert.show();
+            }
+        });
+
+//-----------------------------------------------------------------------------------------------------------------------
+
+//Button: Intolerance Selection -----------------------------------------------------------------------------------------------------
+        type.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder typeAlert = new AlertDialog.Builder(getActivity());
+                typeAlert.setTitle("Select Intolerances");
+                typeAlert.setMultiChoiceItems(typeItems, checkedTypes, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int itemPosition, boolean isChecked) {
+                        if(isChecked){
+                            if(!selectedTypeList.contains(itemPosition)){
+                                selectedTypeList.add(itemPosition);
+                            }
+                        }
+                        else{
+                            for (int i = 0; i < selectedTypeList.size(); i++)
+                                if (selectedTypeList.get(i) == itemPosition) {
+                                    selectedTypeList.remove(i);
+                                    break;}
+                        }
+                    }
+                });
+                typeAlert.setCancelable(true);
+                typeAlert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        StringBuilder typeString= new StringBuilder();
+                        for(int i=0;i<selectedTypeList.size(); i++){
+                            typeString.append(typeItems[selectedTypeList.get(i)]);
+                            if(i != selectedTypeList.size()-1){
+                                typeString.append(",");
+                            }
+                        }
+                        general.put("type", String.valueOf(typeString));
+                    }
+                });
+                typeAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                typeAlert.show();
+            }
+        });
+
+//-----------------------------------------------------------------------------------------------------------------------
 
 
 // Button: Search -------------------------------------------------------------------------------------------------------------------
@@ -610,6 +740,9 @@ public class SearchFragment extends Fragment {
         putNutrientToHashmap(macroNutrientList, macronutrients);
         putNutrientToHashmap(microNutrientList, micronutrients);
         putNutrientToHashmap(vitaminList, vitamins);
+
+        //TimePicker
+        general.put("maxReadyTime", String.valueOf(timePicker.getValue()));
 
     }
 

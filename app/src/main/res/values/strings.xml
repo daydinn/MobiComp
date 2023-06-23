@@ -14,7 +14,7 @@
         <item>Cajun</item>
         <item>Caribbean</item>
         <item>Chinese</item>
-        <item>Eastern</item>
+        <item>Eastern-European</item>
         <item>European</item>
         <item>French</item>
         <item>German</item>
@@ -25,10 +25,10 @@
         <item>Japanese</item>
         <item>Jewish</item>
         <item>Korean</item>
-        <item>Latin American</item>
+        <item>Latin-American</item>
         <item>Mediterranean</item>
         <item>Mexican</item>
-        <item>Middle Eastern</item>
+        <item>Middle-Eastern</item>
         <item>Nordic</item>
         <item>Southern</item>
         <item>Spanish</item>
@@ -38,32 +38,47 @@
     <string-array name="diet_list">
         <item>Vegan</item>
         <item>Vegetarian</item>
-        <item>American</item>
-        <item>British</item>
-        <item>Cajun</item>
-        <item>Caribbean</item>
-        <item>Chinese</item>
-        <item>Eastern</item>
-        <item>European</item>
-        <item>French</item>
-        <item>German</item>
-        <item>Greek</item>
-        <item>Indian</item>
-        <item>Irish</item>
-        <item>Italian</item>
-        <item>Japanese</item>
-        <item>Jewish</item>
-        <item>Korean</item>
-        <item>Latin American</item>
-        <item>Mediterranean</item>
-        <item>Mexican</item>
-        <item>Middle Eastern</item>
-        <item>Nordic</item>
-        <item>Southern</item>
-        <item>Spanish</item>
-        <item>Thai</item>
-        <item>Vietnamese</item>
-    </string-array>string-array>
+        <item>Lacto-Vegetarian</item>
+        <item>Ovo-Vegetarian</item>
+        <item>Primal</item>
+        <item>Gluten-Free</item>
+        <item>Ketogenic</item>
+        <item>Pescetarian</item>
+        <item>Paleo</item>
+        <item>Low-FODMAP</item>
+        <item>Whole30</item>
+    </string-array>
+    <string-array name="intolerance_list">
+        <item>Dairy</item>
+        <item>Egg</item>
+        <item>Gluten</item>
+        <item>Grain</item>
+        <item>Peanut</item>
+        <item>Seafood</item>
+        <item>Sesame</item>
+        <item>Shellfish</item>
+        <item>Soy</item>
+        <item>Sulfite</item>
+        <item>Tree-Nut</item>
+        <item>Wheat</item>
+    </string-array>
+    <string-array name="type_list">
+        <item>main-course</item>
+        <item>side-dish</item>
+        <item>dessert</item>
+        <item>appetizer</item>
+        <item>salad</item>
+        <item>bread</item>
+        <item>breakfast</item>
+        <item>soup</item>
+        <item>beverage</item>
+        <item>sauce</item>
+        <item>marinade</item>
+        <item>fingerfood</item>
+        <item>snack</item>
+        <item>drink</item>
+
+    </string-array>
     <string-array name="macronutrient_list">
         <item>Carbs</item>
         <item>Protein</item>
@@ -101,11 +116,11 @@
         <item>Vitamin B6</item>
         <item>Vitamin B12</item>
     </string-array>
-    
-    
-    
-    
-    
+
+
+
+
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
