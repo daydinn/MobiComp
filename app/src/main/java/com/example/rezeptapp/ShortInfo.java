@@ -7,6 +7,7 @@ public class ShortInfo implements Serializable {
     private int id;
     private String title;
     private String image;
+    private boolean favorite = false;
 
     public ShortInfo(int id, String title, String image){
         this.id=id;
@@ -37,5 +38,13 @@ public class ShortInfo implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }

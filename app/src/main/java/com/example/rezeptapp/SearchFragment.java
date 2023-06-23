@@ -118,6 +118,11 @@ public class SearchFragment extends Fragment {
 
         name = view.findViewById(R.id.editTextName);
 
+        try {
+            ArrayList<Recipe> recipeList = searchmanager.getRandomRecipe(0);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         //Cuisine
         cuisine = view.findViewById(R.id.CuisineButton);

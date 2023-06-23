@@ -25,6 +25,7 @@ import okhttp3.Response;
 
 public class SearchManager {
     private Recipe recipe = new Recipe();
+    ArrayList<Recipe> recipeList = new ArrayList<>();
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private OkHttpClient client;
     private Request request;
@@ -77,7 +78,45 @@ public class SearchManager {
         });
         countDownLatch.await();
         return shortInfoList;
+    }
 
+    public ArrayList<ShortInfo> getSimilarRecipe(int id, int amount) throws InterruptedException {
+        shortInfoList = new ArrayList<>();
+        String url = "https://api.spoonacular.com/recipes/" + id + "/similar" + apiKey + "&number=" + amount;
+        Log.d("search", url);
+        //Set Up Http Client
+        setUpHttpClient(url);
+        //CountDownLatch -> Wartet bis Response komplett ist.
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        //Make http Request
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                shortInfoList = new ArrayList<ShortInfo>();
+                e.printStackTrace();
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful() && response.body() != null) {
+                    String myResponse = response.body().string();
+                    //shortInfoList=parseShortRecipe(myResponse);
+                    Log.d("Json Parse", myResponse);
+                    Gson gson = new Gson();
+                    shortInfoList = gson.fromJson(myResponse, new TypeToken<ArrayList<ShortInfo>>() {
+                    }.getType());
+                    for (int i = 0; i < shortInfoList.size(); i++) {
+                        Log.d("Json Parse", shortInfoList.get(i).getTitle());
+                        Log.d("Json Parse", String.valueOf(shortInfoList.get(i).getId()));
+                    }
+                    response.close();
+                    countDownLatch.countDown();
+                }
+            }
+        });
+        countDownLatch.await();
+        return shortInfoList;
     }
 
     public Recipe getRecipeByID(String id) throws InterruptedException {
@@ -121,6 +160,49 @@ public class SearchManager {
         countDownLatch.await();
         return recipe;
 
+    }
+
+    public ArrayList<Recipe> getRandomRecipe(int amount) throws InterruptedException {
+        recipeList = new ArrayList<>();
+        String url = "https://api.spoonacular.com/recipes/random" + apiKey + "&number="+amount;
+        //Set Up Http Client
+        setUpHttpClient(url);
+        //CountDownLatch -> Wartet bis Response komplett ist.
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        //Make http Request
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                recipe = new Recipe();
+                e.printStackTrace();
+                countDownLatch.countDown();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful() && response.body() != null) {
+                    String myResponse = response.body().string();
+                    //shortInfoList=parseShortRecipe(myResponse);
+                    JsonObject jo = (JsonObject) JsonParser.parseString(myResponse);
+                    JsonArray jsonArr = jo.getAsJsonArray("recipes");
+                    Gson gson = new Gson();
+                    recipeList = gson.fromJson(jsonArr, new TypeToken<ArrayList<Recipe>>(){}.getType());
+                    for (int i = 0; i < recipeList.size(); i++) {
+                        Log.d("Json Parse", recipeList.get(i).getTitle());
+                        Log.d("Json Parse", String.valueOf(recipeList.get(i).getId()));
+                        Log.d("Json Parse", recipeList.get(i).getImage());
+                        Log.d("Json Parse", String.valueOf(recipeList.get(i).getHealthScore()));
+                    }
+
+
+
+                    response.close();
+                    countDownLatch.countDown();
+                }
+            }
+        });
+        countDownLatch.await();
+        return recipeList;
     }
 
     private String buildURL(HashMap<String, String> general, HashMap<String, String> macronutrients, HashMap<String, String> micronutrients, HashMap<String, String> vitamins){

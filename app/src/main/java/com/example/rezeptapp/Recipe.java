@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 public class Recipe {
+    private boolean favorite = false;
     private boolean vegetarian;
     private boolean vegan;
     private boolean glutenFree;
@@ -259,8 +260,16 @@ public class Recipe {
         this.nutrition = nutrition;
     }
 
+    public boolean isFavorite() {
+        return favorite;
+    }
 
-    // Innere Ingredient Klasse__________________________________________________________________
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+
+    // Inner Ingredient class __________________________________________________________________
 
     public static class ExtendedIngredient {
         private int id;

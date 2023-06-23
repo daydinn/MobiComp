@@ -21,16 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/buttonRandomRecipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Recipe"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView01" />
-
             <ImageView
                 android:id="@+id/imageView01"
                 android:layout_width="402dp"
@@ -82,13 +72,14 @@
                 android:id="@+id/textViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Hello World!"
                 android:textAlignment="center"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonRandomRecipe"
+                app:layout_constraintTop_toBottomOf="@+id/imageView01"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -128,32 +119,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
                 app:layout_constraintVertical_bias="0.13999999" />
-
-            <TextView
-                android:id="@+id/textViewYoutube"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Youtube"
-                android:textAlignment="center"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewInstructions"
-                app:layout_constraintVertical_bias="0.13999999"
-                tools:visibility="visible" />
-
-            <TextView
-                android:id="@+id/textViewSource"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Source"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewYoutube"
-                app:layout_constraintVertical_bias="0.110000014" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"

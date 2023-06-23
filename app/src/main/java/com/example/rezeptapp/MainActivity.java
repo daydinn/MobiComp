@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     
  */
 
-    //Nur für Testzwecke
-    Button goToRandomRecipe;
 
 
     @Override
