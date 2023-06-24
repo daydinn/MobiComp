@@ -112,6 +112,7 @@ public class SearchResultsFragment extends Fragment {
         recipeTitel10 = view.findViewById(R.id.recipeTitel10);
         recipeImage10 = view.findViewById(R.id.recipeImage10);
 
+
         Bundle bundle = getArguments();
         if(bundle!=null){
             searchResults = (ArrayList<ShortInfo>) bundle.getSerializable("searchResults");
@@ -129,7 +130,7 @@ public class SearchResultsFragment extends Fragment {
                 bundle.putString("foundRecipe", String.valueOf(shortInfoList.get(0).getId()));
                 RecipePageFragment recipePageFragment = new RecipePageFragment();
                 recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
             }
         });
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 
@@ -48,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,searchFragment).commit();
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,searchResultsFragment).commit();
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit(); //erste Page muss immer unten sein
+
+        //getSupportFragmentManager().beginTransaction().add(R.id.container,searchFragment).addToBackStack(null).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.container,searchResultsFragment).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container,homeFragment).commit(); //erste Page muss immer unten sein
         //helps to replace the container without the homeFragment while we open the App
         //getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
 
@@ -86,17 +88,17 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.home) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.search) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.recipes) {
                     //getSupportFragmentManager().beginTransaction().replace(R.id.container, recipesFragment).commit();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.favorites) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, favoritesFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, favoritesFragment).addToBackStack(null).commit();
                     return true;
                 }
 

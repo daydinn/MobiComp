@@ -15,7 +15,8 @@
         app:showAsAction="never"
         />
     <item android:id="@+id/favoriteItem"
-        android:icon="@drawable/herz"
+        android:icon="@drawable/favorite_off"
         android:title="Favorite"
+
         app:showAsAction="ifRoom"/>
 </menu>

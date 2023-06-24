@@ -2,19 +2,13 @@ package com.example.rezeptapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import android.os.Parcelable;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
-import android.transition.AutoTransition;
-import android.transition.Fade;
-import android.transition.TransitionManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -29,7 +23,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 
 public class SearchFragment extends Fragment {
@@ -163,7 +156,7 @@ public class SearchFragment extends Fragment {
         macroButton = view. findViewById(R.id.macroButton);
         microLayout = view.findViewById(R.id.MicroLayout);
         microButton = view.findViewById(R.id.microButton);
-        microCard = view.findViewById(R.id.MicroCard);
+        microCard = view.findViewById(R.id.RecipeIngredientCard);
         vitaminLayout = view.findViewById(R.id.VitaminLayout);
         vitaminButton = view.findViewById(R.id.vitaminButton);
 
@@ -508,7 +501,7 @@ public class SearchFragment extends Fragment {
                             bundle.putSerializable("searchResults",  shortInfoList);
                             SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
                             searchResultsFragment.setArguments(bundle);
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).addToBackStack(null).commit();
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }

@@ -100,6 +100,20 @@ public class DBHandler extends SQLiteOpenHelper {
         return response > -1;
     }
 
+    public boolean updateShortInfoFavorite(int id, boolean favorite){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(ID_COL, id);
+        values.put(FAVORITE_COL, favorite);
+
+        // Updating Data by id
+        long response = db.update(TABLE_NAME, values, "id=?", new String[]{String.valueOf(id)});
+        db.close();
+        return response > -1;
+    }
+
     public boolean deleteShortInfo(int id){
         SQLiteDatabase db = this.getWritableDatabase();
 

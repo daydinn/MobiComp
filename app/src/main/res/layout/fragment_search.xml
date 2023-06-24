@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/LinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
@@ -234,7 +234,7 @@
             android:outlineProvider="bounds"
             app:cardCornerRadius="24dp"
             app:cardElevation="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/MicroCard"
+            app:layout_constraintBottom_toTopOf="@+id/RecipeIngredientCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selectableLayout"
@@ -286,7 +286,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/MicroCard"
+            android:id="@+id/RecipeIngredientCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -361,7 +361,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/searchLayout"
             app:layout_constraintStart_toEndOf="@+id/searchLayout"
-            app:layout_constraintTop_toBottomOf="@id/MicroCard"
+            app:layout_constraintTop_toBottomOf="@id/RecipeIngredientCard"
             app:layout_constraintVertical_bias="0.01999998">
 
             <LinearLayout
