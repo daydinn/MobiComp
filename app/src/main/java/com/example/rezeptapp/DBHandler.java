@@ -2,10 +2,12 @@ package com.example.rezeptapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-import androidx.annotation.Nullable;
+import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
     private static final String DB_NAME =  "recipe_app_db";
@@ -25,7 +27,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String query = "CREATE TABLE " + TABLE_NAME + " ("
-                + ID_COL + " INTEGER , "
+                + ID_COL + " INTEGER PRIMARY KEY UNIQUE, "
                 + TITLE_COL + " TEXT,"
                 + IMAGE_COL + " TEXT,"
                 + FAVORITE_COL + " BOOLEAN)";
@@ -55,10 +57,56 @@ public class DBHandler extends SQLiteOpenHelper {
         //Insert Content into Table
         long response = db.insert(TABLE_NAME, null, values);
         db.close();
-        if(response<=-1){
-            return false;
-        }
-        return true;
+        return response > -1;
+    }
+
+    public ArrayList<ShortInfo> getAllShortInfo(){
+
+        //Open Database in read mode
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //Get all ShortInfos
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
+        ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
+
+            // Add Data to shortInfo List
+            if (cursor.moveToFirst()) {
+                do {
+                    ShortInfo shortInfo = new ShortInfo(cursor.getInt(0),
+                            cursor.getString(1),
+                            cursor.getString(2));
+                    shortInfo.setFavorite((cursor.getInt(3)==1));
+                    shortInfoList.add(shortInfo);
+                } while (cursor.moveToNext());
+            }
+        cursor.close();
+        return shortInfoList;
+    }
+
+    public boolean updateShortInfo(int id, String title, String image, boolean favorite){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(ID_COL, id);
+        values.put(TITLE_COL, title);
+        values.put(IMAGE_COL, image);
+        values.put(FAVORITE_COL, favorite);
+
+        // Updating Data by id
+        long response = db.update(TABLE_NAME, values, "id=?", new String[]{String.valueOf(id)});
+        db.close();
+        return response > -1;
+    }
+
+    public boolean deleteShortInfo(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //delete Data by id
+        long response = db.delete(TABLE_NAME, "id=?", new String[]{String.valueOf(id)});
+        db.close();
+        return response > -1;
     }
 
 

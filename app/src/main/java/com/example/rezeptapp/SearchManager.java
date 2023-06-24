@@ -187,12 +187,12 @@ public class SearchManager {
                     JsonArray jsonArr = jo.getAsJsonArray("recipes");
                     Gson gson = new Gson();
                     recipeList = gson.fromJson(jsonArr, new TypeToken<ArrayList<Recipe>>(){}.getType());
-                    for (int i = 0; i < recipeList.size(); i++) {
+                    /*for (int i = 0; i < recipeList.size(); i++) {
                         Log.d("Json Parse", recipeList.get(i).getTitle());
                         Log.d("Json Parse", String.valueOf(recipeList.get(i).getId()));
                         Log.d("Json Parse", recipeList.get(i).getImage());
                         Log.d("Json Parse", String.valueOf(recipeList.get(i).getHealthScore()));
-                    }
+                    }*/
 
 
 

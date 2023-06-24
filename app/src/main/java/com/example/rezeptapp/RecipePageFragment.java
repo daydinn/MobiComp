@@ -52,13 +52,12 @@ public class RecipePageFragment extends Fragment {
         requireActivity().addMenuProvider(new MenuProvider() {
               @Override
               public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
-                  menuInflater.inflate(R.menu.found_recipe_menu, menu);
-
+                  menuInflater.inflate(R.menu.recipe_menu, menu);
+                  //menu.findItem(R.id.favoriteItem).setVisible(false);
               }
-
               @Override
               public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
-                  if (menuItem.getItemId() == R.id.foundRecipeSave) {
+                  if (menuItem.getItemId() == R.id.recipeSaveItem) {
                       int id = recipe.getId();
                       String title = recipe.getTitle();
                       String image = recipe.getImage();
@@ -69,7 +68,8 @@ public class RecipePageFragment extends Fragment {
                           return true;
                       }
 
-                      if(dbHandler.addNewShortInfo(id, title, image, favorite)){
+                      //if(dbHandler.addNewShortInfo(id, title, image, favorite)){
+                      if(dbHandler.addNewShortInfo(5, "Title", "image.url", false)){
                           Snackbar.make(getView(), "Recipe saved", Snackbar.LENGTH_SHORT).show();
                       }
                       else{
@@ -77,6 +77,35 @@ public class RecipePageFragment extends Fragment {
                           Snackbar.make(getView(), "Error!\nRecipe can't be saved", Snackbar.LENGTH_SHORT).show();
                       }
 
+                  }
+                  else if(menuItem.getItemId() == R.id.favoriteItem){
+
+                      //menuItem.setVisible(false);
+                      Log.d("load5","Looaaadd---------");
+                      ArrayList<ShortInfo> shortInfoList = dbHandler.getAllShortInfo();
+                      Log.d("load5", String.valueOf(shortInfoList.size()));
+                      for(int i=0; i<shortInfoList.size();i++){
+                          Log.d("load5", String.valueOf(shortInfoList.get(i).getId()));
+                          Log.d("load5",shortInfoList.get(i).getTitle());
+                          Log.d("load5",shortInfoList.get(i).getImage());
+                          Log.d("load5", String.valueOf(shortInfoList.get(i).isFavorite()));
+                      }
+                  }
+                  else if(menuItem.getItemId() == R.id.recipeUpdateItem){
+                      if(dbHandler.updateShortInfo(5,"newTitle", "newImage.url", true)){
+                          Snackbar.make(getView(), "Recipe Updated", Snackbar.LENGTH_SHORT).show();
+                      }
+                      else{
+                          Snackbar.make(getView(), "Error!\nRecipe not updated", Snackbar.LENGTH_SHORT).show();
+                      }
+                  }
+                  else if(menuItem.getItemId() == R.id.recipeDeleteItem){
+                      if(dbHandler.deleteShortInfo(5)){
+                          Snackbar.make(getView(), "Recipe Deleted", Snackbar.LENGTH_SHORT).show();
+                      }
+                      else{
+                          Snackbar.make(getView(), "Error!\nRecipe not deleted", Snackbar.LENGTH_SHORT).show();
+                      }
                   }
                   return true;
               }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/recipeSaveItem"
+        android:title="Save Recipe"
+        app:showAsAction="never"
+        />
+    <item android:id="@+id/recipeUpdateItem"
+        android:title="Update Recipe"
+        app:showAsAction="never"
+        />
+    <item android:id="@+id/recipeDeleteItem"
+        android:title="Delete Recipe"
+        app:showAsAction="never"
+        />
+    <item android:id="@+id/favoriteItem"
+        android:icon="@drawable/herz"
+        android:title="Favorite"
+        app:showAsAction="ifRoom"/>
+</menu>
