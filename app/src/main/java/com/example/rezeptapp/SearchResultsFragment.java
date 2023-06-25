@@ -3,6 +3,8 @@ package com.example.rezeptapp;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -83,12 +85,26 @@ public class SearchResultsFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
+
+        RecyclerView recyclerView = view.findViewById(R.id.myRecyclerview);
+
+        loadSuggestedRecipes();
+
+        SR2_RecyclerViewAdapter adapter = new SR2_RecyclerViewAdapter(this.getContext(), shortInfoList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+
+
+
+
+
         backButton = view.findViewById(R.id.backButton);
         reloadButton = view.findViewById(R.id.reloadButton);
         recipeMinutes = view.findViewById(R.id.recipeMinutes);
         recipeTitel = view.findViewById(R.id.recipeTitel);
         recipeHealthScore = view.findViewById(R.id.recipeHealthScore);
-        recipeIngredients = view.findViewById(R.id.recipeIngredients);
+        //recipeIngredients = view.findViewById(R.id.recipeIngredients);
         recipeImage = view.findViewById(R.id.recipeImage);
         spaceNewRecipe = view.findViewById(R.id.spaceNewRecipe);
         result = view.findViewById(R.id.result);
@@ -135,6 +151,10 @@ public class SearchResultsFragment extends Fragment {
         textViewList.add(recipeTitel8);
         textViewList.add(recipeTitel9);
         textViewList.add(recipeTitel10);
+
+
+
+
 
         Bundle bundle = getArguments();
         if(bundle!=null){
@@ -436,6 +456,16 @@ public class SearchResultsFragment extends Fragment {
 
 
         }
+
+    private void loadSuggestedRecipes() {
+        Thread thread = new Thread() {
+            public void run() {
+                shortInfoList = searchManager.getTestData();
+                Log.d("test", "nachricht");
+            }
+        };
+        thread.start();
+    }
 
 
     }

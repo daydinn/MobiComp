@@ -88,6 +88,7 @@
 
 
 
+
     <ImageButton
 
         android:id="@+id/backButton"
@@ -119,6 +120,20 @@
         >
 
     </TextView>
+
+
+
+
+
+
+
+    <Space
+        android:id="@+id/spaceNewRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        />
 
     <!---chard1-->
 
@@ -323,44 +338,15 @@
     </LinearLayout>
 
 
-
-       <TextView
-                android:id="@+id/ingredients"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ingredients:"
-                android:layout_gravity="left"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="460dp"
-                android:gravity="center"
-                >
-        </TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myRecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
 
 
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="485dp"
-            android:gravity="center"
-            android:id="@+id/recipeIngredients"
-
-            android:layout_centerHorizontal="true"
-
-
-            android:text="Mehl Ei Pasta Brocoli Lacs Some random Results  "
-
-            android:textColor="@color/black"
-            android:textSize="12sp">
-
-        </TextView>
-
+        />
 
     <LinearLayout
         android:id="@+id/ingredientsLayout"
@@ -373,13 +359,6 @@
         >
 
 
-    <Space
-        android:id="@+id/spaceNewRecipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-
-        />
 
 
 
@@ -388,7 +367,15 @@
 
 
 
-    <!---chard2-->
+
+
+
+
+
+
+
+
+
     <ImageView
         android:id="@+id/recipeImage2"
         android:layout_marginTop="600dp"
@@ -418,11 +405,11 @@
 
         >
     </TextView>
-    <!---end of chard2-->
 
 
 
-    <!---chard3-->
+
+
     <ImageView
         android:id="@+id/recipeImage3"
         android:layout_marginTop="1100dp"
@@ -684,6 +671,14 @@
 
 
     <!---end of chard11-->
+
+
+
+
+
+
+
+
 
 
 
