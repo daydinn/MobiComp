@@ -36,18 +36,39 @@ public class Recipe {
 
     public Recipe() {
     }
+
+    /**
+     * Returns whether the recipe is vegetarian or not.
+     * @Author Rene Wentzel
+     * @return boolean
+     */
     public boolean isVegetarian() {
         return vegetarian;
     }
 
+    /**
+     * Sets the state of the recipe being vegetarian or not.
+     * @Author Rene Wentzel
+     * @param vegetarian boolean
+     */
     public void setVegetarian(boolean vegetarian) {
         this.vegetarian = vegetarian;
     }
 
+    /**
+     * Returns whether the recipe is vegean or not.
+     * @Author Rene Wentzel
+     * @return boolean
+     */
     public boolean isVegan() {
         return vegan;
     }
 
+    /**
+     * Sets the state of the recipe being vegan or not.
+     * @Author Rene Wentzel
+     * @param vegan boolean
+     */
     public void setVegan(boolean vegan) {
         this.vegan = vegan;
     }

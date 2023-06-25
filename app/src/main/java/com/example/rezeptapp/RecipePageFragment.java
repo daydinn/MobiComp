@@ -4,9 +4,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -29,9 +31,10 @@ public class RecipePageFragment extends Fragment {
     String recipeID ="";
     Recipe recipe = new Recipe();
     DBHandler dbHandler;
-
+    TextView recipeTitle;
     ImageView recipeImage;
     LinearLayout ingredientLayout;
+    TextView instructions;
 
 
     @Override
@@ -42,6 +45,14 @@ public class RecipePageFragment extends Fragment {
             recipeID = bundle.getString("foundRecipe");
             Log.d("result5", "Recipe ID: "+ recipeID);
         }
+
+        try {
+            SearchManager searchmanager = new SearchManager();
+            recipe = searchmanager.getRecipeByID(recipeID);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         /*try {
             SearchManager searchmanager = new SearchManager();
             ArrayList<Recipe> recipeList = searchmanager.getRandomRecipe(0);
@@ -49,7 +60,7 @@ public class RecipePageFragment extends Fragment {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }*/
-        recipe.setId(10);
+        /*recipe.setId(10);
         recipe.setTitle("Recipe Number Ten");
         recipe.setImage("Recipelink.url");
         recipe.setFavorite(false);
@@ -63,7 +74,7 @@ public class RecipePageFragment extends Fragment {
             ingrList.add(ingr);
         }
 
-        recipe.setExtendedIngredients(ingrList);
+        recipe.setExtendedIngredients(ingrList);*/
 
         dbHandler = new DBHandler(getContext());
     }
@@ -75,14 +86,23 @@ public class RecipePageFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_page, container, false);
 
+        recipeTitle = view.findViewById(R.id.RecipeTitleTextView);
+        recipeTitle.setText(recipe.getTitle());
+        recipeImage = view.findViewById(R.id.bigRecipeImage);
+        Picasso.get().load(recipe.getImage()).into(recipeImage);
         ingredientLayout = view.findViewById(R.id.RecipeIngredientsLayout);
         setUpIngredients();
+        instructions = view.findViewById(R.id.RecipeInstruction);
+        instructions.setText(Html.fromHtml(recipe.getInstructions(), HtmlCompat.FROM_HTML_SEPARATOR_LINE_BREAK_LIST));
 
-        recipeImage = view.findViewById(R.id.bigRecipeImage);
-        Picasso.get().load("https://spoonacular.com/recipeImages/638174-312x231.jpg").into(recipeImage);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(recipe.getTitle());
 
-        //Options Menu
+        /**
+         * Sets up an Option Menu in the top ActionBar.
+         * Includes saving a recipe
+         * To do: Erweitern sobald fertig
+         * @Author Rene Wentzel
+         */
         requireActivity().addMenuProvider(new MenuProvider() {
 
               @Override
@@ -174,6 +194,11 @@ public class RecipePageFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Creates a dedicated Layout for each ingredient and their amount and unit and add them to the Page.
+     * The layout creation can be found in createIngredientLine() methode.
+     * @Author Rene Wentzel
+     */
     private void setUpIngredients(){
         ArrayList<Recipe.ExtendedIngredient> ingredientList = recipe.getExtendedIngredients();
         if(ingredientList!=null){
@@ -188,6 +213,15 @@ public class RecipePageFragment extends Fragment {
 
     }
 
+    /**
+     * Creates a linear layout that includes the given ingredient, amount and unit.
+     * returns the created linear layout.
+ * @Autor Rene Wentzel
+     * @param ingredient The ingredient name
+     * @param measure The measurement of the ingredient
+     * @param unit The unit of the measurement
+     * @return Returns a LinearLayout object
+     */
     private LinearLayout createIngredientLine(String ingredient, String measure, String unit){
         int sizeInDP =0;
         LinearLayout linearLayout = new LinearLayout(getContext());

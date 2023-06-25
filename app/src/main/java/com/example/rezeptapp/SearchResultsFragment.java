@@ -112,11 +112,37 @@ public class SearchResultsFragment extends Fragment {
         recipeTitel10 = view.findViewById(R.id.recipeTitel10);
         recipeImage10 = view.findViewById(R.id.recipeImage10);
 
+        ArrayList<ImageView> imageViewList = new ArrayList<>();
+        imageViewList.add(recipeImage);
+        imageViewList.add(recipeImage2);
+        imageViewList.add(recipeImage3);
+        imageViewList.add(recipeImage4);
+        imageViewList.add(recipeImage5);
+        imageViewList.add(recipeImage6);
+        imageViewList.add(recipeImage7);
+        imageViewList.add(recipeImage8);
+        imageViewList.add(recipeImage9);
+        imageViewList.add(recipeImage10);
+
+        ArrayList<TextView> textViewList = new ArrayList<>();
+        textViewList.add(recipeTitel);
+        textViewList.add(recipeTitel2);
+        textViewList.add(recipeTitel3);
+        textViewList.add(recipeTitel4);
+        textViewList.add(recipeTitel5);
+        textViewList.add(recipeTitel6);
+        textViewList.add(recipeTitel7);
+        textViewList.add(recipeTitel8);
+        textViewList.add(recipeTitel9);
+        textViewList.add(recipeTitel10);
 
         Bundle bundle = getArguments();
         if(bundle!=null){
             searchResults = (ArrayList<ShortInfo>) bundle.getSerializable("searchResults");
             for(int i=0; i<searchResults.size();i++){
+                textViewList.get(i).setText(searchResults.get(i).getTitle());
+                Picasso.get().load(searchResults.get(i).getImage()).into(imageViewList.get(i));
+
                 Log.d("result5", searchResults.get(i).getTitle());
                 Log.d("result5", String.valueOf(searchResults.get(i).getId()));
                 Log.d("result5", searchResults.get(i).getImage());
@@ -127,7 +153,97 @@ public class SearchResultsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(shortInfoList.get(0).getId()));
+                bundle.putString("foundRecipe", String.valueOf(searchResults.get(0).getId()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
+            }
+        });
+        recipeImage2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(searchResults.get(1).getId()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
+            }
+        });
+        recipeImage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(searchResults.get(2).getId()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
+            }
+        });
+        recipeImage4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(searchResults.get(3).getId()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
+            }
+        });
+        recipeImage5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(searchResults.get(4).getId()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
+            }
+        });
+        recipeImage6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(searchResults.get(5).getId()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
+            }
+        });
+        recipeImage7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(searchResults.get(6).getId()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
+            }
+        });
+        recipeImage8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(searchResults.get(7).getId()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
+            }
+        });
+        recipeImage9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(searchResults.get(8).getId()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
+            }
+        });
+        recipeImage10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(searchResults.get(9).getId()));
                 RecipePageFragment recipePageFragment = new RecipePageFragment();
                 recipePageFragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
@@ -136,7 +252,7 @@ public class SearchResultsFragment extends Fragment {
 
 
 
-        loadFoundRecipe();
+        //loadFoundRecipe();
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -216,11 +332,6 @@ public class SearchResultsFragment extends Fragment {
 
 
                         public void run() {
-
-
-
-
-
 
                                 ShortInfo shortinfo = shortInfoList.get(RandInt());
                                 Picasso.get().load(shortinfo.getImage()).into(recipeImage);

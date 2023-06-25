@@ -33,6 +33,7 @@
             android:layout_height="55dp"
             android:ems="10"
             android:hint="Recipe Name"
+            android:text="chicken"
             android:inputType="text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -244,6 +245,7 @@
                 android:id="@+id/MacroLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingVertical="16dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -306,6 +308,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:paddingVertical="16dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -368,6 +371,7 @@
                 android:id="@+id/VitaminLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingVertical="16dp"
                 android:gravity="center"
                 android:orientation="vertical">
 

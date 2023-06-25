@@ -81,24 +81,23 @@ public class SearchFragment extends Fragment {
     ArrayList<EditText> excludeIngredientEditList = new ArrayList<>();
 
     //Macro Nutrients
-    LinearLayout macroLayout ;
+    LinearLayout macroLayout;
     ArrayList<LinearLayout> macroNutrientList = new ArrayList<>();
     Button macroButton;
 
     //Micro Nutrients
-    LinearLayout microLayout ;
+    LinearLayout microLayout;
     ArrayList<LinearLayout> microNutrientList = new ArrayList<>();
     Button microButton;
     CardView microCard;
 
     //Vitamins
-    LinearLayout vitaminLayout ;
+    LinearLayout vitaminLayout;
     ArrayList<LinearLayout> vitaminList = new ArrayList<>();
     Button vitaminButton;
 
     //Max. Cooking Time
     NumberPicker timePicker;
-
 
 
     @Override
@@ -111,36 +110,30 @@ public class SearchFragment extends Fragment {
 
         name = view.findViewById(R.id.editTextName);
 
-        try {
-            ArrayList<Recipe> recipeList = searchmanager.getRandomRecipe(0);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
         //Cuisine
         cuisine = view.findViewById(R.id.CuisineButton);
         cuisineItems = getResources().getStringArray(R.array.cuisine_list);
         checkedCuisines = new boolean[cuisineItems.length];
 
         //Diet
-        diet  = view.findViewById(R.id.DietButton);
+        diet = view.findViewById(R.id.DietButton);
         dietItems = getResources().getStringArray(R.array.diet_list);
         checkedDiets = new boolean[dietItems.length];
 
         //Intolerances
         intolerances = view.findViewById(R.id.IntolerancesButton);
         intolerancesItems = getResources().getStringArray(R.array.intolerance_list);
-        checkedIntolerances = new boolean [intolerancesItems.length];
+        checkedIntolerances = new boolean[intolerancesItems.length];
 
         //Type
         type = view.findViewById(R.id.TypeButton);
-        typeItems =getResources().getStringArray(R.array.type_list);
+        typeItems = getResources().getStringArray(R.array.type_list);
         checkedTypes = new boolean[typeItems.length];
 
         //Ingredients
         ingredient = view.findViewById(R.id.editTextIngredient);
         addIngredientButton = view.findViewById(R.id.addIngredientButton);
-        removeIngredientButton = view. findViewById(R.id.removeIngredientButton);
+        removeIngredientButton = view.findViewById(R.id.removeIngredientButton);
         ingredientLayout = view.findViewById(R.id.ingredientsLayout);
         spaceIngredient = view.findViewById(R.id.spaceIngredient);
 
@@ -153,7 +146,7 @@ public class SearchFragment extends Fragment {
 
         //Nutrients+Vitamins
         macroLayout = view.findViewById(R.id.MacroLayout);
-        macroButton = view. findViewById(R.id.macroButton);
+        macroButton = view.findViewById(R.id.macroButton);
         microLayout = view.findViewById(R.id.MicroLayout);
         microButton = view.findViewById(R.id.microButton);
         microCard = view.findViewById(R.id.RecipeIngredientCard);
@@ -166,21 +159,30 @@ public class SearchFragment extends Fragment {
         timePicker.setMaxValue(360);
         timePicker.setValue(0);
 
-//Buttons: Add/Remove Ingredient Edit Text Fields -------------------------------------------------------------------
+//Buttons: Add/Remove Ingredient Edit Text Fields-------------------------------------------------------------------
+        /**
+         * Removes the latest EditText of ingredients
+         * @Author Rene Wentzel
+         */
         removeIngredientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ingredientEditList.size()>0){
-                    ingredientLayout.removeView(ingredientEditList.get(ingredientEditList.size()-1));
-                    ingredientEditList.remove(ingredientEditList.get(ingredientEditList.size()-1));
+                if (ingredientEditList.size() > 0) {
+                    ingredientLayout.removeView(ingredientEditList.get(ingredientEditList.size() - 1));
+                    ingredientEditList.remove(ingredientEditList.get(ingredientEditList.size() - 1));
                 }
-                if(ingredientEditList.size()==0){
+                if (ingredientEditList.size() == 0) {
                     removeIngredientButton.setEnabled(false);
                     removeIngredientButton.setVisibility(View.GONE);
                 }
 
             }
         });
+
+        /**
+         * Adds a new EditText for ingredients
+         * @Author Rene Wentzel
+         */
         addIngredientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,7 +196,7 @@ public class SearchFragment extends Fragment {
                 Log.d("sizep ingredient", String.valueOf(ingredientLayout.indexOfChild(spaceIngredient)));
                 Log.d("sizep button", String.valueOf(ingredientLayout.indexOfChild(removeIngredientButton)));
                 Log.d("sizep editlist", String.valueOf(ingredientLayout.indexOfChild(ingredientEditList.get(0))));
-                if(ingredientEditList.size()==1){
+                if (ingredientEditList.size() == 1) {
                     removeIngredientButton.setEnabled(true);
                     removeIngredientButton.setVisibility(View.VISIBLE);
                 }
@@ -205,20 +207,29 @@ public class SearchFragment extends Fragment {
 
 
 //Buttons: Add/Remove Excluded Ingredient Edit Text Fields -------------------------------------------------------------------
+        /**
+         * Removes the latest EditText of excluded ingredients
+         * @Author Rene Wentzel
+         */
         removeExcludeIngredientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(excludeIngredientEditList.size()>0){
-                    excludeIngredientLayout.removeView(excludeIngredientEditList.get(excludeIngredientEditList.size()-1));
-                    excludeIngredientEditList.remove(excludeIngredientEditList.get(excludeIngredientEditList.size()-1));
+                if (excludeIngredientEditList.size() > 0) {
+                    excludeIngredientLayout.removeView(excludeIngredientEditList.get(excludeIngredientEditList.size() - 1));
+                    excludeIngredientEditList.remove(excludeIngredientEditList.get(excludeIngredientEditList.size() - 1));
                 }
-                if(excludeIngredientEditList.size()==0){
+                if (excludeIngredientEditList.size() == 0) {
                     removeExcludeIngredientButton.setEnabled(false);
                     removeExcludeIngredientButton.setVisibility(View.GONE);
                 }
 
             }
         });
+
+        /**
+         * Adds a new EditText for excluded ingredients
+         * @Author Rene Wentzel
+         */
         addExcludeIngredientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -229,7 +240,7 @@ public class SearchFragment extends Fragment {
                 newEditText.setHint("Excluded Ingredient");
                 excludeIngredientLayout.addView(newEditText, excludeIngredientLayout.indexOfChild(spaceExcludeIngredient));
                 excludeIngredientEditList.add(newEditText);
-                if(excludeIngredientEditList.size()==1){
+                if (excludeIngredientEditList.size() == 1) {
                     removeExcludeIngredientButton.setEnabled(true);
                     removeExcludeIngredientButton.setVisibility(View.VISIBLE);
                 }
@@ -239,28 +250,33 @@ public class SearchFragment extends Fragment {
 //-----------------------------------------------------------------------------------------------------------------------
 
 
-//Button: Cuisine Selection -----------------------------------------------------------------------------------------------------
+//Button: Cuisine Selection-----------------------------------------------------------------------------------------------------
+        /**
+         * Opens a dialog with a check list of cuisines.
+         * Writes selected cuisines in dedicated Hashmaps when confirming.
+         * @Author Rene Wentzel
+         */
         cuisine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder cuisineAlert = new AlertDialog.Builder(getActivity());
-                if(!excludeCuisine)
+                if (!excludeCuisine)
                     cuisineAlert.setTitle("Select Include Cuisines");
                 else
                     cuisineAlert.setTitle("Select Exclude Cuisines");
                 cuisineAlert.setMultiChoiceItems(cuisineItems, checkedCuisines, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int itemPosition, boolean isChecked) {
-                        if(isChecked){
-                            if(!selectedCuisineList.contains(itemPosition)){
+                        if (isChecked) {
+                            if (!selectedCuisineList.contains(itemPosition)) {
                                 selectedCuisineList.add(itemPosition);
                             }
-                        }
-                        else{
+                        } else {
                             for (int i = 0; i < selectedCuisineList.size(); i++)
                                 if (selectedCuisineList.get(i) == itemPosition) {
                                     selectedCuisineList.remove(i);
-                                    break;}
+                                    break;
+                                }
                         }
                     }
 
@@ -269,18 +285,17 @@ public class SearchFragment extends Fragment {
                 cuisineAlert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        StringBuilder cuisineString= new StringBuilder();
-                        for(int i=0;i<selectedCuisineList.size(); i++){
+                        StringBuilder cuisineString = new StringBuilder();
+                        for (int i = 0; i < selectedCuisineList.size(); i++) {
                             cuisineString.append(cuisineItems[selectedCuisineList.get(i)]);
-                            if(i != selectedCuisineList.size()-1){
+                            if (i != selectedCuisineList.size() - 1) {
                                 cuisineString.append(",");
                             }
                         }
-                        if(excludeCuisine){
+                        if (excludeCuisine) {
                             general.put("excludedCuisine", cuisineString.toString());
                             general.put("cuisine", "");
-                        }
-                        else{
+                        } else {
                             general.put("cuisine", cuisineString.toString());
                             general.put("excludedCuisine", "");
                         }
@@ -298,13 +313,12 @@ public class SearchFragment extends Fragment {
                 cuisineAlert.setNeutralButton("In-/Exclude", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(excludeCuisine){
+                        if (excludeCuisine) {
                             cuisineAlert.setTitle("Select Include Cuisines");
-                            excludeCuisine=false;
-                        }
-                        else{
+                            excludeCuisine = false;
+                        } else {
                             cuisineAlert.setTitle("Select Exclude Cuisines");
-                            excludeCuisine=true;
+                            excludeCuisine = true;
                         }
                         cuisineAlert.show();
 
@@ -316,28 +330,33 @@ public class SearchFragment extends Fragment {
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-//Button: Diet Selection -----------------------------------------------------------------------------------------------------
+//Button: Diet Selection-----------------------------------------------------------------------------------------------------
+        /**
+         * Opens a dialog with a check list of diets.
+         * Writes selected diet types in dedicated Hashmaps when confirming.
+         * @Author Rene Wentzel
+         */
         diet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dietAlert = new AlertDialog.Builder(getActivity());
-                if(!dietOr)
+                if (!dietOr)
                     dietAlert.setTitle("Include all Diets");
                 else
                     dietAlert.setTitle("Include at least one Diet");
                 dietAlert.setMultiChoiceItems(dietItems, checkedDiets, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int itemPosition, boolean isChecked) {
-                        if(isChecked){
-                            if(!selectedDietsList.contains(itemPosition)){
+                        if (isChecked) {
+                            if (!selectedDietsList.contains(itemPosition)) {
                                 selectedDietsList.add(itemPosition);
                             }
-                        }
-                        else{
+                        } else {
                             for (int i = 0; i < selectedDietsList.size(); i++)
                                 if (selectedDietsList.get(i) == itemPosition) {
                                     selectedDietsList.remove(i);
-                                    break;}
+                                    break;
+                                }
                         }
                     }
                 });
@@ -345,22 +364,21 @@ public class SearchFragment extends Fragment {
                 dietAlert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        StringBuilder dietString= new StringBuilder();
-                        for(int i=0;i<selectedDietsList.size(); i++){
+                        StringBuilder dietString = new StringBuilder();
+                        for (int i = 0; i < selectedDietsList.size(); i++) {
                             dietString.append(dietItems[selectedDietsList.get(i)]);
-                            if(i != selectedDietsList.size()-1){
+                            if (i != selectedDietsList.size() - 1) {
                                 dietString.append(",");
                             }
                         }
-                        if(dietOr){
+                        if (dietOr) {
                             //Befehl für OR Suche anhängen
                             general.put("diet", String.valueOf(dietString));
-                        }
-                        else{
+                        } else {
                             //Befehl für AND Suche anhängen
                             general.put("diet", String.valueOf(dietString));
                         }
-                        Log.d("search diet",general.get("diet") );
+                        Log.d("search diet", general.get("diet"));
                     }
                 });
                 dietAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -372,13 +390,12 @@ public class SearchFragment extends Fragment {
                 dietAlert.setNeutralButton("Mode", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(dietOr){
+                        if (dietOr) {
                             dietAlert.setTitle("Include all Diets");
-                            dietOr=false;
-                        }
-                        else{
+                            dietOr = false;
+                        } else {
                             dietAlert.setTitle("Include at least one Diet");
-                            dietOr=true;
+                            dietOr = true;
                         }
                         dietAlert.show();
                     }
@@ -389,7 +406,12 @@ public class SearchFragment extends Fragment {
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-//Button: Intolerance Selection -----------------------------------------------------------------------------------------------------
+//Button: Intolerance Selection-----------------------------------------------------------------------------------------------------
+        /**
+         * Opens a dialog with a check list of intolerances.
+         * Writes selected intolerances in dedicated Hashmaps when confirming.
+         * @Author Rene Wentzel
+         */
         intolerances.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -398,16 +420,16 @@ public class SearchFragment extends Fragment {
                 intolerancesAlert.setMultiChoiceItems(intolerancesItems, checkedIntolerances, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int itemPosition, boolean isChecked) {
-                        if(isChecked){
-                            if(!selectedIntolerancesList.contains(itemPosition)){
+                        if (isChecked) {
+                            if (!selectedIntolerancesList.contains(itemPosition)) {
                                 selectedIntolerancesList.add(itemPosition);
                             }
-                        }
-                        else{
+                        } else {
                             for (int i = 0; i < selectedIntolerancesList.size(); i++)
                                 if (selectedIntolerancesList.get(i) == itemPosition) {
                                     selectedIntolerancesList.remove(i);
-                                    break;}
+                                    break;
+                                }
                         }
                     }
                 });
@@ -415,10 +437,10 @@ public class SearchFragment extends Fragment {
                 intolerancesAlert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        StringBuilder intolerancesString= new StringBuilder();
-                        for(int i=0;i<selectedIntolerancesList.size(); i++){
+                        StringBuilder intolerancesString = new StringBuilder();
+                        for (int i = 0; i < selectedIntolerancesList.size(); i++) {
                             intolerancesString.append(intolerancesItems[selectedIntolerancesList.get(i)]);
-                            if(i != selectedIntolerancesList.size()-1){
+                            if (i != selectedIntolerancesList.size() - 1) {
                                 intolerancesString.append(",");
                             }
                         }
@@ -438,7 +460,12 @@ public class SearchFragment extends Fragment {
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-//Button: Intolerance Selection -----------------------------------------------------------------------------------------------------
+//Button: Type Selection-----------------------------------------------------------------------------------------------------
+        /**
+         * Opens a dialog with a check list of meal types.
+         * Writes selected meal types in dedicated Hashmaps when confirming.
+         * @Author Rene Wentzel
+         */
         type.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -447,16 +474,16 @@ public class SearchFragment extends Fragment {
                 typeAlert.setMultiChoiceItems(typeItems, checkedTypes, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int itemPosition, boolean isChecked) {
-                        if(isChecked){
-                            if(!selectedTypeList.contains(itemPosition)){
+                        if (isChecked) {
+                            if (!selectedTypeList.contains(itemPosition)) {
                                 selectedTypeList.add(itemPosition);
                             }
-                        }
-                        else{
+                        } else {
                             for (int i = 0; i < selectedTypeList.size(); i++)
                                 if (selectedTypeList.get(i) == itemPosition) {
                                     selectedTypeList.remove(i);
-                                    break;}
+                                    break;
+                                }
                         }
                     }
                 });
@@ -464,10 +491,10 @@ public class SearchFragment extends Fragment {
                 typeAlert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        StringBuilder typeString= new StringBuilder();
-                        for(int i=0;i<selectedTypeList.size(); i++){
+                        StringBuilder typeString = new StringBuilder();
+                        for (int i = 0; i < selectedTypeList.size(); i++) {
                             typeString.append(typeItems[selectedTypeList.get(i)]);
-                            if(i != selectedTypeList.size()-1){
+                            if (i != selectedTypeList.size() - 1) {
                                 typeString.append(",");
                             }
                         }
@@ -487,7 +514,13 @@ public class SearchFragment extends Fragment {
 //-----------------------------------------------------------------------------------------------------------------------
 
 
-// Button: Search -------------------------------------------------------------------------------------------------------------------
+// Button: Search-------------------------------------------------------------------------------------------------------------------
+        /**
+         * Starts the search.
+         * Gives all search values to the SearchManager and hands the search results over to the SearchResultsFragment
+         * Goes to SearchResultFragment
+         * @Author Rene Wentzel
+         */
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -498,7 +531,7 @@ public class SearchFragment extends Fragment {
                             putValuesInHashmap();
                             shortInfoList = searchmanager.searchRecipes(general, macronutrients, micronutrients, vitamins);
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable("searchResults",  shortInfoList);
+                            bundle.putSerializable("searchResults", shortInfoList);
                             SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
                             searchResultsFragment.setArguments(bundle);
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).addToBackStack(null).commit();
@@ -512,7 +545,7 @@ public class SearchFragment extends Fragment {
         });
 //-----------------------------------------------------------------------------------------------------------------------
 
-//Create Nutrient Fields-----------------------------------------------------------------------------------------------
+//Create Nutrient Fields                Rene Wentzel -----------------------------------------------------------------------------------------------
         createMacroNutrientList();
         createMicroNutrientList();
         createVitaminList();
@@ -520,17 +553,20 @@ public class SearchFragment extends Fragment {
 //-----------------------------------------------------------------------------------------------------------------------
 
 //Nutrient Buttons-----------------------------------------------------------------------------------------------
+        /**
+         * Shows/hides the macro nutrients in search page.
+         * @Author Rene Wentzel
+         */
         macroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(macroNutrientList.get(0).getVisibility()==View.GONE){
-                    for(int i=0; i<macroNutrientList.size(); i++){
+                if (macroNutrientList.get(0).getVisibility() == View.GONE) {
+                    for (int i = 0; i < macroNutrientList.size(); i++) {
                         macroNutrientList.get(i).setVisibility(view.VISIBLE);
                     }
                     macroButton.setText("/\\");
-                }
-                else{
-                    for(int i=0; i<macroNutrientList.size(); i++){
+                } else {
+                    for (int i = 0; i < macroNutrientList.size(); i++) {
                         macroNutrientList.get(i).setVisibility(view.GONE);
                     }
                     macroButton.setText("V");
@@ -538,18 +574,21 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        /**
+         * Shows/hides the micro nutrients in search page.
+         * @Author Rene Wentzel
+         */
         microButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(microNutrientList.get(0).getVisibility()==View.GONE){
+                if (microNutrientList.get(0).getVisibility() == View.GONE) {
                     //TransitionManager.beginDelayedTransition(view.findViewById(R.id.MicroCard), new AutoTransition());
-                    for(int i=0; i<microNutrientList.size(); i++){
+                    for (int i = 0; i < microNutrientList.size(); i++) {
                         microNutrientList.get(i).setVisibility(view.VISIBLE);
                     }
                     microButton.setText("/\\");
-                }
-                else{
-                    for(int i=0; i<microNutrientList.size(); i++){
+                } else {
+                    for (int i = 0; i < microNutrientList.size(); i++) {
                         microNutrientList.get(i).setVisibility(view.GONE);
                     }
                     microButton.setText("V");
@@ -557,17 +596,20 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        /**
+         * Shows/hides the vitamins in search page.
+         * @Author Rene Wentzel
+         */
         vitaminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(vitaminList.get(0).getVisibility()==View.GONE){
-                    for(int i=0; i<vitaminList.size(); i++){
+                if (vitaminList.get(0).getVisibility() == View.GONE) {
+                    for (int i = 0; i < vitaminList.size(); i++) {
                         vitaminList.get(i).setVisibility(view.VISIBLE);
                     }
                     vitaminButton.setText("/\\");
-                }
-                else{
-                    for(int i=0; i<vitaminList.size(); i++){
+                } else {
+                    for (int i = 0; i < vitaminList.size(); i++) {
                         vitaminList.get(i).setVisibility(view.GONE);
                     }
                     vitaminButton.setText("V");
@@ -578,49 +620,79 @@ public class SearchFragment extends Fragment {
 //-----------------------------------------------------------------------------------------------------------------------
 
 
-
 //End of Create View
 
         return view;
     }
 
-//Create Nutrient Fields-----------------------------------------------------------------------------------------------
-    private void createMicroNutrientList(){
+    //Create Nutrient Fields-----------------------------------------------------------------------------------------------
+
+    /**
+     * Creates a certain layout for each micro nutrient that can be searched for.
+     * Puts each created layout into an ArrayList of Layouts (microNutrientList).
+     * The layout creation can be found in creatNutrientViews() methode
+     * @Author Rene Wentzel
+     */
+    private void createMicroNutrientList() {
         String[] names = getResources().getStringArray(R.array.micronutrient_list);
-        for (String s : names) {
-            microNutrientList.add(createNutrientViews(s, microLayout));
+        String[] measure = getResources().getStringArray(R.array.micronutrient_measure_list);
+        for (int i=0;i<names.length;i++) {
+            microNutrientList.add(createNutrientViews(names[i],measure[i], microLayout));
         }
     }
 
-    private void createMacroNutrientList(){
+    /**
+     * Creates a certain layout for each macro nutrient that can be searched for.
+     * Puts each created layout into an ArrayList of Layouts (macroNutrientList).
+     * The layout creation can be found in creatNutrientViews() methode
+     * @Author Rene Wentzel
+     */
+    private void createMacroNutrientList() {
         String[] names = getResources().getStringArray(R.array.macronutrient_list);
-        for (String s : names) {
-            macroNutrientList.add(createNutrientViews(s, macroLayout));
+        String[] measure = getResources().getStringArray(R.array.macronutrient_measure_list);
+        for (int i=0;i<names.length;i++) {
+            macroNutrientList.add(createNutrientViews(names[i],measure[i], macroLayout));
         }
     }
 
-    private void createVitaminList(){
+    /**
+     * Creates a certain layout for each vitamin that can be searched for.
+     * Puts each created layout into an ArrayList of Layouts (vitaminList).
+     * The layout creation can be found in creatNutrientViews() methode
+     * @Author Rene Wentzel
+     */
+    private void createVitaminList() {
         String[] names = getResources().getStringArray(R.array.vitamin_list);
-        for (String s : names) {
-            vitaminList.add(createNutrientViews(s, vitaminLayout));
+        String[] measure = getResources().getStringArray(R.array.vitamin_measure_list);
+        for (int i=0;i<names.length;i++) {
+            vitaminList.add(createNutrientViews(names[i],measure[i], vitaminLayout));
         }
     }
 
-    private LinearLayout createNutrientViews(String name, LinearLayout layout){
+    /**
+     * Creates a layout with a textview for a given nutrient and measurement units
+     * and with two editText fields for a min. and max. value of the given name.
+     * Returns the created layout.
+     * @Author Rene Wentzel
+     * @param name The name of nutrient
+     * @param layout The layout that adds the created layout
+     * @return Returns a LinearLayout object.
+     */
+    private LinearLayout createNutrientViews(String name,String measure, LinearLayout layout) {
         LinearLayout linear = new LinearLayout(getContext());
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-        layoutParams.setMargins(50,layoutParams.topMargin,50,layoutParams.bottomMargin);
+        layoutParams.setMargins(50, layoutParams.topMargin, 50, layoutParams.bottomMargin);
         linear.setLayoutParams(layoutParams);
         linear.setOrientation(LinearLayout.HORIZONTAL);
 
         // Textviews
         TextView textView1 = new TextView(getContext());
         textView1.setText(name);
-        textView1.setTextSize(18);
-        float width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+        textView1.setTextSize(16);
+        float width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
         textView1.setLayoutParams(new LinearLayout.LayoutParams(
                 (int) width,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -640,7 +712,7 @@ public class SearchFragment extends Fragment {
         EditText editText = new EditText(getContext());
         editText.setHint("0");
         editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        editText.setKeyListener(DigitsKeyListener.getInstance(false,true));
+        editText.setKeyListener(DigitsKeyListener.getInstance(false, true));
         width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
         editText.setLayoutParams(new LinearLayout.LayoutParams(
                 (int) width,
@@ -661,7 +733,7 @@ public class SearchFragment extends Fragment {
         Space space = new Space(getContext());
         width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics());
         space.setLayoutParams(new LinearLayout.LayoutParams(
-                (int)width,
+                (int) width,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 1
         ));
@@ -679,16 +751,16 @@ public class SearchFragment extends Fragment {
         EditText editText2 = new EditText(getContext());
         editText2.setHint("0");
         editText2.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        editText2.setKeyListener(DigitsKeyListener.getInstance(false,true));
+        editText2.setKeyListener(DigitsKeyListener.getInstance(false, true));
         width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
         editText2.setLayoutParams(new LinearLayout.LayoutParams(
-                (int)width,
+                (int) width,
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 1
         ));
 
         TextView textView5 = new TextView(getContext());
-        textView5.setText("mg");
+        textView5.setText(measure);
         textView5.setTextSize(16);
         textView5.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -713,13 +785,18 @@ public class SearchFragment extends Fragment {
 //------------------------------------------------------------------------------------------------------------------
 
 //HashMaps: Creating/Updating-----------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Puts all EditText values and the time picker into their respective HashMaps, preparing them for recipe search.
+     * @Author Rene Wentzel
+     */
     private void putValuesInHashmap() {
         //Name, Ingredients, Excluded Ingredients
         general.put("query", String.valueOf(name.getText()));
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(ingredient.getText());
-        for(int i=0; i<ingredientEditList.size();i++){
-            if(!String.valueOf(ingredientEditList.get(i).getText()).equals("")){
+        for (int i = 0; i < ingredientEditList.size(); i++) {
+            if (!String.valueOf(ingredientEditList.get(i).getText()).equals("")) {
                 stringBuilder.append(",").append(ingredientEditList.get(i).getText());
             }
         }
@@ -727,8 +804,8 @@ public class SearchFragment extends Fragment {
 
         stringBuilder = new StringBuilder();
         stringBuilder.append(excludedIngredient.getText());
-        for(int i=0; i<excludeIngredientEditList.size();i++){
-            if(!String.valueOf(excludeIngredientEditList.get(i).getText()).equals("")){
+        for (int i = 0; i < excludeIngredientEditList.size(); i++) {
+            if (!String.valueOf(excludeIngredientEditList.get(i).getText()).equals("")) {
                 stringBuilder.append(",").append(excludeIngredientEditList.get(i).getText());
             }
         }
@@ -744,19 +821,26 @@ public class SearchFragment extends Fragment {
 
     }
 
-    private void putNutrientToHashmap(ArrayList<LinearLayout> linear, HashMap<String, String> map){
-        for(int i = 0; i< linear.size(); i++){
+    /**
+     * Filters all min. and max. amount values out of a certain LinearLayout list into a given Hashmap.
+     * The given LinearLayouts must be created by createNutrientViews() methode or have to have the same structure.
+     * @Author Rene Wentzel
+     * @param linear An ArrayList<LinearLayout> with the structure made from createNutrientViews() methode.
+     * @param map A Hashmap that will store the filtered amount values.
+     */
+    private void putNutrientToHashmap(ArrayList<LinearLayout> linear, HashMap<String, String> map) {
+        for (int i = 0; i < linear.size(); i++) {
             EditText editMin = (EditText) linear.get(i).getChildAt(2);
             EditText editMax = (EditText) linear.get(i).getChildAt(6);
             String stringMin = String.valueOf(editMin.getText());
             String stringMax = String.valueOf(editMax.getText());
             TextView nameView = (TextView) linear.get(i).getChildAt(0);
             String name = String.valueOf(nameView.getText());
-            if(name.contains("Vitamin "))
-                name=name.replace("Vitamin ", "");
-            String nameMin = "minimum"+name;
-            String nameMax = "maximum"+name;
-            if(name.equals("Sat. Fat")){
+            if (name.contains("Vitamin "))
+                name = name.replace("Vitamin ", "");
+            String nameMin = "minimum" + name;
+            String nameMax = "maximum" + name;
+            if (name.equals("Sat. Fat")) {
                 nameMin = "minimumSaturatedFat";
                 nameMax = "maximumSaturatedFat";
             }
@@ -764,14 +848,17 @@ public class SearchFragment extends Fragment {
             Log.d("edit", name);
             Log.d("edit", stringMin);
             Log.d("edit", stringMax);
-            if(!stringMin.isEmpty()&&!stringMin.equals("0"))
+            if (!stringMin.isEmpty() && !stringMin.equals("0"))
                 map.put(nameMin, stringMin);
-            if(!stringMax.isEmpty()&&!stringMax.equals("0"))
+            if (!stringMax.isEmpty() && !stringMax.equals("0"))
                 map.put(nameMax, stringMax);
         }
     }
 
-
+    /**
+     * Creates Hashmaps with items for all values that can be searched for.
+     * @Author Rene Wentzel
+     */
     private void createSearchHashmaps() {
         general = new HashMap<>();
         general.put("query", "");
@@ -787,12 +874,14 @@ public class SearchFragment extends Fragment {
         macronutrients = new HashMap<>();
         macronutrients.put("minimumCarbs", "-1.0");
         macronutrients.put("minimumProtein", "-1.0");
+        macronutrients.put("minimumCalories", "-1.0");
         macronutrients.put("minimumFat", "-1.0");
         macronutrients.put("minimumSaturatedFat", "-1.0");
         macronutrients.put("minimumFiber", "-1.0");
         macronutrients.put("minimumSugar", "-1.0");
         macronutrients.put("maximumCarbs", "-1.0");
         macronutrients.put("maximumProtein", "-1.0");
+        macronutrients.put("maximumCalories", "-1.0");
         macronutrients.put("maximumFat", "-1.0");
         macronutrients.put("maximumSaturatedFat", "-1.0");
         macronutrients.put("maximumFiber", "-1.0");
@@ -858,12 +947,3 @@ public class SearchFragment extends Fragment {
 
     //------------------------------------------------------------------------------------------------------------------
 }
-
-
-/*
-
-
-     SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
-                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,searchResultsFragment).commit();
- */
-

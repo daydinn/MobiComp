@@ -41,6 +41,17 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     *
+     * Add a new recipe to the Database.
+     * Returns a boolean depending on whether the Database insert was successful or not.
+     * @Author Rene Wentzel
+     * @param id The id of the recipe
+     * @param title The name of the recipe
+     * @param image The URL to the image of the recipe
+     * @param favorite The favorite status
+     * @return Returns true when insertion was successful. Returns false when insertion failed.
+     */
     public boolean addNewShortInfo(int id, String title, String image, boolean favorite){
         // Open Database in Write Mode
         SQLiteDatabase db = this.getWritableDatabase();
@@ -60,6 +71,12 @@ public class DBHandler extends SQLiteOpenHelper {
         return response > -1;
     }
 
+    /**
+     * Read all data sets in the database and parse them into ShortInfo Objects.
+     * Returns an list of all ShortInfo Objects
+     * @Author Rene Wentzel
+     * @return Returns a ArrayList of ShortInfo Objects (ArrayList<ShortInfo>)
+     */
     public ArrayList<ShortInfo> getAllShortInfo(){
 
         //Open Database in read mode
@@ -84,6 +101,16 @@ public class DBHandler extends SQLiteOpenHelper {
         return shortInfoList;
     }
 
+    /**
+     * Updates an existing data set with given parameters.
+     * Returns a boolean depending on whether the update was successful or not.
+     * @Author Rene Wentzel
+     * @param id The id of the recipe
+     * @param title The name of the recipe
+     * @param image The URL to the image of the recipe
+     * @param favorite The favorite status
+     * @return Returns true when update was successful. Returns false when update failed.
+     */
     public boolean updateShortInfo(int id, String title, String image, boolean favorite){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -100,6 +127,14 @@ public class DBHandler extends SQLiteOpenHelper {
         return response > -1;
     }
 
+    /**
+     * Updates the Favorite column of a data set.
+     * Returns a boolean depending on whether the update was successful or not.
+     * @Author Rene Wentzel
+     * @param id The id of the recipe
+     * @param favorite The favorite status
+     * @return Returns true when update was successful. Returns false when update failed.
+     */
     public boolean updateShortInfoFavorite(int id, boolean favorite){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -114,6 +149,13 @@ public class DBHandler extends SQLiteOpenHelper {
         return response > -1;
     }
 
+    /**
+     * Removes the data set with the given id.
+     * Returns a boolean depending on whether the update was successful or not.
+     * @Author Rene Wentzel
+     * @param id The id of the recipe
+     * @return Returns true when removal was successful. Returns false when removal failed.
+     */
     public boolean deleteShortInfo(int id){
         SQLiteDatabase db = this.getWritableDatabase();
 
