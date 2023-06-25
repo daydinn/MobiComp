@@ -128,7 +128,7 @@ public class SearchResultsFragment extends Fragment {
         recipeTitel10 = view.findViewById(R.id.recipeTitel10);
         recipeImage10 = view.findViewById(R.id.recipeImage10);
 
-        ArrayList<ImageView> imageViewList = new ArrayList<>();
+        /*ArrayList<ImageView> imageViewList = new ArrayList<>();
         imageViewList.add(recipeImage);
         imageViewList.add(recipeImage2);
         imageViewList.add(recipeImage3);
@@ -150,13 +150,13 @@ public class SearchResultsFragment extends Fragment {
         textViewList.add(recipeTitel7);
         textViewList.add(recipeTitel8);
         textViewList.add(recipeTitel9);
-        textViewList.add(recipeTitel10);
+        textViewList.add(recipeTitel10);*/
 
 
 
 
 
-        Bundle bundle = getArguments();
+        /*Bundle bundle = getArguments();
         if(bundle!=null){
             searchResults = (ArrayList<ShortInfo>) bundle.getSerializable("searchResults");
             for(int i=0; i<searchResults.size();i++){
@@ -167,8 +167,8 @@ public class SearchResultsFragment extends Fragment {
                 Log.d("result5", String.valueOf(searchResults.get(i).getId()));
                 Log.d("result5", searchResults.get(i).getImage());
             }
-        }
-
+        }*/
+/*
         recipeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -268,11 +268,11 @@ public class SearchResultsFragment extends Fragment {
                 recipePageFragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
             }
-        });
+        });*/
 
 
 
-        //loadFoundRecipe();
+        loadFoundRecipe();
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -365,7 +365,7 @@ public class SearchResultsFragment extends Fragment {
                                 recipeMinutes.setText(id);
 
                                 //recipeHealthScore.setText(shortinfo.getTitle());
-                                recipeIngredients.setText(shortinfo.getImage());
+                                //recipeIngredients.setText(shortinfo.getImage());
 
                                 recipeTitel.setText(shortinfo.getTitle());
                                 //recipeHealthScore.setText(shortinfo.getImage());

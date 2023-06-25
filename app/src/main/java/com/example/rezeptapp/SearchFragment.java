@@ -721,7 +721,7 @@ public class SearchFragment extends Fragment {
         ));
 
         TextView textView3 = new TextView(getContext());
-        textView3.setText("mg");
+        textView3.setText(measure);
         textView3.setTextSize(16);
         textView3.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,

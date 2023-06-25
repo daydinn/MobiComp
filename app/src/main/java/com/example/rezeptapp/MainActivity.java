@@ -21,9 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecipesFragment recipesFragment = new RecipesFragment();
     FavoritesFragment favoritesFragment= new FavoritesFragment();
-
-    //Testzwecke
-    RecipePageFragment recipePageFragment = new RecipePageFragment();
+    CookingBookFragment cookingBookFragment = new CookingBookFragment();
 
 
 
@@ -93,14 +91,14 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.search) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).addToBackStack(null).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new SearchFragment()).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.recipes) {
                     //getSupportFragmentManager().beginTransaction().replace(R.id.container, recipesFragment).commit();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new CookingBookFragment()).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.favorites) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, favoritesFragment).addToBackStack(null).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new FavoritesFragment()).addToBackStack(null).commit();
                     return true;
                 }
 
