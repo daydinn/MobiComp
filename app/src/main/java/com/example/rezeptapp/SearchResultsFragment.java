@@ -43,24 +43,7 @@ public class SearchResultsFragment extends Fragment {
 
 
 
-    ImageView recipeImage2;
-    TextView recipeTitel2;
-    ImageView recipeImage3;
-    TextView recipeTitel3;
-    ImageView recipeImage4;
-    TextView recipeTitel4;
-    ImageView recipeImage5;
-    TextView recipeTitel5;
-    ImageView recipeImage6;
-    TextView recipeTitel6;
-    ImageView recipeImage7;
-    TextView recipeTitel7;
-    ImageView recipeImage8;
-    TextView recipeTitel8;
-    ImageView recipeImage9;
-    TextView recipeTitel9;
-    ImageView recipeImage10;
-    TextView recipeTitel10;
+
 
 
 
@@ -100,33 +83,19 @@ public class SearchResultsFragment extends Fragment {
 
 
         backButton = view.findViewById(R.id.backButton);
-        reloadButton = view.findViewById(R.id.reloadButton);
-        recipeMinutes = view.findViewById(R.id.recipeMinutes);
-        recipeTitel = view.findViewById(R.id.recipeTitel);
-        recipeHealthScore = view.findViewById(R.id.recipeHealthScore);
+        //reloadButton = view.findViewById(R.id.reloadButton);
+
+        //recipeMinutes = view.findViewById(R.id.recipeMinutes);
+       // recipeTitel = view.findViewById(R.id.recipeTitel);
+        //recipeHealthScore = view.findViewById(R.id.recipeHealthScore);
         //recipeIngredients = view.findViewById(R.id.recipeIngredients);
-        recipeImage = view.findViewById(R.id.recipeImage);
-        spaceNewRecipe = view.findViewById(R.id.spaceNewRecipe);
-        result = view.findViewById(R.id.result);
-        ofresults = view.findViewById(R.id.ofResults);
-        recipeTitel2 = view.findViewById(R.id.recipeTitel2);
-        recipeImage2 = view.findViewById(R.id.recipeImage2);
-        recipeTitel3 = view.findViewById(R.id.recipeTitel3);
-        recipeImage3 = view.findViewById(R.id.recipeImage3);
-        recipeTitel4 = view.findViewById(R.id.recipeTitel4);
-        recipeImage4 = view.findViewById(R.id.recipeImage4);
-        recipeTitel5 = view.findViewById(R.id.recipeTitel5);
-        recipeImage5 = view.findViewById(R.id.recipeImage5);
-        recipeTitel6 = view.findViewById(R.id.recipeTitel6);
-        recipeImage6 = view.findViewById(R.id.recipeImage6);
-        recipeTitel7 = view.findViewById(R.id.recipeTitel7);
-        recipeImage7 = view.findViewById(R.id.recipeImage7);
-        recipeTitel8 = view.findViewById(R.id.recipeTitel8);
-        recipeImage8 = view.findViewById(R.id.recipeImage8);
-        recipeTitel9 = view.findViewById(R.id.recipeTitel9);
-        recipeImage9 = view.findViewById(R.id.recipeImage9);
-        recipeTitel10 = view.findViewById(R.id.recipeTitel10);
-        recipeImage10 = view.findViewById(R.id.recipeImage10);
+        //recipeImage = view.findViewById(R.id.recipeImage);
+
+
+        //spaceNewRecipe = view.findViewById(R.id.spaceNewRecipe);
+        //result = view.findViewById(R.id.result);
+       // ofresults = view.findViewById(R.id.ofResults);
+
 
         /*ArrayList<ImageView> imageViewList = new ArrayList<>();
         imageViewList.add(recipeImage);
@@ -284,16 +253,8 @@ public class SearchResultsFragment extends Fragment {
         });
 
 
-        reloadButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
 
 
-
-                loadFoundRecipe();
-            }
-        });
 
         return view;
 
@@ -354,7 +315,7 @@ public class SearchResultsFragment extends Fragment {
                         public void run() {
 
                                 ShortInfo shortinfo = shortInfoList.get(RandInt());
-                                Picasso.get().load(shortinfo.getImage()).into(recipeImage);
+                                //Picasso.get().load(shortinfo.getImage()).into(recipeImage);
 
                                 //recipeIdTest.setText(String.valueOf(shortinfo.getId())); no need?
 
@@ -362,60 +323,16 @@ public class SearchResultsFragment extends Fragment {
 
                                 //noch nicht fertig
                                 String id = String.valueOf(shortinfo.getId());
-                                recipeMinutes.setText(id);
+                                //recipeMinutes.setText(id);
 
                                 //recipeHealthScore.setText(shortinfo.getTitle());
                                 //recipeIngredients.setText(shortinfo.getImage());
 
-                                recipeTitel.setText(shortinfo.getTitle());
+                                //recipeTitel.setText(shortinfo.getTitle());
                                 //recipeHealthScore.setText(shortinfo.getImage());
 
 
-                                //chard1
-                               ShortInfo shortinfo1 = shortInfoList.get(1);
-                               Picasso.get().load(shortinfo1.getImage()).into(recipeImage);
-                               recipeTitel2.setText(shortinfo1.getTitle());
 
-                              //chard2
-                              ShortInfo shortinfo2 = shortInfoList.get(2);
-                              Picasso.get().load(shortinfo2.getImage()).into(recipeImage2);
-                              recipeTitel3.setText(shortinfo2.getTitle());
-
-                              //chard3
-                            ShortInfo shortinfo3 = shortInfoList.get(3);
-                            Picasso.get().load(shortinfo3.getImage()).into(recipeImage3);
-                            recipeTitel4.setText(shortinfo3.getTitle());
-
-                            //chard4
-                            ShortInfo shortinfo4 = shortInfoList.get(4);
-                            Picasso.get().load(shortinfo4.getImage()).into(recipeImage4);
-                            recipeTitel5.setText(shortinfo4.getTitle());
-
-                            //chard5
-                            ShortInfo shortinfo5 = shortInfoList.get(5);
-                            Picasso.get().load(shortinfo5.getImage()).into(recipeImage5);
-                            recipeTitel6.setText(shortinfo5.getTitle());
-
-                            //chard6
-                            ShortInfo shortinfo6 = shortInfoList.get(6);
-                            Picasso.get().load(shortinfo6.getImage()).into(recipeImage6);
-                            recipeTitel7.setText(shortinfo6.getTitle());
-
-                            //chard7
-                            ShortInfo shortinfo7 = shortInfoList.get(7);
-                            Picasso.get().load(shortinfo7.getImage()).into(recipeImage7);
-                            recipeTitel8.setText(shortinfo7.getTitle());
-
-                            //chard8
-                            ShortInfo shortinfo8 = shortInfoList.get(8);
-                            Picasso.get().load(shortinfo8.getImage()).into(recipeImage8);
-                            recipeTitel9.setText(shortinfo8.getTitle());
-
-
-                            //chard9
-                            ShortInfo shortinfo9 = shortInfoList.get(9);
-                            Picasso.get().load(shortinfo9.getImage()).into(recipeImage9);
-                            recipeTitel10.setText(shortinfo9.getTitle());
    /*
                             //chard10
                             ShortInfo shortinfo10 = shortInfoList.get(10);
@@ -437,10 +354,10 @@ public class SearchResultsFragment extends Fragment {
 
 
 
-                            result.setText(id);
+                            //result.setText(id);
 
                                 String sizeofList= String.valueOf(shortInfoList.size());
-                                ofresults.setText(sizeofList);
+                                //ofresults.setText(sizeofList);
 
 
                             }
