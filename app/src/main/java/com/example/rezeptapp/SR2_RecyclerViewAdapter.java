@@ -1,6 +1,7 @@
 package com.example.rezeptapp;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -43,13 +47,24 @@ public class SR2_RecyclerViewAdapter extends RecyclerView.Adapter<SR2_RecyclerVi
         holder.tvID.setText(String.valueOf(shortInfoList.get(position).getId()));
         holder.tvTitle.setText(shortInfoList.get(position).getTitle());
         //holder.imageView.setImageResource(shortInfoList.get(position).getImage());
-        //Picasso.get().load(shortInfoList.get(position).getImage()).into(holder.imageView);
-        Picasso.get().load("https://medien.bremen.de/media/w/480/dsc06740-unionbrauerei-gruenkohl-ikrause-smbd1-bd1.jpg").into(holder.imageView);
-        Log.d("value: ",shortInfoList.get(position).getImage());
-        //TODO: proper image format
+        Picasso.get().load(shortInfoList.get(position).getImage()).into(holder.imageView);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Puts id of the choosen recipe into a bundle and gives it to a new started RecipePageFragment.         Rene Wentzel
+                Bundle bundle = new Bundle();
+                bundle.putString("foundRecipe", String.valueOf(holder.tvID.getText()));
+                RecipePageFragment recipePageFragment = new RecipePageFragment();
+                recipePageFragment.setArguments(bundle);
 
-
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, recipePageFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
     }
 
     @Override

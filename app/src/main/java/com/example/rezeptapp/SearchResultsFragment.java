@@ -42,15 +42,6 @@ public class SearchResultsFragment extends Fragment {
     TextView ofresults;
 
 
-
-
-
-
-
-
-
-
-
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private ArrayList<ShortInfo> searchResults = new ArrayList<>();
     private SearchManager searchManager = new SearchManager();
@@ -66,181 +57,25 @@ public class SearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        loadSuggestedRecipes();// muss zuerst aufgerufen werden
+        //loadSuggestedRecipes();// muss zuerst aufgerufen werden
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
 
+        //Takes the given bundle. If bundle contains data, casts them into searchResult object.             Rene Wentzel
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            searchResults = (ArrayList<ShortInfo>) bundle.getSerializable("searchResults");
+        }
 
         RecyclerView recyclerView = view.findViewById(R.id.myRecyclerview);
-        SR2_RecyclerViewAdapter adapter = new SR2_RecyclerViewAdapter(this.getContext(), shortInfoList);
+        SR2_RecyclerViewAdapter adapter = new SR2_RecyclerViewAdapter(this.getContext(), searchResults);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
 
 
 
-
-
-
-
-
-
         backButton = view.findViewById(R.id.backButton);
-        //reloadButton = view.findViewById(R.id.reloadButton);
-
-        //recipeMinutes = view.findViewById(R.id.recipeMinutes);
-       // recipeTitel = view.findViewById(R.id.recipeTitel);
-        //recipeHealthScore = view.findViewById(R.id.recipeHealthScore);
-        //recipeIngredients = view.findViewById(R.id.recipeIngredients);
-        //recipeImage = view.findViewById(R.id.recipeImage);
-
-
-        //spaceNewRecipe = view.findViewById(R.id.spaceNewRecipe);
-        //result = view.findViewById(R.id.result);
-       // ofresults = view.findViewById(R.id.ofResults);
-
-
-        /*ArrayList<ImageView> imageViewList = new ArrayList<>();
-        imageViewList.add(recipeImage);
-        imageViewList.add(recipeImage2);
-        imageViewList.add(recipeImage3);
-        imageViewList.add(recipeImage4);
-        imageViewList.add(recipeImage5);
-        imageViewList.add(recipeImage6);
-        imageViewList.add(recipeImage7);
-        imageViewList.add(recipeImage8);
-        imageViewList.add(recipeImage9);
-        imageViewList.add(recipeImage10);
-
-        ArrayList<TextView> textViewList = new ArrayList<>();
-        textViewList.add(recipeTitel);
-        textViewList.add(recipeTitel2);
-        textViewList.add(recipeTitel3);
-        textViewList.add(recipeTitel4);
-        textViewList.add(recipeTitel5);
-        textViewList.add(recipeTitel6);
-        textViewList.add(recipeTitel7);
-        textViewList.add(recipeTitel8);
-        textViewList.add(recipeTitel9);
-        textViewList.add(recipeTitel10);*/
-
-
-
-
-
-        /*Bundle bundle = getArguments();
-        if(bundle!=null){
-            searchResults = (ArrayList<ShortInfo>) bundle.getSerializable("searchResults");
-            for(int i=0; i<searchResults.size();i++){
-                textViewList.get(i).setText(searchResults.get(i).getTitle());
-                Picasso.get().load(searchResults.get(i).getImage()).into(imageViewList.get(i));
-
-                Log.d("result5", searchResults.get(i).getTitle());
-                Log.d("result5", String.valueOf(searchResults.get(i).getId()));
-                Log.d("result5", searchResults.get(i).getImage());
-            }
-        }*/
-/*
-        recipeImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(searchResults.get(0).getId()));
-                RecipePageFragment recipePageFragment = new RecipePageFragment();
-                recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
-            }
-        });
-        recipeImage2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(searchResults.get(1).getId()));
-                RecipePageFragment recipePageFragment = new RecipePageFragment();
-                recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
-            }
-        });
-        recipeImage3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(searchResults.get(2).getId()));
-                RecipePageFragment recipePageFragment = new RecipePageFragment();
-                recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
-            }
-        });
-        recipeImage4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(searchResults.get(3).getId()));
-                RecipePageFragment recipePageFragment = new RecipePageFragment();
-                recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
-            }
-        });
-        recipeImage5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(searchResults.get(4).getId()));
-                RecipePageFragment recipePageFragment = new RecipePageFragment();
-                recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
-            }
-        });
-        recipeImage6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(searchResults.get(5).getId()));
-                RecipePageFragment recipePageFragment = new RecipePageFragment();
-                recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
-            }
-        });
-        recipeImage7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(searchResults.get(6).getId()));
-                RecipePageFragment recipePageFragment = new RecipePageFragment();
-                recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
-            }
-        });
-        recipeImage8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(searchResults.get(7).getId()));
-                RecipePageFragment recipePageFragment = new RecipePageFragment();
-                recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
-            }
-        });
-        recipeImage9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(searchResults.get(8).getId()));
-                RecipePageFragment recipePageFragment = new RecipePageFragment();
-                recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
-            }
-        });
-        recipeImage10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("foundRecipe", String.valueOf(searchResults.get(9).getId()));
-                RecipePageFragment recipePageFragment = new RecipePageFragment();
-                recipePageFragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, recipePageFragment).addToBackStack(null).commit();
-            }
-        });*/
 
 
 
@@ -254,9 +89,6 @@ public class SearchResultsFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
             }
         });
-
-
-
 
 
         return view;
