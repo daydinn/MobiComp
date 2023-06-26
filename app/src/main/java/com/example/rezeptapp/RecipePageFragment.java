@@ -1,5 +1,6 @@
 package com.example.rezeptapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,8 @@ import androidx.core.text.HtmlCompat;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Message;
 import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
@@ -21,11 +24,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RecipePageFragment extends Fragment {
     String recipeID ="";
@@ -36,124 +41,238 @@ public class RecipePageFragment extends Fragment {
     LinearLayout ingredientLayout;
     TextView instructions;
 
+    //Infos
+    TextView cookingTime;
+    TextView servings;
+    TextView cuisines;
+    TextView dishtypes;
+    ImageView vegetarian;
+    ImageView vegan;
+    ImageView glutenFree;
+    ImageView dairyFree;
+    ImageView lowFODMap;
+    ImageView healthScoreIcon;
+    TextView healthScore;
+    ImageView sustainable;
+    LinearLayout cuisineDishLayout;
+    LinearLayout macroLayout;
+    LinearLayout microLayout;
+    LinearLayout vitaminLayout;
+    ImageView macroView;
+    ImageView microView;
+    ImageView vitaminView;
+    boolean isRecipeSaved=false;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Gets data from previous page. If data exists, writes into recipeID.                       Rene Wentzel
         Bundle bundle = getArguments();
         if(bundle!=null){
             recipeID = bundle.getString("foundRecipe");
             Log.d("result5", "Recipe ID: "+ recipeID);
         }
 
+        //Starts request to the API to get recipe data of recipeID.                                 Rene Wenztel
         try {
             SearchManager searchmanager = new SearchManager();
             recipe = searchmanager.getRecipeByID(recipeID);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-
-
+        //Creates a new dbHandler. Ask database if recipe of given recipeID already exists          Rene Wentzel
         dbHandler = new DBHandler(getContext());
+        isRecipeSaved = dbHandler.checkDataExists(recipeID);
     }
 
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_page, container, false);
+        //Set Optionbar Title
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle(recipe.getTitle());
 
         recipeTitle = view.findViewById(R.id.RecipeTitleTextView);
-        recipeTitle.setText(recipe.getTitle());
         recipeImage = view.findViewById(R.id.bigRecipeImage);
-        Picasso.get().load(recipe.getImage()).into(recipeImage);
         ingredientLayout = view.findViewById(R.id.RecipeIngredientsLayout);
-        setUpIngredients();
         instructions = view.findViewById(R.id.RecipeInstruction);
-        instructions.setText(Html.fromHtml(recipe.getInstructions(), HtmlCompat.FROM_HTML_SEPARATOR_LINE_BREAK_LIST));
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(recipe.getTitle());
+        cookingTime = view.findViewById(R.id.ReadyTimeTextView);
+        servings = view.findViewById(R.id.ServingTextView);
+        cuisineDishLayout = view.findViewById(R.id.cuisineDishLayout);
+        cuisines = view.findViewById(R.id.CuisineTextView);
+        dishtypes = view.findViewById(R.id.DishtypeTextView);
+        vegetarian = view.findViewById(R.id.VegetarianIcon);
+        vegan = view.findViewById(R.id.VeganIcon);
+        glutenFree = view.findViewById(R.id.GlutenFreeIcon);
+        dairyFree = view.findViewById(R.id.DairyFreeIcon);
+        lowFODMap = view.findViewById(R.id.LowFODMapIcon);
+        healthScoreIcon = view.findViewById(R.id.HealthScoreIcon);
+        healthScore = view.findViewById(R.id.HealthScoreTextView);
+        sustainable = view.findViewById(R.id.SustainableIcon);
+        macroLayout = view.findViewById(R.id.RecipeMacroLayout);
+        microLayout = view.findViewById(R.id.RecipeMicroLayout);
+        vitaminLayout = view.findViewById(R.id.RecipeVitaminLayout);
+        macroView = view.findViewById(R.id.RecipeMacroButton);
+        microView = view.findViewById(R.id.RecipeMicroButton);
+        vitaminView = view.findViewById(R.id.RecipeVitaminButton);
 
-        /**
-         * Sets up an Option Menu in the top ActionBar.
-         * Includes saving a recipe
-         * To do: Erweitern sobald fertig
-         * @Author Rene Wentzel
-         */
-        requireActivity().addMenuProvider(new MenuProvider() {
+        view.post(new Runnable() {
+            @Override
+            public void run() {
 
-              @Override
-              public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
-                  menuInflater.inflate(R.menu.recipe_menu, menu);
+                recipeTitle.setText(recipe.getTitle());
+                Picasso.get().load(recipe.getImage()).into(recipeImage);
+                setUpIngredients();
+                try{
+                    instructions.setText(Html.fromHtml(recipe.getInstructions(), HtmlCompat.FROM_HTML_SEPARATOR_LINE_BREAK_LIST));
+                }
+                catch (Exception e){
 
-                  //menu.findItem(R.id.favoriteItem).setVisible(false);
-              }
-              @Override
-              public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
-              //Save Button
-                  if (menuItem.getItemId() == R.id.recipeSaveItem) {
+                    Toast.makeText(getContext(),"Unable to load Recipe.\nPlease reload Page.",Toast.LENGTH_SHORT).show();
+                }
 
-                      if(recipe.getId()==0){
-                          Snackbar.make(getView(), "Error!\nRecipe can't be saved", Snackbar.LENGTH_SHORT).show();
-                          return true;
-                      }
+                //Setting up misc information
+                cookingTime.setText(recipe.getReadyInMinutes()+" minutes");
+                servings.setText(recipe.getServings()+" portions");
+                StringBuilder text = new StringBuilder();
+                if(recipe.getCuisines().size()==0)
+                    cuisines.setVisibility(View.GONE);
+                if(recipe.getCuisines().size()==0&&recipe.getDishTypes().size()==0){
+                    cuisineDishLayout.setVisibility(View.GONE);
+                }
+                else{
+                    for(int i=0; i<recipe.getCuisines().size();i++){
+                        if(i!=0){
+                            cuisines.setText(cuisines.getText()+", ");
+                        }
+                        cuisines.setText(cuisines.getText()+recipe.getCuisines().get(i));
+                    }
+                    for(int i=0; i<recipe.getDishTypes().size();i++){
+                        if(i!=0){
+                            dishtypes.setText(dishtypes.getText()+", ");
+                        }
+                        dishtypes.setText(dishtypes.getText()+recipe.getDishTypes().get(i));
+                    }
+                }
 
-                      if(dbHandler.addNewShortInfo(recipe.getId(), recipe.getTitle(), recipe.getImage(), recipe.isFavorite())){
-                          Snackbar.make(getView(), "Recipe saved", Snackbar.LENGTH_SHORT).show();
+                if(recipe.isVegetarian())
+                    vegetarian.setAlpha(1f);
+                if(recipe.isVegan())
+                    vegan.setAlpha(1f);
+                if(recipe.isGlutenFree())
+                    glutenFree.setAlpha(1f);
+                if(recipe.isDairyFree())
+                    dairyFree.setAlpha(1f);
+                if(recipe.isLowFodmap())
+                    lowFODMap.setAlpha(1f);
+                if(recipe.getHealthScore()!=0){
+                    healthScoreIcon.setAlpha(1f);
+                    healthScore.setText(String.valueOf(recipe.getHealthScore()));
+                }
+                if(recipe.isSustainable())
+                    sustainable.setAlpha(1f);
+
+                macroLayout.addView(createNutrientLines("testnutrient", 25, "meter"));
+
+
+                /**
+                 * Sets up an Option Menu in the top ActionBar.
+                 * Includes saving/deleting a recipe to the local storage and setting/removing saved recipes to/from favorite.
+                 * To do: Erweitern sobald fertig
+                 * @Author Rene Wentzel
+                 */
+                requireActivity().addMenuProvider(new MenuProvider() {
+
+                  @Override
+                  public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                      menu.clear();
+                      menuInflater.inflate(R.menu.recipe_menu, menu);
+                      isRecipeSaved = dbHandler.checkDataExists(recipeID);
+                      recipe.setFavorite(dbHandler.isShortInfoFavorite(recipe.getId()));
+                      if(isRecipeSaved){
+                          menu.findItem(R.id.favoriteItem).setVisible(true);
+                          menu.findItem(R.id.recipeSaveItem).setVisible(false);
+                          menu.findItem(R.id.recipeDeleteItem).setVisible(true);
                       }
                       else{
-
-                          Snackbar.make(getView(), "Error!\nRecipe can't be saved", Snackbar.LENGTH_SHORT).show();
+                          menu.findItem(R.id.favoriteItem).setVisible(false);
+                          menu.findItem(R.id.recipeSaveItem).setVisible(true);
+                          menu.findItem(R.id.recipeDeleteItem).setVisible(false);
                       }
 
-                  }
-              //Favorite Icon
-                  else if(menuItem.getItemId() == R.id.favoriteItem){
-                      /*boolean newFavoriteState;
                       if(recipe.isFavorite()){
-                          newFavoriteState=false;
+                          menu.findItem(R.id.favoriteItem).setIcon(R.drawable.favorite_on);
                       }
                       else{
-                          newFavoriteState=true;
-                      }*/
-                      recipe.setFavorite(!recipe.isFavorite());
+                          menu.findItem(R.id.favoriteItem).setIcon(R.drawable.favorite_off);
+                      }
+                  }
+                  @Override
+                  public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                      //Save Button
+                      if (menuItem.getItemId() == R.id.recipeSaveItem) {
 
-                      if(dbHandler.updateShortInfoFavorite(recipe.getId(), recipe.isFavorite())){
-                          if(recipe.isFavorite()){
-                              menuItem.setIcon(R.drawable.favorite_on);
-                              Snackbar.make(getView(), "Favorite Set", Snackbar.LENGTH_SHORT).show();
+                          if(recipe.getId()==0){
+                              Snackbar.make(getView(), "Error!\nRecipe can't be saved", Snackbar.LENGTH_SHORT).show();
+                              return true;
+                          }
+
+                          if(dbHandler.addNewShortInfo(recipe.getId(), recipe.getTitle(), recipe.getImage(), recipe.isFavorite())){
+                              Snackbar.make(getView(), "Recipe saved", Snackbar.LENGTH_SHORT).show();
                           }
                           else{
-                              menuItem.setIcon(R.drawable.favorite_off);
-                              Snackbar.make(getView(), "Favorite Removed", Snackbar.LENGTH_SHORT).show();
+
+                              Snackbar.make(getView(), "Error!\nRecipe can't be saved", Snackbar.LENGTH_SHORT).show();
                           }
+                          requireActivity().invalidateOptionsMenu();
+                      }
+                      //Favorite Icon
+                      else if(menuItem.getItemId() == R.id.favoriteItem){
+                          recipe.setFavorite(!recipe.isFavorite());
 
-                      }
+                          if(dbHandler.updateShortInfoFavorite(recipe.getId(), recipe.isFavorite())){
 
-                      //menuItem.setVisible(false);
+                              if(recipe.isFavorite()){
+                                  menuItem.setIcon(R.drawable.favorite_on);
+                                  Snackbar.make(getView(), "Favorite Set", Snackbar.LENGTH_SHORT).show();
+                              }
+                              else{
+                                  menuItem.setIcon(R.drawable.favorite_off);
+                                  Snackbar.make(getView(), "Favorite Removed", Snackbar.LENGTH_SHORT).show();
+                              }
+                              ArrayList<ShortInfo> rep = dbHandler.getAllShortInfo();
+                              for(int i=0; i<rep.size();i++){
+                                  Log.d("check5", rep.get(i).getTitle());
+                                  Log.d("check5", String.valueOf(rep.get(i).isFavorite()));
+                              }
+
+                          }
+                          requireActivity().invalidateOptionsMenu();
+                      }
+                      //Delete Button
+                      else if(menuItem.getItemId() == R.id.recipeDeleteItem){
+                          if(dbHandler.deleteShortInfo(recipe.getId())){
+                              Snackbar.make(getView(), "Recipe Deleted", Snackbar.LENGTH_SHORT).show();
+                          }
+                          else{
+                              Snackbar.make(getView(), "Error!\nRecipe not deleted", Snackbar.LENGTH_SHORT).show();
+                          }
+                          requireActivity().invalidateOptionsMenu();
+                      }
+                      return true;
                   }
-                  /*else if(menuItem.getItemId() == R.id.recipeUpdateItem){
-                      if(dbHandler.updateShortInfo(5,"newTitle", "newImage.url", true)){
-                          Snackbar.make(getView(), "Recipe Updated", Snackbar.LENGTH_SHORT).show();
-                      }
-                      else{
-                          Snackbar.make(getView(), "Error!\nRecipe not updated", Snackbar.LENGTH_SHORT).show();
-                      }
-                  }*/
-                  else if(menuItem.getItemId() == R.id.recipeDeleteItem){
-                      if(dbHandler.deleteShortInfo(recipe.getId())){
-                          Snackbar.make(getView(), "Recipe Deleted", Snackbar.LENGTH_SHORT).show();
-                      }
-                      else{
-                          Snackbar.make(getView(), "Error!\nRecipe not deleted", Snackbar.LENGTH_SHORT).show();
-                      }
-                  }
-                  return true;
-              }
-          }, getViewLifecycleOwner()
-        );
+              }, getViewLifecycleOwner()
+                );
+            }
+        });
+
+
 
 
         // Inflate the layout for this fragment
@@ -230,6 +349,43 @@ public class RecipePageFragment extends Fragment {
 
         //ingredientLayout.addView(linearLayout,1);
         return linearLayout;
+    }
+
+    private LinearLayout createNutrientLines( String name, float amount, String measure){
+            LinearLayout linearLayout = new LinearLayout(getContext());
+                linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                ));
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                linearLayout.setPadding(dpToPx(48), dpToPx(2), dpToPx(48), dpToPx(2));
+
+                TextView textView1 = new TextView(getContext());
+                textView1.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        1
+                ));
+                textView1.setGravity(Gravity.START);
+                textView1.setText(name);
+
+                TextView textView2 = new TextView(getContext());
+                textView2.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        1
+                ));
+                textView2.setGravity(Gravity.END);
+                textView2.setText(amount + " " + measure);
+
+                linearLayout.addView(textView1);
+                linearLayout.addView(textView2);
+        return linearLayout;
+    }
+
+    private int dpToPx(int dp) {
+        float density = getResources().getDisplayMetrics().density;
+        return (int) (dp * density);
     }
 
 

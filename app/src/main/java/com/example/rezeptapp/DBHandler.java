@@ -72,6 +72,25 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /**
+     * Checks by id if a given dataset already exists in the database.
+     * @Author Rene Wentzel
+     * @param id The id that get checked
+     * @return Returns true if data already exists. Returns false if data does not exist.
+     */
+    public boolean checkDataExists(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = " + id, null);
+
+        boolean recordExists = (cursor.getCount() > 0);
+
+        cursor.close();
+        db.close();
+
+        return recordExists;
+    }
+
+    /**
      * Read all data sets in the database and parse them into ShortInfo Objects.
      * Returns an list of all ShortInfo Objects
      * @Author Rene Wentzel
@@ -147,6 +166,24 @@ public class DBHandler extends SQLiteOpenHelper {
         long response = db.update(TABLE_NAME, values, "id=?", new String[]{String.valueOf(id)});
         db.close();
         return response > -1;
+    }
+
+    public boolean isShortInfoFavorite(int id){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(ID_COL, id);
+
+        // Updating Data by id
+        Cursor cursor = db.rawQuery("SELECT "+FAVORITE_COL+" FROM " + TABLE_NAME+" WHERE id = "+id, null);
+        boolean result = false;
+        if (cursor.moveToFirst()) {
+            result = (cursor.getInt(0)==1);
+        }
+        cursor.close();
+        db.close();
+        return result;
     }
 
     /**

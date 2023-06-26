@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="56dp"
-            android:layout_marginVertical="12dp"
+            android:layout_marginVertical="16dp"
             android:background="@color/cardview_dark_background"
             android:elevation="24dp"
             android:outlineProvider="bounds"
@@ -53,10 +53,183 @@
                     android:id="@+id/textIngredients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
                     android:gravity="center_horizontal"
                     android:text="Ingredients" />
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+        android:id="@+id/RecipeMiscCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/cardview_dark_background"
+        android:elevation="24dp"
+        android:outlineProvider="bounds"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="24dp">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="6dp">
+
+                <ImageView
+                    android:id="@+id/ReadyTimeIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="6dp"
+                    android:gravity="start"
+                    android:layout_marginStart="16dp"
+                    app:srcCompat="@drawable/baseline_access_time_24" />
+                <TextView
+                    android:id="@+id/ReadyTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="minutes"
+                    />
+
+                <ImageView
+                    android:id="@+id/ServingIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="6dp"
+                    android:gravity="start"
+                    android:layout_marginStart="8dp"
+                    app:srcCompat="@drawable/servings_24" />
+                <TextView
+                    android:id="@+id/ServingTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="portions"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/cuisineDishLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="6dp">
+
+
+                <TextView
+                    android:id="@+id/CuisineTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Cuisines: "
+                    />
+
+                <TextView
+                    android:id="@+id/DishtypeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="Dish Types: "
+                    />
+
+
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="6dp">
+
+                    <ImageView
+                        android:id="@+id/VegetarianIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="6dp"
+                        android:layout_marginStart="16dp"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/vegetarian_24" />
+
+                    <ImageView
+                        android:id="@+id/VeganIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:paddingHorizontal="6dp"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/vegan_24" />
+
+                    <ImageView
+                        android:id="@+id/GlutenFreeIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:paddingHorizontal="6dp"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/glutenfree_24" />
+
+                    <ImageView
+                        android:id="@+id/DairyFreeIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:paddingHorizontal="6dp"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/dairyfree_24" />
+
+                    <ImageView
+                        android:id="@+id/LowFODMapIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:paddingHorizontal="6dp"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/low_fodmap_24" />
+
+                    <ImageView
+                        android:id="@+id/SustainableIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="start"
+                        android:paddingHorizontal="6dp"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/sustainable_24" />
+
+                    <ImageView
+                        android:id="@+id/HealthScoreIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:paddingHorizontal="6dp"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/healthscore_24" />
+                    <TextView
+                        android:id="@+id/HealthScoreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/RecipeTextCard"
@@ -76,7 +249,156 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:padding="16dp"
-                android:text="@string/lorem_ipsum_half" />
+                android:text="1" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/cardview_dark_background"
+            android:elevation="24dp"
+            android:outlineProvider="bounds"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="24dp">
+
+            <LinearLayout
+                android:id="@+id/RecipeMacroLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="8dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:text="Macronutrients" />
+
+                    <ImageView
+                        android:id="@+id/RecipeMacroButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingVertical="2dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:paddingStart="48dp"
+                        android:text="Calories" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingEnd="48dp"
+                        android:gravity="end"
+                        android:text="20 mg" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/cardview_dark_background"
+            android:elevation="24dp"
+            android:outlineProvider="bounds"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="24dp">
+
+            <LinearLayout
+                android:id="@+id/RecipeMicroLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:text="Macronutrients" />
+
+
+                    <ImageView
+                        android:id="@+id/RecipeMicroButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/cardview_dark_background"
+            android:elevation="24dp"
+            android:outlineProvider="bounds"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="24dp">
+
+            <LinearLayout
+                android:id="@+id/RecipeVitaminLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:text="Macronutrients" />
+
+
+                    <ImageView
+                        android:id="@+id/RecipeVitaminButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/baseline_arrow_back_ios_24" />
+                </LinearLayout>
+
+            </LinearLayout>
+
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 

@@ -51,13 +51,15 @@ public class CookingBookFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cooking_book, container, false);
 
         bookSitesLayout = view.findViewById(R.id.BookSitesLayout);
-        for(int i=0; i<dbResults.size();i++){
-            bookSitesLayout.addView(createRecipeCard(dbResults.get(i).getTitle(), dbResults.get(i).getImage(), dbResults.get(i).getId()));
-        }
 
-
-
-
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                for(int i=0; i<dbResults.size();i++){
+                    bookSitesLayout.addView(createRecipeCard(dbResults.get(i).getTitle(), dbResults.get(i).getImage(), dbResults.get(i).getId()));
+                }
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;

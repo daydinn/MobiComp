@@ -6,14 +6,11 @@
         android:title="Save Recipe"
         app:showAsAction="never"
         />
-    <item android:id="@+id/recipeUpdateItem"
-        android:title="Update Recipe"
-        app:showAsAction="never"
-        />
     <item android:id="@+id/recipeDeleteItem"
         android:title="Delete Recipe"
         app:showAsAction="never"
         />
+
     <item android:id="@+id/favoriteItem"
         android:icon="@drawable/favorite_off"
         android:title="Favorite"

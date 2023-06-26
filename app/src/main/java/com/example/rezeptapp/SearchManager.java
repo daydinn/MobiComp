@@ -29,7 +29,8 @@ public class SearchManager {
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private OkHttpClient client;
     private Request request;
-    private String apiKey = "?apiKey=3a12fe000cda4985aec81ce863d180d9";
+    //private String apiKey = "?apiKey=3a12fe000cda4985aec81ce863d180d9";
+    private String apiKey = "?apiKey=45f6a0cce7b04513bab4ecef0cb5a2d7";
 
     /**
      * Resets the OkHttpClient and starts a request to the given URL.
@@ -68,7 +69,8 @@ public class SearchManager {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                shortInfoList = new ArrayList<ShortInfo>();
+                shortInfoList = new ArrayList<>();
+                Log.d("Error", "Request failed");
                 e.printStackTrace();
                 countDownLatch.countDown();
             }
@@ -77,7 +79,6 @@ public class SearchManager {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful() && response.body() != null) {
                     String myResponse = response.body().string();
-                    //shortInfoList=parseShortRecipe(myResponse);
                     Log.d("Json Parse", myResponse);
                     JsonObject jo = (JsonObject) JsonParser.parseString(myResponse);
                     JsonArray jsonArr = jo.getAsJsonArray("results");
@@ -155,6 +156,7 @@ public class SearchManager {
     public Recipe getRecipeByID(String id) throws InterruptedException {
         recipe = new Recipe();
         String url = "https://api.spoonacular.com/recipes/" + id + "/information" + apiKey + "&includeNutrition=true";
+        Log.d("search", url);
         //Set Up Http Client
         setUpHttpClient(url);
         //CountDownLatch -> Wartet bis Response komplett ist.
