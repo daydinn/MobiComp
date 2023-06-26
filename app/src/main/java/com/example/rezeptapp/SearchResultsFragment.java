@@ -66,16 +66,19 @@ public class SearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        loadSuggestedRecipes();// muss zuerst aufgerufen werden
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
 
+
         RecyclerView recyclerView = view.findViewById(R.id.myRecyclerview);
-
-        loadSuggestedRecipes();
-
         SR2_RecyclerViewAdapter adapter = new SR2_RecyclerViewAdapter(this.getContext(), shortInfoList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+
+
+
 
 
 

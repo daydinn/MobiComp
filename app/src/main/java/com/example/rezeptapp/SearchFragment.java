@@ -531,12 +531,13 @@ public class SearchFragment extends Fragment {
                             putValuesInHashmap();
                             shortInfoList = searchmanager.searchRecipes(general, macronutrients, micronutrients, vitamins);
                             Bundle bundle = new Bundle();
-                            SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).addToBackStack(null).commit();
                             bundle.putSerializable("searchResults", shortInfoList);
-
-
+                            SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
                             searchResultsFragment.setArguments(bundle);
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).addToBackStack(null).commit();
+                            //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
+
+
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
