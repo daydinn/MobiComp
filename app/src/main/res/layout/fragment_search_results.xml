@@ -96,7 +96,7 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:src="@drawable/show_hide_icon"
         android:layout_toLeftOf="@+id/RecipieTitel"
         android:layout_marginTop="62dp"
         android:layout_marginRight="5dp"

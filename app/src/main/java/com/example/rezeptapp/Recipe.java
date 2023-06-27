@@ -289,6 +289,43 @@ public class Recipe {
         this.favorite = favorite;
     }
 
+    public ArrayList<Nutrition.Nutrients> getMacroNutrients(){
+        ArrayList<Nutrition.Nutrients> macroNutrients = new ArrayList<>();
+        String[] searched = {"Fat", "Saturated Fat", "Carbohydrates", "Net Carbohydrates", "Sugar"};
+        for (Nutrition.Nutrients nut : nutrition.getNutrients()) {
+            for (String item:searched) {
+                if(nut.getName().equals(item)){
+                    macroNutrients.add(nut);
+                }
+            }
+        }
+        return macroNutrients;
+    }
+    public ArrayList<Nutrition.Nutrients> getMicroNutrients(){
+        ArrayList<Nutrition.Nutrients> microNutrients = new ArrayList<>();
+        String[] searched = {"Cholesterol", "Sodium", "Protein", "Selenium", "Phosphorus", "Iron", "Potassium", "Folate", "Magnesium", "Zinc", "Copper", "Manganese", "Fiber", "Calcium"};
+        for (Nutrition.Nutrients nut : nutrition.getNutrients()) {
+            for (String item:searched) {
+                if(nut.getName().equals(item)){
+                    microNutrients.add(nut);
+                }
+            }
+        }
+        return microNutrients;
+    }
+    public ArrayList<Nutrition.Nutrients> getVitamins(){
+        ArrayList<Nutrition.Nutrients> vitamins = new ArrayList<>();
+        String[] searched = {"Vitamin A", "Vitamin B1", "Vitamin B12", "Vitamin B2", "Vitamin B3", "Vitamin B5", "Vitamin B6", "Vitamin C", "Vitamin D", "Vitamin E", "Vitamin K"};
+        for (Nutrition.Nutrients nut : nutrition.getNutrients()) {
+            for (String item:searched) {
+                if(nut.getName().equals(item)){
+                    vitamins.add(nut);
+                }
+            }
+        }
+        return vitamins;
+    }
+
 
     // Inner Ingredient class __________________________________________________________________
 

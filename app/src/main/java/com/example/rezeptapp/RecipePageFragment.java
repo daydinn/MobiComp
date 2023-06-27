@@ -44,8 +44,8 @@ public class RecipePageFragment extends Fragment {
     //Infos
     TextView cookingTime;
     TextView servings;
+    ImageView cuisineIcon;
     TextView cuisines;
-    TextView dishtypes;
     ImageView vegetarian;
     ImageView vegan;
     ImageView glutenFree;
@@ -72,7 +72,6 @@ public class RecipePageFragment extends Fragment {
         Bundle bundle = getArguments();
         if(bundle!=null){
             recipeID = bundle.getString("foundRecipe");
-            Log.d("result5", "Recipe ID: "+ recipeID);
         }
 
         //Starts request to the API to get recipe data of recipeID.                                 Rene Wenztel
@@ -106,7 +105,7 @@ public class RecipePageFragment extends Fragment {
         servings = view.findViewById(R.id.ServingTextView);
         cuisineDishLayout = view.findViewById(R.id.cuisineDishLayout);
         cuisines = view.findViewById(R.id.CuisineTextView);
-        dishtypes = view.findViewById(R.id.DishtypeTextView);
+        cuisineIcon = view.findViewById(R.id.CuisineIcon);
         vegetarian = view.findViewById(R.id.VegetarianIcon);
         vegan = view.findViewById(R.id.VeganIcon);
         glutenFree = view.findViewById(R.id.GlutenFreeIcon);
@@ -129,6 +128,10 @@ public class RecipePageFragment extends Fragment {
                 recipeTitle.setText(recipe.getTitle());
                 Picasso.get().load(recipe.getImage()).into(recipeImage);
                 setUpIngredients();
+                setUpNutrients();
+                macroLayout.setVisibility(View.GONE);
+                microLayout.setVisibility(View.GONE);
+                vitaminLayout.setVisibility(View.GONE);
                 try{
                     instructions.setText(Html.fromHtml(recipe.getInstructions(), HtmlCompat.FROM_HTML_SEPARATOR_LINE_BREAK_LIST));
                 }
@@ -140,24 +143,13 @@ public class RecipePageFragment extends Fragment {
                 //Setting up misc information
                 cookingTime.setText(recipe.getReadyInMinutes()+" minutes");
                 servings.setText(recipe.getServings()+" portions");
-                StringBuilder text = new StringBuilder();
-                if(recipe.getCuisines().size()==0)
-                    cuisines.setVisibility(View.GONE);
-                if(recipe.getCuisines().size()==0&&recipe.getDishTypes().size()==0){
-                    cuisineDishLayout.setVisibility(View.GONE);
-                }
-                else{
+                if(recipe.getCuisines().size()!=0){
+                    cuisineIcon.setAlpha(1f);
                     for(int i=0; i<recipe.getCuisines().size();i++){
                         if(i!=0){
                             cuisines.setText(cuisines.getText()+", ");
                         }
                         cuisines.setText(cuisines.getText()+recipe.getCuisines().get(i));
-                    }
-                    for(int i=0; i<recipe.getDishTypes().size();i++){
-                        if(i!=0){
-                            dishtypes.setText(dishtypes.getText()+", ");
-                        }
-                        dishtypes.setText(dishtypes.getText()+recipe.getDishTypes().get(i));
                     }
                 }
 
@@ -178,8 +170,6 @@ public class RecipePageFragment extends Fragment {
                 if(recipe.isSustainable())
                     sustainable.setAlpha(1f);
 
-                macroLayout.addView(createNutrientLines("testnutrient", 25, "meter"));
-
 
                 /**
                  * Sets up an Option Menu in the top ActionBar.
@@ -188,7 +178,6 @@ public class RecipePageFragment extends Fragment {
                  * @Author Rene Wentzel
                  */
                 requireActivity().addMenuProvider(new MenuProvider() {
-
                   @Override
                   public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
                       menu.clear();
@@ -272,6 +261,44 @@ public class RecipePageFragment extends Fragment {
             }
         });
 
+        macroView.setOnClickListener(v -> {
+            if(macroLayout.getVisibility()==View.GONE){
+                macroLayout.setVisibility(View.VISIBLE);
+                macroView.setRotation(90);
+                macroView.setTranslationY(dpToPx(6));
+            }
+            else{
+                macroLayout.setVisibility(View.GONE);
+                macroView.setRotation(270);
+                macroView.setTranslationY(dpToPx(-6));
+            }
+        });
+
+        microView.setOnClickListener(v -> {
+            if(microLayout.getVisibility()==View.GONE){
+                microLayout.setVisibility(View.VISIBLE);
+                microView.setRotation(90);
+                microView.setTranslationY(dpToPx(6));
+            }
+            else{
+                microLayout.setVisibility(View.GONE);
+                microView.setRotation(270);
+                microView.setTranslationY(dpToPx(-6));
+            }
+        });
+
+        vitaminView.setOnClickListener(v -> {
+            if(vitaminLayout.getVisibility()==View.GONE){
+                vitaminLayout.setVisibility(View.VISIBLE);
+                vitaminView.setRotation(90);
+                vitaminView.setTranslationY(dpToPx(6));
+            }
+            else{
+                vitaminLayout.setVisibility(View.GONE);
+                vitaminView.setRotation(270);
+                vitaminView.setTranslationY(dpToPx(-6));
+            }
+        });
 
 
 
@@ -349,6 +376,18 @@ public class RecipePageFragment extends Fragment {
 
         //ingredientLayout.addView(linearLayout,1);
         return linearLayout;
+    }
+
+    private void setUpNutrients(){
+        for (Recipe.Nutrition.Nutrients nut: recipe.getMacroNutrients()) {
+            macroLayout.addView(createNutrientLines(nut.getName(), nut.getAmount(), nut.getUnit()));
+        }
+        for (Recipe.Nutrition.Nutrients nut: recipe.getMicroNutrients()) {
+            microLayout.addView(createNutrientLines(nut.getName(), nut.getAmount(), nut.getUnit()));
+        }
+        for (Recipe.Nutrition.Nutrients nut: recipe.getVitamins()) {
+            vitaminLayout.addView(createNutrientLines(nut.getName(), nut.getAmount(), nut.getUnit()));
+        }
     }
 
     private LinearLayout createNutrientLines( String name, float amount, String measure){

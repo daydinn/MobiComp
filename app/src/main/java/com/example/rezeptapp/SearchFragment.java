@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -23,6 +24,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class SearchFragment extends Fragment {
@@ -105,6 +107,10 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        //Set Optionbar Title
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Search Recipe");
+
         searchButton = view.findViewById(R.id.buttonSearch);
         createSearchHashmaps();
 
@@ -826,7 +832,8 @@ public class SearchFragment extends Fragment {
         putNutrientToHashmap(vitaminList, vitamins);
 
         //TimePicker
-        general.put("maxReadyTime", String.valueOf(timePicker.getValue()));
+        if(timePicker.getValue()>0)
+            general.put("maxReadyTime", String.valueOf(timePicker.getValue()));
 
     }
 
@@ -878,7 +885,7 @@ public class SearchFragment extends Fragment {
         general.put("includeIngredients", "");
         general.put("excludeIngredients", "");
         general.put("type", "");
-        general.put("maxReadyTime", "");
+        general.put("maxReadyTime", "0");
 
         macronutrients = new HashMap<>();
         macronutrients.put("minimumCarbs", "-1.0");

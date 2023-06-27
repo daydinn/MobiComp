@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CookingBookFragment extends Fragment {
 
@@ -28,6 +30,7 @@ public class CookingBookFragment extends Fragment {
     ArrayList<CardView> recipeCardList = new ArrayList<>();
     ArrayList<ShortInfo> dbResults = new ArrayList<>();
     DBHandler dbHandler;
+    boolean isFavorite=false;
     public CookingBookFragment() {
         // Required empty public constructor
     }
@@ -37,12 +40,11 @@ public class CookingBookFragment extends Fragment {
         super.onCreate(savedInstanceState);
         dbHandler = new DBHandler(getContext());
         dbResults=dbHandler.getAllShortInfo();
-        for(int i=0; i<recipeCardList.size();i++){
-            final int index = i;
-            CardView cardview = recipeCardList.get(i);
 
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            isFavorite = bundle.getBoolean("isFavorite");
         }
-
     }
 
     @Override
@@ -50,13 +52,26 @@ public class CookingBookFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cooking_book, container, false);
 
+        //Set Optionbar Title
+        if(!isFavorite)
+            Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("My Cooking Book");
+        else
+            Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("My Favorite Recipes");
+
         bookSitesLayout = view.findViewById(R.id.BookSitesLayout);
 
         view.post(new Runnable() {
             @Override
             public void run() {
                 for(int i=0; i<dbResults.size();i++){
-                    bookSitesLayout.addView(createRecipeCard(dbResults.get(i).getTitle(), dbResults.get(i).getImage(), dbResults.get(i).getId()));
+                    if(isFavorite){
+                        if(dbResults.get(i).isFavorite()){
+                            bookSitesLayout.addView(createRecipeCard(dbResults.get(i).getTitle(), dbResults.get(i).getImage(), dbResults.get(i).getId()));
+                        }
+                    }
+                    else{
+                        bookSitesLayout.addView(createRecipeCard(dbResults.get(i).getTitle(), dbResults.get(i).getImage(), dbResults.get(i).getId()));
+                    }
                 }
             }
         });

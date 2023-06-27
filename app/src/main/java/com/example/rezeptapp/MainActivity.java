@@ -18,9 +18,6 @@ public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment= new HomeFragment();
     SearchFragment searchFragment = new SearchFragment();
     SearchFragment searchResultsFragment = new SearchFragment();
-
-    RecipesFragment recipesFragment = new RecipesFragment();
-    FavoritesFragment favoritesFragment= new FavoritesFragment();
     CookingBookFragment cookingBookFragment = new CookingBookFragment();
 
 
@@ -44,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Setup for the top ActionBar           René Wentzel
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar.setOverflowIcon(getDrawable(R.drawable.baseline_menu_24));
         setSupportActionBar(myToolbar);
 
 
@@ -98,7 +96,11 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, new CookingBookFragment()).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.favorites) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new FavoritesFragment()).addToBackStack(null).commit();
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean("isFavorite", true);
+                    CookingBookFragment cookingBookFragment = new CookingBookFragment();
+                    cookingBookFragment.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, cookingBookFragment).addToBackStack(null).commit();
                     return true;
                 }
 

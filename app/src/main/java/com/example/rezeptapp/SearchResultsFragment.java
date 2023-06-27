@@ -2,6 +2,7 @@ package com.example.rezeptapp;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 
@@ -66,6 +68,8 @@ public class SearchResultsFragment extends Fragment {
         if(bundle!=null){
             searchResults = (ArrayList<ShortInfo>) bundle.getSerializable("searchResults");
         }
+        //Set Optionbar Title
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Found Recipes");
 
         RecyclerView recyclerView = view.findViewById(R.id.myRecyclerview);
         SR2_RecyclerViewAdapter adapter = new SR2_RecyclerViewAdapter(this.getContext(), searchResults);

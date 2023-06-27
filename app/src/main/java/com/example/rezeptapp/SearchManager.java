@@ -261,7 +261,7 @@ public class SearchManager {
     private String buildURL(HashMap<String, String> general, HashMap<String, String> macronutrients, HashMap<String, String> micronutrients, HashMap<String, String> vitamins){
         StringBuilder result = new StringBuilder();
         for (Map.Entry<String, String> entry : general.entrySet()) {
-            if(!entry.getValue().isEmpty()&& !Objects.equals(entry.getValue(), "null")){
+            if(!entry.getValue().isEmpty()&& !Objects.equals(entry.getValue(), "") && !Objects.equals(entry.getValue(), "0")){
                 result.append("&").append(entry.getKey()).append("=").append(entry.getValue());
             }
         }
