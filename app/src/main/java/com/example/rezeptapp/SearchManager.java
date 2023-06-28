@@ -45,6 +45,24 @@ public class SearchManager {
     }
 
     /**
+     * Searches for recipes only by a recipe name.
+     * internally uses the searchRecipes methode filled with empty arguments except for the recipe name.
+     * @Author Rene Wentzel
+     * @param name The name that recipes should be searched for
+     * @return When request was successful, returns an ArrayList with the search results. When request was not successful, returns an empty ArrayList.
+     * @throws InterruptedException Waits for response of the API. Throws InterruptesException when response takes too long.
+     */
+    public ArrayList<ShortInfo> quickSearch(String name) throws InterruptedException {
+        shortInfoList = new ArrayList<>();
+        HashMap<String, String> search = new HashMap<>();
+        search.put("query", name);
+        HashMap<String, String> nothing = new HashMap<>();
+        shortInfoList = searchRecipes(search,nothing, nothing, nothing);
+        return shortInfoList;
+    }
+
+
+    /**
      * Connects to Spoonacular API and gives back a list of recipes that fit the filters given by HashMaps.
      * Each Hashmap has a certain set of items that represent one search filter.
      * See createSearchHashmaps() methode in SearchFragment.java to get a full list of HashMap items.
