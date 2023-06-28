@@ -70,6 +70,10 @@ public class SearchResultsFragment extends Fragment {
         }
         //Set Optionbar Title
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Found Recipes");
+        AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
+        assert appCompatActivity != null;
+        Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
 
         RecyclerView recyclerView = view.findViewById(R.id.myRecyclerview);
         SR2_RecyclerViewAdapter adapter = new SR2_RecyclerViewAdapter(this.getContext(), searchResults);

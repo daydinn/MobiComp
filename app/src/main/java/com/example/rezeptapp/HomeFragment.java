@@ -29,8 +29,12 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        //Set Optionbar Title
+        //Change Optionbar                              Rene Wentzel
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Recipe Rhapsody");
+        AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
+        assert appCompatActivity != null;
+        Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+        appCompatActivity.getSupportActionBar().setHomeButtonEnabled(false);
 
         RecyclerView recyclerView = view.findViewById(R.id.suggestedRecipeView);
 

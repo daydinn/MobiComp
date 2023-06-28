@@ -110,6 +110,10 @@ public class SearchFragment extends Fragment {
 
         //Set Optionbar Title
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Search Recipe");
+        AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
+        assert appCompatActivity != null;
+        Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
 
         searchButton = view.findViewById(R.id.buttonSearch);
         createSearchHashmaps();

@@ -98,6 +98,10 @@ public class RecipePageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_page, container, false);
         //Set Optionbar Title
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle(recipe.getTitle());
+        AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
+        assert appCompatActivity != null;
+        Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
 
         recipeTitle = view.findViewById(R.id.RecipeTitleTextView);
         recipeImage = view.findViewById(R.id.bigRecipeImage);
@@ -123,7 +127,6 @@ public class RecipePageFragment extends Fragment {
         macroView = view.findViewById(R.id.RecipeMacroButton);
         microView = view.findViewById(R.id.RecipeMicroButton);
         vitaminView = view.findViewById(R.id.RecipeVitaminButton);
-        backButton = view.findViewById(R.id.backButton);
 
         view.post(new Runnable() {
             @Override
@@ -304,19 +307,6 @@ public class RecipePageFragment extends Fragment {
             }
         });
 
-        //going back to the searchresults
-
-
-        /*
-        @Todo: Nachdem zurück in die Searchresultspage navigiert wurde, werden die searchErgebnisse nicht mehr angezeigt
-         */
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
-            }
-        });
 
 
 
