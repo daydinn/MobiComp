@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ScrollView01"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/recipe_background">
 
 
 <RelativeLayout
@@ -99,7 +100,7 @@
         android:src="@drawable/show_hide_icon"
         android:layout_toLeftOf="@+id/RecipieTitel"
         android:layout_marginTop="62dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="73dp"
 
 
 
@@ -356,7 +357,7 @@
             android:id="@+id/myRecyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="140dp"
             android:layout_marginBottom="50dp"
 
 
