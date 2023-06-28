@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +34,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class RecipePageFragment extends Fragment {
+
+    ImageButton backButton;
     String recipeID ="";
     Recipe recipe = new Recipe();
     DBHandler dbHandler;
@@ -120,6 +123,7 @@ public class RecipePageFragment extends Fragment {
         macroView = view.findViewById(R.id.RecipeMacroButton);
         microView = view.findViewById(R.id.RecipeMicroButton);
         vitaminView = view.findViewById(R.id.RecipeVitaminButton);
+        backButton = view.findViewById(R.id.backButton);
 
         view.post(new Runnable() {
             @Override
@@ -297,6 +301,20 @@ public class RecipePageFragment extends Fragment {
                 vitaminLayout.setVisibility(View.GONE);
                 vitaminView.setRotation(270);
                 vitaminView.setTranslationY(dpToPx(-6));
+            }
+        });
+
+        //going back to the searchresults
+
+
+        /*
+        @Todo: Nachdem zurück in die Searchresultspage navigiert wurde, werden die searchErgebnisse nicht mehr angezeigt
+         */
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchResultsFragment searchResultsFragment = new SearchResultsFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).commit();
             }
         });
 
