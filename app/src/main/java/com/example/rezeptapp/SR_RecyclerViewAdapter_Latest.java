@@ -2,12 +2,15 @@ package com.example.rezeptapp;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,15 +18,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
-import com.squareup.picasso.Picasso;
-
-public class SR_RecyclerViewAdapter extends RecyclerView.Adapter<SR_RecyclerViewAdapter.SR_ViewHolder> {
+public class SR_RecyclerViewAdapter_Latest extends RecyclerView.Adapter<SR_RecyclerViewAdapter_Latest.SR_ViewHolder> {
     Context context;
-    ArrayList<Recipe> shortInfoList;
+    ArrayList<ShortInfo> shortInfoList;
 
-    public SR_RecyclerViewAdapter(Context context, ArrayList<Recipe> shortInfoList){
+    public SR_RecyclerViewAdapter_Latest(Context context, ArrayList<ShortInfo> shortInfoList){
         this.context = context;
         this.shortInfoList = shortInfoList;
     }
@@ -31,13 +30,13 @@ public class SR_RecyclerViewAdapter extends RecyclerView.Adapter<SR_RecyclerView
 
     @NonNull
     @Override
-    public SR_RecyclerViewAdapter.SR_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SR_RecyclerViewAdapter_Latest.SR_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate layout and style rows
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recycler_view_row, parent, false);
 
-        return new SR_RecyclerViewAdapter.SR_ViewHolder(view);
+        return new SR_RecyclerViewAdapter_Latest.SR_ViewHolder(view);
     }
 
     @Override

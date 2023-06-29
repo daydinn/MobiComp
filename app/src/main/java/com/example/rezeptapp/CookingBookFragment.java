@@ -95,7 +95,7 @@ public class CookingBookFragment extends Fragment {
         );
         layoutParams.setMargins(dpToPx(32), dpToPx(12), dpToPx(32), dpToPx(12));
         cardView.setLayoutParams(layoutParams);
-        cardView.setCardElevation(dpToPx(24));
+        cardView.setCardElevation(dpToPx(8));
         cardView.setRadius(dpToPx(24));
 
         // Creates RelativeLayouts

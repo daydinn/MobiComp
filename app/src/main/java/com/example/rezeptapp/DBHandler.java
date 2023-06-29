@@ -121,6 +121,38 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /**
+     * Read the latest data sets added to the database and parse them into ShortInfo Objects.
+     * The amount of data sets getting back can be set via parameter.
+     * Returns an list of all ShortInfo Objects
+     * @Author Rene Wentzel
+     * @param amount Tha amount of data sets given back.
+     * @return Returns a ArrayList of ShortInfo Objects (ArrayList<ShortInfo>)
+     */
+    public ArrayList<ShortInfo> getLatestShortInfos(int amount){
+
+        //Open Database in read mode
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //Get all ShortInfos
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY ROWID DESC LIMIT " + amount, null);
+
+        ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
+
+        // Add Data to shortInfo List
+        if (cursor.moveToFirst()) {
+            do {
+                ShortInfo shortInfo = new ShortInfo(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2));
+                shortInfo.setFavorite((cursor.getInt(3)==1));
+                shortInfoList.add(shortInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return shortInfoList;
+    }
+
+    /**
      * Updates an existing data set with given parameters.
      * Returns a boolean depending on whether the update was successful or not.
      * @Author Rene Wentzel

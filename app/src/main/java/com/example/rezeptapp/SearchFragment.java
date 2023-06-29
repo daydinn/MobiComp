@@ -568,7 +568,6 @@ public class SearchFragment extends Fragment {
                                     searchResultsFragment.setArguments(bundle);
                                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchResultsFragment).addToBackStack(null).commit();
                                 } catch (InterruptedException e) {
-                                    Log.d("Error", "Interrupt Exception");
                                     throw new RuntimeException(e);
                                 }
                             }

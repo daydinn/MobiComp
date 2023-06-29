@@ -64,7 +64,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/startPageID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ingredients"
@@ -130,7 +130,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/startPageTitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Excluded Ingredients"
@@ -450,6 +450,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:stateListAnimator="@null"
+        android:elevation="10dp"
         android:layout_margin="6dp"
         android:textSize="16sp"
         android:backgroundTint="#1E5C0B"
