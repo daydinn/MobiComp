@@ -1,6 +1,7 @@
 package com.example.rezeptapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -260,6 +261,22 @@ public class RecipePageFragment extends Fragment {
                               Snackbar.make(getView(), "Error!\nRecipe not deleted", Snackbar.LENGTH_SHORT).show();
                           }
                           requireActivity().invalidateOptionsMenu();
+                      }
+                      //Share Button5062
+                      else if(menuItem.getItemId() == R.id.recipeShareItem){
+                          if(recipe.getSourceUrl().isEmpty()){
+                              Snackbar.make(getView(), "Error!\nIt's not possible to share this recipe.", Snackbar.LENGTH_SHORT).show();
+                          }
+                          else{
+                              Intent sendIntent = new Intent();
+                              sendIntent.setAction(Intent.ACTION_SEND);
+                              sendIntent.putExtra(Intent.EXTRA_TEXT, recipe.getSourceUrl());
+                              sendIntent.setType("text/plain");
+                              Intent shareIntent = Intent.createChooser(sendIntent, null);
+                              startActivity(shareIntent);
+                          }
+
+
                       }
                       return true;
                   }

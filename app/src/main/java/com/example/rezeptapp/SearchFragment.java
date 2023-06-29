@@ -887,6 +887,7 @@ public class SearchFragment extends Fragment {
                 nameMin = "minimumSaturatedFat";
                 nameMax = "maximumSaturatedFat";
             }
+            name = name.replace(" ", "%20");
 
             Log.d("edit", name);
             Log.d("edit", stringMin);

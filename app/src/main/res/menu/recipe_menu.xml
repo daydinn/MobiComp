@@ -11,6 +11,10 @@
         android:title="Delete Recipe"
         app:showAsAction="never"
         />
+    <item android:id="@+id/recipeShareItem"
+        android:title="Share"
+        app:showAsAction="never"
+        />
 
     <item android:id="@+id/favoriteItem"
         android:icon="@drawable/favorite_off"
