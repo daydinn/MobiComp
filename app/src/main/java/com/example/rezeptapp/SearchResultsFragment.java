@@ -58,7 +58,7 @@ public class SearchResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        //loadSuggestedRecipes();// muss zuerst aufgerufen werden
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_results, container, false);
 
@@ -104,24 +104,6 @@ public class SearchResultsFragment extends Fragment {
 
     }
 
-    /*
-    public int counter {
-
-        int currentNumber = 0;
-        for (int i = 1; i <y ; i++) {
-            currentNumber = counter(i);
-
-        }
-        return counter(currentNumber);
-    }
-
-    public static int counter(int number) {
-        return number;
-    }
-
-*/
-
-
 
 
     private void loadFoundRecipe() {
@@ -146,46 +128,11 @@ public class SearchResultsFragment extends Fragment {
                         public void run() {
 
                                 ShortInfo shortinfo = shortInfoList.get(RandInt());
-                                //Picasso.get().load(shortinfo.getImage()).into(recipeImage);
-
-                                //recipeIdTest.setText(String.valueOf(shortinfo.getId())); no need?
-
-                                //recipeImage  ?
-
                                 //noch nicht fertig
                                 String id = String.valueOf(shortinfo.getId());
                                 //recipeMinutes.setText(id);
 
-                                //recipeHealthScore.setText(shortinfo.getTitle());
-                                //recipeIngredients.setText(shortinfo.getImage());
 
-                                //recipeTitel.setText(shortinfo.getTitle());
-                                //recipeHealthScore.setText(shortinfo.getImage());
-
-
-
-   /*
-                            //chard10
-                            ShortInfo shortinfo10 = shortInfoList.get(10);
-                            Picasso.get().load(shortinfo10.getImage()).into(recipeImage10);
-
-
-
-                            recipeTitel11.setText(shortinfo10.getTitle());
-
-                            //chard11
-                            ShortInfo shortinfo11 = shortInfoList.get(10);
-                            Picasso.get().load(shortinfo11.getImage()).into(recipeImage11);
-                            recipeTitel11.setText(shortinfo11.getTitle());
-
-
-*/
-
-
-
-
-
-                            //result.setText(id);
 
                                 String sizeofList= String.valueOf(shortInfoList.size());
                                 //ofresults.setText(sizeofList);
