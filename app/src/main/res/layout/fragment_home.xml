@@ -23,8 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:iconifiedByDefault="false"
+        android:paddingEnd="10dp"
         android:queryHint="Search here"
         android:textAlignment="center"
+        android:elevation="8dp"
+        android:background="@drawable/quicksearch"
         android:layout_centerHorizontal="true"
         />
 
@@ -38,7 +41,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="16dp"
         android:text="Random Recipes"
-        android:textSize="16dp"/>
+        android:textSize="18dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/randomRecipeView"
@@ -54,8 +57,8 @@
         android:textColor="@color/black"
         android:layout_marginTop="30dp"
         android:layout_marginStart="16dp"
-        android:text="Latest Recipes"
-        android:textSize="16dp"/>
+        android:text="Recdently Added"
+        android:textSize="18dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myRecipeView"

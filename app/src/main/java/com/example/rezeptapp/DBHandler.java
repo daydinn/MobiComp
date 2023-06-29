@@ -10,9 +10,10 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
-    private static final String DB_NAME =  "recipe_app_db";
+    private static final String DB_NAME =  "recipe_rhapsody_db";
     private static final int DB_VERSION = 1;
-    private static final String TABLE_NAME = "myShortInfos";
+    private static final String TABLE_NAME = "myRecipes";
+    private static final String INDEX_COL = "indexcol";
     private static final String ID_COL = "id";
     private static final String TITLE_COL = "title";
     private static final String IMAGE_COL = "image";
@@ -27,7 +28,8 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String query = "CREATE TABLE " + TABLE_NAME + " ("
-                + ID_COL + " INTEGER PRIMARY KEY UNIQUE, "
+                + INDEX_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + ID_COL + " INTEGER UNIQUE, "
                 + TITLE_COL + " TEXT,"
                 + IMAGE_COL + " TEXT,"
                 + FAVORITE_COL + " BOOLEAN)";
@@ -109,10 +111,10 @@ public class DBHandler extends SQLiteOpenHelper {
             // Add Data to shortInfo List
             if (cursor.moveToFirst()) {
                 do {
-                    ShortInfo shortInfo = new ShortInfo(cursor.getInt(0),
-                            cursor.getString(1),
-                            cursor.getString(2));
-                    shortInfo.setFavorite((cursor.getInt(3)==1));
+                    ShortInfo shortInfo = new ShortInfo(cursor.getInt(1),
+                            cursor.getString(2),
+                            cursor.getString(3));
+                    shortInfo.setFavorite((cursor.getInt(4)==1));
                     shortInfoList.add(shortInfo);
                 } while (cursor.moveToNext());
             }
@@ -134,17 +136,17 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         //Get all ShortInfos
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY ROWID DESC LIMIT " + amount, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " ORDER BY indexcol DESC LIMIT " + amount, null);
 
         ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
 
         // Add Data to shortInfo List
         if (cursor.moveToFirst()) {
             do {
-                ShortInfo shortInfo = new ShortInfo(cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2));
-                shortInfo.setFavorite((cursor.getInt(3)==1));
+                ShortInfo shortInfo = new ShortInfo(cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getString(3));
+                shortInfo.setFavorite((cursor.getInt(4)==1));
                 shortInfoList.add(shortInfo);
             } while (cursor.moveToNext());
         }
