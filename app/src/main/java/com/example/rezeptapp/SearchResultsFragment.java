@@ -42,6 +42,7 @@ public class SearchResultsFragment extends Fragment {
 
     TextView ofresults;
 
+    TextView NoRecipeFound;
 
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private ArrayList<ShortInfo> searchResults = new ArrayList<>();
@@ -79,6 +80,7 @@ public class SearchResultsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
+        NoRecipe = view.findViewById(R.id.NoRecipeFound);
 
 
 
@@ -137,6 +139,9 @@ public class SearchResultsFragment extends Fragment {
                                 String sizeofList= String.valueOf(shortInfoList.size());
                                 //ofresults.setText(sizeofList);
 
+                             if(shortInfoList.size() <= 0){
+                                 NoRecipeFound.setVisibility(View.VISIBLE);
+                             }
 
                             }
 
