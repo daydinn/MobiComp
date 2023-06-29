@@ -1,57 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<ScrollView
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/recipe_background">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/LinearLayout"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-        tools:context=".SearchFragment">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/SearchRecipe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search a Recipie"
-            android:textColor="@color/black"
 
-            android:textSize="25dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.00999999">
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="85dp" />
 
-        </TextView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="16dp"
+            android:elevation="24dp"
+            android:outlineProvider="bounds"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="38dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="24dp">
 
         <EditText
             android:id="@+id/editTextName"
-            android:layout_width="227dp"
-            android:layout_height="55dp"
-            android:ems="10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:hint="Recipe Name"
-            android:text="chicken"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="2dp"
+            android:textSize="26sp"
             android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SearchRecipe"
-            app:layout_constraintVertical_bias="0.04000002" />
+            android:gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="36dp"
+            android:elevation="24dp"
+            android:outlineProvider="bounds"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="24dp">
 
         <LinearLayout
             android:id="@+id/ingredientsLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextName"
-            app:layout_constraintVertical_bias="0.060000002">
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView"
@@ -64,11 +74,12 @@
 
             <EditText
                 android:id="@+id/editTextIngredient"
-                android:layout_width="227dp"
-                android:layout_height="49dp"
-                android:ems="10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Ingredient"
-                android:inputType="text" />
+                android:inputType="text"
+                android:layout_gravity="center_horizontal"/>
+
 
             <Space
                 android:id="@+id/spaceIngredient"
@@ -77,58 +88,63 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:gravity="end">
 
-                <Space
+                <ImageView
+                    android:id="@+id/removeIngredientButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/removeIngredientButton"
-                    android:layout_width="55dp"
-                    android:layout_height="60dp"
                     android:enabled="false"
-                    android:text="-"
-                    android:visibility="gone" />
+                    android:background="@drawable/baseline_remove_circle_24"
+                    android:visibility="gone"
+                    android:layout_gravity="end"/>
 
-                <Button
+                <ImageView
                     android:id="@+id/addIngredientButton"
-                    android:layout_width="55dp"
-                    android:layout_height="60dp"
-                    android:text="+" />
-
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/baseline_add_circle_24"
+                    android:layout_gravity="end"/>
             </LinearLayout>
 
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="36dp"
+            android:elevation="24dp"
+            android:layout_marginBottom="24dp"
+            android:outlineProvider="bounds"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="24dp">
         <LinearLayout
             android:id="@+id/excludeIngredientsLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingredientsLayout"
-            app:layout_constraintVertical_bias="0.060000002">
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Excluded Ingredients"
+                android:textColor="#000000"
                 android:textSize="20sp"
-                android:gravity="center"/>
+                android:gravity="center_horizontal"/>
 
             <EditText
                 android:id="@+id/editTextExcludedIngredient"
-                android:layout_width="227dp"
-                android:layout_height="55dp"
-                android:ems="10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Excluded Ingredient"
-                android:inputType="text" />
+                android:inputType="text"
+                android:layout_gravity="center_horizontal"/>
 
             <Space
                 android:id="@+id/spaceExcludeIngredient"
@@ -137,42 +153,74 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Space
+                android:layout_height="wrap_content"
+                android:gravity="end">
+                <ImageView
+                    android:id="@+id/removeExcludeIngredientButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/removeExcludeIngredientButton"
-                    android:layout_width="55dp"
-                    android:layout_height="60dp"
                     android:enabled="false"
-                    android:text="-"
-                    android:visibility="gone" />
+                    android:background="@drawable/baseline_remove_circle_24"
+                    android:visibility="gone"
+                    android:layout_gravity="end"/>
 
-                <Button
+                <ImageView
                     android:id="@+id/addExcludeIngredientButton"
-                    android:layout_width="55dp"
-                    android:layout_height="60dp"
-                    android:text="+" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/baseline_add_circle_24"
+                    android:layout_gravity="end"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginBottom="24dp"
+            android:elevation="24dp"
+            android:outlineProvider="bounds"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="24dp">
         <LinearLayout
             android:id="@+id/selectableLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/excludeIngredientsLayout"
-            app:layout_constraintVertical_bias="0.0">
+            android:padding="6dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="6dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/DietButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#40CA15"
+                    android:text="Diet" />
+
+                <Button
+                    android:id="@+id/CuisineButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:backgroundTint="#40CA15"
+                    android:text="Cuisine" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -184,107 +232,111 @@
                     android:id="@+id/TypeButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#40CA15"
                     android:text="Type" />
 
                 <Button
                     android:id="@+id/IntolerancesButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:backgroundTint="#40CA15"
                     android:text="Intolerances" />
 
-                <Button
-                    android:id="@+id/DietButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Diet" />
-
-                <Button
-                    android:id="@+id/CuisineButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cuisine" />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView3"
+                <ImageView
+                    android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Max. Cooking Time:"
-                    android:textSize="16sp" />
+                    android:gravity="center"
+                    app:srcCompat="@drawable/baseline_access_time_24" />
 
-                <NumberPicker
+                <SeekBar
                     android:id="@+id/minutePicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="54dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="4dp"
+                    android:progress="0"
+                    android:progressBackgroundTint="#40CA15"
+                    android:backgroundTint="#40CA15"
+                    android:progressTint="#40CA15"
+                    android:thumbTint="#40CA15"
+                    android:max="360"/>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/minutesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_gravity="center"
+                android:textColor="#000000"
+                android:text="Minutes: 0"
+                android:textSize="14sp" />
+
+
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/MacroCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="24dp"
             android:background="@color/cardview_dark_background"
             android:elevation="24dp"
             android:outlineProvider="bounds"
             app:cardCornerRadius="24dp"
-            app:cardElevation="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/RecipeIngredientCard"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectableLayout"
-            app:layout_constraintVertical_bias="0.0">
+            app:cardElevation="24dp">
 
             <LinearLayout
                 android:id="@+id/MacroLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingVertical="16dp"
                 android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/selectableLayout"
-                app:layout_constraintVertical_bias="0.04000002">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                android:orientation="vertical">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="8dp"
+                    android:paddingHorizontal="12dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView11"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Macro Nutrients"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toTopOf="@+id/macroButton"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:text="Macronutrients" />
 
-                    <Button
+                    <ImageView
                         android:id="@+id/macroButton"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:text="V"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/textView11" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/show_hide_icon"
+                        android:rotation="270"
+                        android:translationY="-6dp"/>
 
-
+                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -292,61 +344,47 @@
             android:id="@+id/RecipeIngredientCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="24dp"
             android:background="@color/cardview_dark_background"
             android:elevation="24dp"
             android:outlineProvider="bounds"
             app:cardCornerRadius="24dp"
-            app:cardElevation="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/VitaminCard"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/MacroCard"
-            app:layout_constraintVertical_bias="0.0">
+            app:cardElevation="24dp">
 
             <LinearLayout
                 android:id="@+id/MicroLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingVertical="16dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/MacroLayout"
-                app:layout_constraintVertical_bias="0.18">
+                android:orientation="vertical">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Button
-                        android:id="@+id/microButton"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:text="V"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/textView12" />
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="8dp"
+                    android:paddingHorizontal="12dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView12"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Micro Nutrients"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:text="Macronutrients" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/microButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/show_hide_icon"
+                        android:rotation="270"
+                        android:translationY="-6dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -356,79 +394,64 @@
             android:id="@+id/VitaminCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="75dp"
             android:background="@color/cardview_dark_background"
             android:elevation="24dp"
             android:outlineProvider="bounds"
             app:cardCornerRadius="24dp"
-            app:cardElevation="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/searchLayout"
-            app:layout_constraintStart_toEndOf="@+id/searchLayout"
-            app:layout_constraintTop_toBottomOf="@id/RecipeIngredientCard"
-            app:layout_constraintVertical_bias="0.01999998">
+            app:cardElevation="24dp">
 
             <LinearLayout
                 android:id="@+id/VitaminLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingVertical="16dp"
                 android:gravity="center"
                 android:orientation="vertical">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Button
-                        android:id="@+id/vitaminButton"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:text="V"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/textView13" />
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="8dp"
+                    android:paddingHorizontal="12dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView13"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Vitamins"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:text="Macronutrients" />
 
+                    <ImageView
+                        android:id="@+id/vitaminButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/show_hide_icon"
+                        android:rotation="270"
+                        android:translationY="-6dp"/>
+
+                </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/searchLayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/VitaminCard">
-
-            <Button
-                android:id="@+id/buttonSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/input_bg"
-                android:text="Search"
-                android:textColor="@color/white"
-
-                android:textColorHint="@color/white" />
-
-        </LinearLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
 </ScrollView>
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="6dp"
+        android:textSize="16sp"
+        android:backgroundTint="#1E5C0B"
+        android:text="Search" />
+</RelativeLayout>

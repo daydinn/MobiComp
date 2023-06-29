@@ -92,22 +92,6 @@
 
 
 
-    <ImageButton
-
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:src="@drawable/show_hide_icon"
-        android:layout_toLeftOf="@+id/RecipieTitel"
-        android:layout_marginTop="62dp"
-        android:layout_marginRight="73dp"
-
-
-
-
-        />
-
-
 
 
 

@@ -17,8 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.SeekBar;
 import android.widget.Space;
 import android.widget.TextView;
 
@@ -69,15 +71,15 @@ public class SearchFragment extends Fragment {
 
 
     //Ingredient
-    Button addIngredientButton;
-    Button removeIngredientButton;
+    ImageView addIngredientButton;
+    ImageView removeIngredientButton;
     LinearLayout ingredientLayout;
     Space spaceIngredient;
     ArrayList<EditText> ingredientEditList = new ArrayList<>();
 
     //Exclude Ingredient
-    Button addExcludeIngredientButton;
-    Button removeExcludeIngredientButton;
+    ImageView addExcludeIngredientButton;
+    ImageView removeExcludeIngredientButton;
     LinearLayout excludeIngredientLayout;
     Space spaceExcludeIngredient;
     ArrayList<EditText> excludeIngredientEditList = new ArrayList<>();
@@ -85,21 +87,22 @@ public class SearchFragment extends Fragment {
     //Macro Nutrients
     LinearLayout macroLayout;
     ArrayList<LinearLayout> macroNutrientList = new ArrayList<>();
-    Button macroButton;
+    ImageView macroButton;
 
     //Micro Nutrients
     LinearLayout microLayout;
     ArrayList<LinearLayout> microNutrientList = new ArrayList<>();
-    Button microButton;
+    ImageView microButton;
     CardView microCard;
 
     //Vitamins
     LinearLayout vitaminLayout;
     ArrayList<LinearLayout> vitaminList = new ArrayList<>();
-    Button vitaminButton;
+    ImageView vitaminButton;
 
     //Max. Cooking Time
-    NumberPicker timePicker;
+    SeekBar timePicker;
+    TextView minuteText;
 
 
     @Override
@@ -165,14 +168,28 @@ public class SearchFragment extends Fragment {
 
         //Timepicker
         timePicker = view.findViewById(R.id.minutePicker);
+        minuteText = view.findViewById(R.id.minutesTextView);
 
         view.post(new Runnable() {
             @Override
             public void run() {
 
-                timePicker.setMinValue(0);
-                timePicker.setMaxValue(360);
-                timePicker.setValue(0);
+                timePicker.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        minuteText.setText("Minutes: "+String.valueOf(progress));
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                    }
+                });
 
 //Buttons: Add/Remove Ingredient Edit Text Fields-------------------------------------------------------------------
                 /**
@@ -580,12 +597,14 @@ public class SearchFragment extends Fragment {
                             for (int i = 0; i < macroNutrientList.size(); i++) {
                                 macroNutrientList.get(i).setVisibility(view.VISIBLE);
                             }
-                            macroButton.setText("/\\");
+                            macroButton.setRotation(90);
+                            macroButton.setTranslationY(dpToPx(6));
                         } else {
                             for (int i = 0; i < macroNutrientList.size(); i++) {
                                 macroNutrientList.get(i).setVisibility(view.GONE);
                             }
-                            macroButton.setText("V");
+                            macroButton.setRotation(270);
+                            macroButton.setTranslationY(dpToPx(-6));
                         }
                     }
                 });
@@ -602,12 +621,14 @@ public class SearchFragment extends Fragment {
                             for (int i = 0; i < microNutrientList.size(); i++) {
                                 microNutrientList.get(i).setVisibility(view.VISIBLE);
                             }
-                            microButton.setText("/\\");
+                            microButton.setRotation(90);
+                            microButton.setTranslationY(dpToPx(6));
                         } else {
                             for (int i = 0; i < microNutrientList.size(); i++) {
                                 microNutrientList.get(i).setVisibility(view.GONE);
                             }
-                            microButton.setText("V");
+                            microButton.setRotation(270);
+                            microButton.setTranslationY(dpToPx(-6));
                         }
                     }
                 });
@@ -623,12 +644,14 @@ public class SearchFragment extends Fragment {
                             for (int i = 0; i < vitaminList.size(); i++) {
                                 vitaminList.get(i).setVisibility(view.VISIBLE);
                             }
-                            vitaminButton.setText("/\\");
+                            vitaminButton.setRotation(90);
+                            vitaminButton.setTranslationY(dpToPx(6));
                         } else {
                             for (int i = 0; i < vitaminList.size(); i++) {
                                 vitaminList.get(i).setVisibility(view.GONE);
                             }
-                            vitaminButton.setText("V");
+                            vitaminButton.setRotation(270);
+                            vitaminButton.setTranslationY(dpToPx(-6));
                         }
                     }
                 });
@@ -836,8 +859,8 @@ public class SearchFragment extends Fragment {
         putNutrientToHashmap(vitaminList, vitamins);
 
         //TimePicker
-        if(timePicker.getValue()>0)
-            general.put("maxReadyTime", String.valueOf(timePicker.getValue()));
+        if(timePicker.getProgress()>0)
+            general.put("maxReadyTime", String.valueOf(timePicker.getProgress()));
 
     }
 
@@ -966,4 +989,9 @@ public class SearchFragment extends Fragment {
     }
 
     //------------------------------------------------------------------------------------------------------------------
+
+    private int dpToPx(int dp) {
+        float density = getResources().getDisplayMetrics().density;
+        return (int) (dp * density);
+    }
 }

@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -113,18 +114,6 @@ public class CookingBookFragment extends Fragment {
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Picasso.get().load(url).into(imageView);
 
-        // Creates TextView for Background
-        TextView backgroundTextView = new TextView(getContext());
-        RelativeLayout.LayoutParams outlineParams = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        outlineParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        backgroundTextView.setLayoutParams(outlineParams);
-        backgroundTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-        backgroundTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-        backgroundTextView.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.outline));
-
         // Creates TextView for Recipe Name
         TextView titleTextView = new TextView(getContext());
         RelativeLayout.LayoutParams titleParams = new RelativeLayout.LayoutParams(
@@ -132,17 +121,16 @@ public class CookingBookFragment extends Fragment {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
         titleParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        titleParams.setMargins(dpToPx(8), 0, dpToPx(8), 0);
+        titleTextView.setPadding(dpToPx(16), 0, dpToPx(16), dpToPx(2));
         titleTextView.setLayoutParams(titleParams);
         titleTextView.setGravity(Gravity.CENTER_HORIZONTAL);
         titleTextView.setText(title);
         titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         titleTextView.setTextColor(Color.WHITE);
-
+        titleTextView.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.outline));
 
         // Hinzufügen der Views zum RelativeLayout
         relativeLayout.addView(imageView);
-        relativeLayout.addView(backgroundTextView);
         relativeLayout.addView(titleTextView);
 
         // Hinzufügen des RelativeLayouts zur CardView

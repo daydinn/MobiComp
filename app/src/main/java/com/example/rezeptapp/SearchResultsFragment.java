@@ -26,7 +26,6 @@ import java.util.Random;
 public class SearchResultsFragment extends Fragment {
 
     ImageView recipeImage;
-    ImageButton backButton;
 
     TextView recipeMinutes;
     TextView recipeHealthScore;
@@ -83,20 +82,9 @@ public class SearchResultsFragment extends Fragment {
 
 
 
-        backButton = view.findViewById(R.id.backButton);
-
 
 
         loadFoundRecipe();
-
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchFragment searchFragment = new SearchFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, searchFragment).commit();
-            }
-        });
 
 
         return view;
