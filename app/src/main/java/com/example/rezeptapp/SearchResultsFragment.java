@@ -80,7 +80,7 @@ public class SearchResultsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        NoRecipe = view.findViewById(R.id.NoRecipeFound);
+        NoRecipeFound = view.findViewById(R.id.NoRecipeFound);
 
 
 
