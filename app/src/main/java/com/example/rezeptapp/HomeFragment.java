@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -31,9 +33,11 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         try {
             randomList = searchManager.getRandomRecipe(10);
         } catch (InterruptedException e) {
+
             throw new RuntimeException(e);
         }
         dbHandler = new DBHandler(getContext());

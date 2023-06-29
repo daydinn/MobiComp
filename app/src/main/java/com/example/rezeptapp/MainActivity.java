@@ -1,5 +1,6 @@
 package com.example.rezeptapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -60,7 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
         //getSupportFragmentManager().beginTransaction().add(R.id.container,searchFragment).addToBackStack(null).commit();
         //getSupportFragmentManager().beginTransaction().replace(R.id.container,searchResultsFragment).addToBackStack(null).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.container,homeFragment).commit(); //erste Page muss immer unten sein
+
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).addToBackStack(null).commit(); //erste Page muss immer unten sein
+
+
         //helps to replace the container without the homeFragment while we open the App
         //getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
 
@@ -93,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.home) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).addToBackStack(null).commit();
