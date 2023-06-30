@@ -139,7 +139,7 @@ public class SearchResultsFragment extends Fragment {
                                 String sizeofList= String.valueOf(shortInfoList.size());
                                 //ofresults.setText(sizeofList);
 
-                             if(shortInfoList.size() <= 0){
+                             if(searchResults.size() == 0){
                                  NoRecipeFound.setVisibility(View.VISIBLE);
                              }
 

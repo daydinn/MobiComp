@@ -37,10 +37,10 @@
         android:layout_marginTop="120dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No list found for the search criteria..."
+        android:text="No recipe has been found for the search criteria..."
         android:textColor="@color/OrangeRed"
         android:layout_centerHorizontal="true"
-        android:textSize="20dp"
+        android:textSize="19dp"
         android:visibility="invisible"
 
         >
