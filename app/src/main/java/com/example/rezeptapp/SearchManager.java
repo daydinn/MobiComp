@@ -3,12 +3,18 @@ package com.example.rezeptapp;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +35,8 @@ public class SearchManager {
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private OkHttpClient client;
     private Request request;
-    //private String apiKey = "?apiKey=3a12fe000cda4985aec81ce863d180d9";
-    private String apiKey = "?apiKey=45f6a0cce7b04513bab4ecef0cb5a2d7";
+    private String apiKey = "?apiKey=3a12fe000cda4985aec81ce863d180d9";
+    //private String apiKey = "?apiKey=45f6a0cce7b04513bab4ecef0cb5a2d7";
 
     /**
      * Resets the OkHttpClient and starts a request to the given URL.
@@ -198,9 +204,10 @@ public class SearchManager {
                     Log.d("Json Parse", recipe.getTitle());
                     Log.d("Json Parse", String.valueOf(recipe.getId()));
                     Log.d("Json Parse", recipe.getImage());
-                    Log.d("Json Parse", recipe.getExtendedIngredients().get(0).getName());
-                    Log.d("Json Parse", String.valueOf(recipe.getExtendedIngredients().get(0).getAmount()));
-                    Log.d("Json Parse", recipe.getExtendedIngredients().get(0).getUnit());
+                    Log.d("Json Parse", recipe.getIngredientList().get(0).getName());
+                    Log.d("Json Parse", String.valueOf(recipe.getIngredientList().get(0).getAmount()));
+                    Log.d("Json Parse", recipe.getIngredientList().get(0).getUnit());
+
                     Log.d("Json Parse", recipe.getNutrition().getNutrients().get(0).getName());
                     Log.d("Json Parse", String.valueOf(recipe.getNutrition().getNutrients().get(0).getAmount()));
                     Log.d("Json Parse", recipe.getNutrition().getNutrients().get(0).getUnit());
@@ -318,6 +325,22 @@ public class SearchManager {
 
     }
 
+    public static class NutritionDeserializer implements JsonDeserializer<ArrayList<Recipe.Nutrition.Nutrient>> {
+        @Override
+        public ArrayList<Recipe.Nutrition.Nutrient> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            JsonObject jsonObject = json.getAsJsonObject();
+            JsonObject nutritionObject = jsonObject.getAsJsonObject("nutrition");
+            JsonArray nutrientsArray  = nutritionObject.getAsJsonArray("nutrients");
+
+            ArrayList<Recipe.Nutrition.Nutrient> nutrientsList = new ArrayList<>();
+            for (JsonElement element : nutrientsArray) {
+                Recipe.Nutrition.Nutrient nutrient = context.deserialize(element, Recipe.Nutrition.Nutrient.class);
+                nutrientsList.add(nutrient);
+            }
+
+            return nutrientsList;
+        }
+    }
 
 }
 

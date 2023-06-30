@@ -57,7 +57,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="30dp"
         android:layout_marginStart="16dp"
-        android:text="Recdently Added"
+        android:text="Recently Added"
         android:textSize="18dp"/>
 
     <androidx.recyclerview.widget.RecyclerView

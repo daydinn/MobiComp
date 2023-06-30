@@ -58,6 +58,13 @@
                     android:textSize="16sp"
                     android:gravity="center_horizontal"
                     android:text="Ingredients" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RecipeIngredientRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -308,6 +315,13 @@
                 android:paddingVertical="16dp"
                 android:orientation="vertical">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RecipeMacroRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
             </LinearLayout>
             </LinearLayout>
 
@@ -360,6 +374,13 @@
                 android:layout_height="match_parent"
                 android:paddingVertical="16dp"
                 android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RecipeMicroRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
             </LinearLayout>
 
@@ -412,6 +433,13 @@
                 android:layout_height="match_parent"
                 android:paddingVertical="16dp"
                 android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RecipeVitaminRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
             </LinearLayout>
 

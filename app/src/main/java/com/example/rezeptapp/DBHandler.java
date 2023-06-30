@@ -123,6 +123,36 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /**
+     * Read all data sets in the database where Favorite column is true and parse them into ShortInfo Objects.
+     * Returns an list of all ShortInfo Objects
+     * @Author Rene Wentzel
+     * @return Returns a ArrayList of ShortInfo Objects (ArrayList<ShortInfo>)
+     */
+    public ArrayList<ShortInfo> getAllFavoriteShortInfo(){
+
+        //Open Database in read mode
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //Get all ShortInfos
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + FAVORITE_COL + " = true", null);
+
+        ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
+
+        // Add Data to shortInfo List
+        if (cursor.moveToFirst()) {
+            do {
+                ShortInfo shortInfo = new ShortInfo(cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getString(3));
+                shortInfo.setFavorite((cursor.getInt(4)==1));
+                shortInfoList.add(shortInfo);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return shortInfoList;
+    }
+
+    /**
      * Read the latest data sets added to the database and parse them into ShortInfo Objects.
      * The amount of data sets getting back can be set via parameter.
      * Returns an list of all ShortInfo Objects

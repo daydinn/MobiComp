@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
-import android.os.Message;
 import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
@@ -66,6 +66,11 @@ public class RecipePageFragment extends Fragment {
     ImageView microView;
     ImageView vitaminView;
     boolean isRecipeSaved=false;
+
+    RecyclerView macroRecyclerView;
+    RecyclerView microRecyclerView;
+    RecyclerView vitaminRecyclerView;
+    RecyclerView ingredientRecyclerView;
 
 
     @Override
@@ -129,14 +134,19 @@ public class RecipePageFragment extends Fragment {
         microView = view.findViewById(R.id.RecipeMicroButton);
         vitaminView = view.findViewById(R.id.RecipeVitaminButton);
 
+        macroRecyclerView = view.findViewById(R.id.RecipeMacroRecycler);
+        microRecyclerView = view.findViewById(R.id.RecipeMicroRecycler);
+        vitaminRecyclerView = view.findViewById(R.id.RecipeVitaminRecycler);
+        ingredientRecyclerView = view.findViewById(R.id.RecipeIngredientRecycler);
+
         view.post(new Runnable() {
             @Override
             public void run() {
 
                 recipeTitle.setText(recipe.getTitle());
                 Picasso.get().load(recipe.getImage()).into(recipeImage);
-                setUpIngredients();
-                setUpNutrients();
+                //setUpIngredients();
+                //setUpNutrients();
                 macroLayout.setVisibility(View.GONE);
                 microLayout.setVisibility(View.GONE);
                 vitaminLayout.setVisibility(View.GONE);
@@ -178,6 +188,22 @@ public class RecipePageFragment extends Fragment {
                 if(recipe.isSustainable())
                     sustainable.setAlpha(1f);
 
+                //Setting up nutrients and ingredients
+                SR_RecyclerViewAdapter_Recipe_Nutrients myAdapter = new SR_RecyclerViewAdapter_Recipe_Nutrients(getContext(), recipe.getMacroNutrients());
+                macroRecyclerView.setAdapter(myAdapter);
+                macroRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                myAdapter = new SR_RecyclerViewAdapter_Recipe_Nutrients(getContext(), recipe.getMicroNutrients());
+                microRecyclerView.setAdapter(myAdapter);
+                microRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                myAdapter = new SR_RecyclerViewAdapter_Recipe_Nutrients(getContext(), recipe.getVitamins());
+                vitaminRecyclerView.setAdapter(myAdapter);
+                vitaminRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                SR_RecyclerViewAdapter_Recipe_Ingredients ingredientsAdapter = new SR_RecyclerViewAdapter_Recipe_Ingredients(getContext(), recipe.getIngredientList());
+                ingredientRecyclerView.setAdapter(ingredientsAdapter);
+                ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
                 /**
                  * Sets up an Option Menu in the top ActionBar.
@@ -331,121 +357,6 @@ public class RecipePageFragment extends Fragment {
         return view;
     }
 
-    /**
-     * Creates a dedicated Layout for each ingredient and their amount and unit and add them to the Page.
-     * The layout creation can be found in createIngredientLine() methode.
-     * @Author Rene Wentzel
-     */
-    private void setUpIngredients(){
-        ArrayList<Recipe.ExtendedIngredient> ingredientList = recipe.getExtendedIngredients();
-        if(ingredientList!=null){
-            for(int i=0; i<ingredientList.size();i++){
-                ingredientLayout.addView(
-                        createIngredientLine(ingredientList.get(i).getName(),
-                            String.valueOf(ingredientList.get(i).getAmount()),
-                            ingredientList.get(i).getUnit())
-                );
-            }
-        }
-
-    }
-
-    /**
-     * Creates a linear layout that includes the given ingredient, amount and unit.
-     * returns the created linear layout.
- * @Autor Rene Wentzel
-     * @param ingredient The ingredient name
-     * @param measure The measurement of the ingredient
-     * @param unit The unit of the measurement
-     * @return Returns a LinearLayout object
-     */
-    private LinearLayout createIngredientLine(String ingredient, String measure, String unit){
-        int sizeInDP =0;
-        LinearLayout linearLayout = new LinearLayout(getContext());
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-        ));
-        sizeInDP = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
-        linearLayout.setPadding(0,sizeInDP,0,sizeInDP);
-        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-    // First TextView (RecipeIngredient)
-        TextView recipeIngredientTextView = new TextView(getContext());
-        recipeIngredientTextView.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                1
-        ));
-        recipeIngredientTextView.setGravity(Gravity.START);
-        sizeInDP = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, getResources().getDisplayMetrics());
-        int sizeInDP2 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
-        recipeIngredientTextView.setPadding(sizeInDP, 0, 0, sizeInDP2);
-        recipeIngredientTextView.setText(ingredient);
-
-    // Second TextView (RecipeMeasure)
-        TextView recipeMeasureTextView = new TextView(getContext());
-        recipeMeasureTextView.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                1
-        ));
-        recipeMeasureTextView.setGravity(Gravity.END);
-        sizeInDP = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, getResources().getDisplayMetrics());
-        recipeMeasureTextView.setPadding(0, 0, sizeInDP, sizeInDP2);
-        recipeMeasureTextView.setText(measure + " " + unit);
-
-        // Füge die TextViews dem LinearLayout hinzu
-        linearLayout.addView(recipeIngredientTextView);
-        linearLayout.addView(recipeMeasureTextView);
-
-        //ingredientLayout.addView(linearLayout,1);
-        return linearLayout;
-    }
-
-    private void setUpNutrients(){
-        for (Recipe.Nutrition.Nutrients nut: recipe.getMacroNutrients()) {
-            macroLayout.addView(createNutrientLines(nut.getName(), nut.getAmount(), nut.getUnit()));
-        }
-        for (Recipe.Nutrition.Nutrients nut: recipe.getMicroNutrients()) {
-            microLayout.addView(createNutrientLines(nut.getName(), nut.getAmount(), nut.getUnit()));
-        }
-        for (Recipe.Nutrition.Nutrients nut: recipe.getVitamins()) {
-            vitaminLayout.addView(createNutrientLines(nut.getName(), nut.getAmount(), nut.getUnit()));
-        }
-    }
-
-    private LinearLayout createNutrientLines( String name, float amount, String measure){
-            LinearLayout linearLayout = new LinearLayout(getContext());
-                linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT
-                ));
-                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                linearLayout.setPadding(dpToPx(48), dpToPx(2), dpToPx(48), dpToPx(2));
-
-                TextView textView1 = new TextView(getContext());
-                textView1.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        1
-                ));
-                textView1.setGravity(Gravity.START);
-                textView1.setText(name);
-
-                TextView textView2 = new TextView(getContext());
-                textView2.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        1
-                ));
-                textView2.setGravity(Gravity.END);
-                textView2.setText(amount + " " + measure);
-
-                linearLayout.addView(textView1);
-                linearLayout.addView(textView2);
-        return linearLayout;
-    }
 
     private int dpToPx(int dp) {
         float density = getResources().getDisplayMetrics().density;

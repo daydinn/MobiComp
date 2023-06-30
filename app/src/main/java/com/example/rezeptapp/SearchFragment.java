@@ -710,6 +710,7 @@ public class SearchFragment extends Fragment {
         }
     }
 
+    //ToDo: Wenn Zeit durch RecyclerView ersetzen
     /**
      * Creates a layout with a textview for a given nutrient and measurement units
      * and with two editText fields for a min. and max. value of the given name.
@@ -903,7 +904,7 @@ public class SearchFragment extends Fragment {
      * @Author Rene Wentzel
      */
     private void createSearchHashmaps() {
-        general = new HashMap<>();
+        general = new HashMap<>();/*
         general.put("query", "");
         general.put("cuisine", "");
         general.put("excludeCuisine", "");
@@ -912,9 +913,9 @@ public class SearchFragment extends Fragment {
         general.put("includeIngredients", "");
         general.put("excludeIngredients", "");
         general.put("type", "");
-        general.put("maxReadyTime", "0");
+        general.put("maxReadyTime", "0");*/
 
-        macronutrients = new HashMap<>();
+        macronutrients = new HashMap<>();/*
         macronutrients.put("minimumCarbs", "-1.0");
         macronutrients.put("minimumProtein", "-1.0");
         macronutrients.put("minimumCalories", "-1.0");
@@ -928,9 +929,9 @@ public class SearchFragment extends Fragment {
         macronutrients.put("maximumFat", "-1.0");
         macronutrients.put("maximumSaturatedFat", "-1.0");
         macronutrients.put("maximumFiber", "-1.0");
-        macronutrients.put("maximumSugar", "-1.0");
+        macronutrients.put("maximumSugar", "-1.0");*/
 
-        micronutrients = new HashMap<>();
+        micronutrients = new HashMap<>();/*
         micronutrients.put("minimumCalcium", "-1.0");
         micronutrients.put("minimumCopper", "-1.0");
         micronutrients.put("minimumIron", "-1.0");
@@ -958,10 +959,10 @@ public class SearchFragment extends Fragment {
         micronutrients.put("maximumCholine", "-1.0");
         micronutrients.put("maximumFolate", "-1.0");
         micronutrients.put("maximumFolicAcid", "-1.0");
-        micronutrients.put("maximumIodine", "-1.0");
+        micronutrients.put("maximumIodine", "-1.0");*/
 
 
-        vitamins = new HashMap<>();
+        vitamins = new HashMap<>();/*
         vitamins.put("minimumA", "-1.0");
         vitamins.put("minimumC", "-1.0");
         vitamins.put("minimumD", "-1.0");
@@ -983,7 +984,7 @@ public class SearchFragment extends Fragment {
         vitamins.put("maximumB3", "-1.0");
         vitamins.put("maximumB5", "-1.0");
         vitamins.put("maximumB6", "-1.0");
-        vitamins.put("maximumB12", "-1.0");
+        vitamins.put("maximumB12", "-1.0");*/
 
 
     }

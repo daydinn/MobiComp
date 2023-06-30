@@ -78,7 +78,7 @@ public class SearchResultsFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.myRecyclerview);
         SR2_RecyclerViewAdapter adapter = new SR2_RecyclerViewAdapter(this.getContext(), searchResults);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         NoRecipeFound = view.findViewById(R.id.NoRecipeFound);
 

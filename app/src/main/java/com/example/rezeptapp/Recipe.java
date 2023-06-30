@@ -1,38 +1,34 @@
 package com.example.rezeptapp;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Recipe {
+public class Recipe implements Serializable {
     private boolean favorite = false;
     private boolean vegetarian;
     private boolean vegan;
     private boolean glutenFree;
     private boolean dairyFree;
-    private boolean veryHealthy;
-    private boolean cheap;
-    private boolean veryPopular;
     private boolean sustainable;
     private boolean lowFodmap;
-    private int weightWatcherSmartPoints;
-    private String gaps;
-    private int preparationMinutes;
-    private int cookingMinutes;
-    private int aggregateLikes;
     private int healthScore;
-    private ArrayList<ExtendedIngredient> extendedIngredients;
     private int id;
     private String title;
     private int readyInMinutes;
     private int servings;
     private String sourceUrl;
     private String image;
-    private String summary;
     private ArrayList<String> cuisines;
     private ArrayList<String> dishTypes;
     private ArrayList<String> diets;
     private String instructions;
+    @SerializedName("nutrition")
     private Nutrition nutrition;
+    @SerializedName("extendedIngredients")
+    private ArrayList<Ingredient> ingredientList;
 
     public Recipe() {
     }
@@ -89,30 +85,6 @@ public class Recipe {
         this.dairyFree = dairyFree;
     }
 
-    public boolean isVeryHealthy() {
-        return veryHealthy;
-    }
-
-    public void setVeryHealthy(boolean veryHealthy) {
-        this.veryHealthy = veryHealthy;
-    }
-
-    public boolean isCheap() {
-        return cheap;
-    }
-
-    public void setCheap(boolean cheap) {
-        this.cheap = cheap;
-    }
-
-    public boolean isVeryPopular() {
-        return veryPopular;
-    }
-
-    public void setVeryPopular(boolean veryPopular) {
-        this.veryPopular = veryPopular;
-    }
-
     public boolean isSustainable() {
         return sustainable;
     }
@@ -129,60 +101,12 @@ public class Recipe {
         this.lowFodmap = lowFodmap;
     }
 
-    public int getWeightWatcherSmartPoints() {
-        return weightWatcherSmartPoints;
-    }
-
-    public void setWeightWatcherSmartPoints(int weightWatcherSmartPoints) {
-        this.weightWatcherSmartPoints = weightWatcherSmartPoints;
-    }
-
-    public String getGaps() {
-        return gaps;
-    }
-
-    public void setGaps(String gaps) {
-        this.gaps = gaps;
-    }
-
-    public int getPreparationMinutes() {
-        return preparationMinutes;
-    }
-
-    public void setPreparationMinutes(int preparationMinutes) {
-        this.preparationMinutes = preparationMinutes;
-    }
-
-    public int getCookingMinutes() {
-        return cookingMinutes;
-    }
-
-    public void setCookingMinutes(int cookingMinutes) {
-        this.cookingMinutes = cookingMinutes;
-    }
-
-    public int getAggregateLikes() {
-        return aggregateLikes;
-    }
-
-    public void setAggregateLikes(int aggregateLikes) {
-        this.aggregateLikes = aggregateLikes;
-    }
-
     public int getHealthScore() {
         return healthScore;
     }
 
     public void setHealthScore(int healthScore) {
         this.healthScore = healthScore;
-    }
-
-    public ArrayList<ExtendedIngredient> getExtendedIngredients() {
-        return extendedIngredients;
-    }
-
-    public void setExtendedIngredients(ArrayList<ExtendedIngredient> extendedIngredients) {
-        this.extendedIngredients = extendedIngredients;
     }
 
     public int getId() {
@@ -233,14 +157,6 @@ public class Recipe {
         this.image = image;
     }
 
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
     public ArrayList<String> getCuisines() {
         return cuisines;
     }
@@ -273,14 +189,6 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public Nutrition getNutrition() {
-        return nutrition;
-    }
-
-    public void setNutrition(Nutrition nutrition) {
-        this.nutrition = nutrition;
-    }
-
     public boolean isFavorite() {
         return favorite;
     }
@@ -289,60 +197,72 @@ public class Recipe {
         this.favorite = favorite;
     }
 
-    public ArrayList<Nutrition.Nutrients> getMacroNutrients(){
-        ArrayList<Nutrition.Nutrients> macroNutrients = new ArrayList<>();
+    public ArrayList<Nutrition.Nutrient> getMacroNutrients(){
+        ArrayList<Nutrition.Nutrient> macroNutrients = new ArrayList<>();
         String[] searched = {"Fat", "Saturated Fat", "Carbohydrates", "Net Carbohydrates", "Sugar"};
-        for (Nutrition.Nutrients nut : nutrition.getNutrients()) {
-            for (String item:searched) {
-                if(nut.getName().equals(item)){
+        for (String s: searched) {
+            for (Nutrition.Nutrient nut: nutrition.getNutrients()) {
+                if(nut.getName().equals(s)){
                     macroNutrients.add(nut);
                 }
             }
+
         }
         return macroNutrients;
     }
-    public ArrayList<Nutrition.Nutrients> getMicroNutrients(){
-        ArrayList<Nutrition.Nutrients> microNutrients = new ArrayList<>();
+    public ArrayList<Nutrition.Nutrient> getMicroNutrients(){
+        ArrayList<Nutrition.Nutrient> microNutrients = new ArrayList<>();
         String[] searched = {"Cholesterol", "Sodium", "Protein", "Selenium", "Phosphorus", "Iron", "Potassium", "Folate", "Magnesium", "Zinc", "Copper", "Manganese", "Fiber", "Calcium"};
-        for (Nutrition.Nutrients nut : nutrition.getNutrients()) {
-            for (String item:searched) {
-                if(nut.getName().equals(item)){
+        for (String s: searched) {
+            for (Nutrition.Nutrient nut: nutrition.getNutrients()) {
+                if(nut.getName().equals(s)){
                     microNutrients.add(nut);
                 }
             }
+
         }
         return microNutrients;
     }
-    public ArrayList<Nutrition.Nutrients> getVitamins(){
-        ArrayList<Nutrition.Nutrients> vitamins = new ArrayList<>();
-        String[] searched = {"Vitamin A", "Vitamin B1", "Vitamin B12", "Vitamin B2", "Vitamin B3", "Vitamin B5", "Vitamin B6", "Vitamin C", "Vitamin D", "Vitamin E", "Vitamin K"};
-        for (Nutrition.Nutrients nut : nutrition.getNutrients()) {
-            for (String item:searched) {
-                if(nut.getName().equals(item)){
+    public ArrayList<Nutrition.Nutrient> getVitamins(){
+        ArrayList<Nutrition.Nutrient> vitamins = new ArrayList<>();
+        String[] searched = {"Vitamin A", "Vitamin B1", "Vitamin B2", "Vitamin B3", "Vitamin B5", "Vitamin B6", "Vitamin B12", "Vitamin C", "Vitamin D", "Vitamin E", "Vitamin K"};
+        for (String s: searched) {
+            for (Nutrition.Nutrient nut: nutrition.getNutrients()) {
+                if(nut.getName().equals(s)){
                     vitamins.add(nut);
                 }
             }
+
         }
         return vitamins;
+    }
+
+    public ArrayList<Ingredient> getIngredientList() {
+        return ingredientList;
+    }
+
+    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
+        this.ingredientList = ingredientList;
+    }
+
+
+    public Nutrition getNutrition() {
+        return nutrition;
+    }
+
+    public void setNutrition(Nutrition nutrition) {
+        this.nutrition = nutrition;
     }
 
 
     // Inner Ingredient class __________________________________________________________________
 
-    public static class ExtendedIngredient {
-        private int id;
+    public static class Ingredient {
         private String name;
         private double amount;
         private String unit;
 
 
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
 
         public String getName() {
             return name;
@@ -371,21 +291,22 @@ public class Recipe {
 
 
     //Inner Nutrition class _______________________________________________
-    public static class Nutrition{
-        private ArrayList<Nutrients> nutrients;
 
-        public ArrayList<Nutrients> getNutrients(){
+    public static class Nutrition{
+        private ArrayList<Nutrient> nutrients;
+        public ArrayList<Nutrient> getNutrients(){
             return nutrients;
         }
-        public void setNutrients(ArrayList<Nutrients> nutrients){
+        public void setNutrients(ArrayList<Nutrient> nutrients){
             this.nutrients=nutrients;
         }
-
-        public class Nutrients {
+        public  class Nutrient {
+            @SerializedName("name")
             private String name;
+            @SerializedName("amount")
             private float amount;
+            @SerializedName("unit")
             private String unit;
-            private float percentOfDailyNeeds;
 
             public String getName() {
                 return name;
@@ -410,19 +331,8 @@ public class Recipe {
             public void setUnit(String unit) {
                 this.unit = unit;
             }
-
-            public float getPercentOfDailyNeeds() {
-                return percentOfDailyNeeds;
-            }
-
-            public void setPercentOfDailyNeeds(float percentOfDailyNeeds) {
-                this.percentOfDailyNeeds = percentOfDailyNeeds;
-            }
         }
     }
-
-
-
 
 
 }
