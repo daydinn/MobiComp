@@ -35,8 +35,8 @@ public class SearchManager {
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private OkHttpClient client;
     private Request request;
-    private String apiKey = "?apiKey=3a12fe000cda4985aec81ce863d180d9";
-    //private String apiKey = "?apiKey=45f6a0cce7b04513bab4ecef0cb5a2d7";
+    //private String apiKey = "?apiKey=3a12fe000cda4985aec81ce863d180d9";
+    private String apiKey = "?apiKey=45f6a0cce7b04513bab4ecef0cb5a2d7";
 
     /**
      * Resets the OkHttpClient and starts a request to the given URL.
@@ -105,10 +105,8 @@ public class SearchManager {
                     String myResponse = response.body().string();
                     Log.d("Json Parse", myResponse);
                     JsonObject jo = (JsonObject) JsonParser.parseString(myResponse);
-                    JsonArray jsonArr = jo.getAsJsonArray("results");
                     Gson gson = new Gson();
-                    shortInfoList = gson.fromJson(jsonArr, new TypeToken<ArrayList<ShortInfo>>() {
-                    }.getType());
+                    shortInfoList = gson.fromJson(jo.getAsJsonArray("results"), new TypeToken<ArrayList<ShortInfo>>(){}.getType());
                     for (int i = 0; i < shortInfoList.size(); i++) {
                         Log.d("Json Parse", shortInfoList.get(i).getTitle());
                         Log.d("Json Parse", String.valueOf(shortInfoList.get(i).getId()));
@@ -202,15 +200,6 @@ public class SearchManager {
                     Gson gson = new Gson();
                     recipe = gson.fromJson(myResponse, Recipe.class);
                     Log.d("Json Parse", recipe.getTitle());
-                    Log.d("Json Parse", String.valueOf(recipe.getId()));
-                    Log.d("Json Parse", recipe.getImage());
-                    Log.d("Json Parse", recipe.getIngredientList().get(0).getName());
-                    Log.d("Json Parse", String.valueOf(recipe.getIngredientList().get(0).getAmount()));
-                    Log.d("Json Parse", recipe.getIngredientList().get(0).getUnit());
-
-                    Log.d("Json Parse", recipe.getNutrition().getNutrients().get(0).getName());
-                    Log.d("Json Parse", String.valueOf(recipe.getNutrition().getNutrients().get(0).getAmount()));
-                    Log.d("Json Parse", recipe.getNutrition().getNutrients().get(0).getUnit());
                     response.close();
                     countDownLatch.countDown();
                 }
@@ -251,9 +240,8 @@ public class SearchManager {
                     String myResponse = response.body().string();
                     //shortInfoList=parseShortRecipe(myResponse);
                     JsonObject jo = (JsonObject) JsonParser.parseString(myResponse);
-                    JsonArray jsonArr = jo.getAsJsonArray("recipes");
                     Gson gson = new Gson();
-                    recipeList = gson.fromJson(jsonArr, new TypeToken<ArrayList<Recipe>>(){}.getType());
+                    recipeList = gson.fromJson(jo.getAsJsonArray("recipes"), new TypeToken<ArrayList<Recipe>>(){}.getType());
                     /*for (int i = 0; i < recipeList.size(); i++) {
                         Log.d("Json Parse", recipeList.get(i).getTitle());
                         Log.d("Json Parse", String.valueOf(recipeList.get(i).getId()));
@@ -325,22 +313,6 @@ public class SearchManager {
 
     }
 
-    public static class NutritionDeserializer implements JsonDeserializer<ArrayList<Recipe.Nutrition.Nutrient>> {
-        @Override
-        public ArrayList<Recipe.Nutrition.Nutrient> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            JsonObject jsonObject = json.getAsJsonObject();
-            JsonObject nutritionObject = jsonObject.getAsJsonObject("nutrition");
-            JsonArray nutrientsArray  = nutritionObject.getAsJsonArray("nutrients");
-
-            ArrayList<Recipe.Nutrition.Nutrient> nutrientsList = new ArrayList<>();
-            for (JsonElement element : nutrientsArray) {
-                Recipe.Nutrition.Nutrient nutrient = context.deserialize(element, Recipe.Nutrition.Nutrient.class);
-                nutrientsList.add(nutrient);
-            }
-
-            return nutrientsList;
-        }
-    }
 
 }
 

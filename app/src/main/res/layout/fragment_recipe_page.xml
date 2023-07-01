@@ -43,10 +43,10 @@
             app:cardCornerRadius="24dp"
             app:cardElevation="24dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/RecipeIngredientsLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginVertical="12dp"
                 android:orientation="vertical">
 
@@ -61,11 +61,13 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecipeIngredientRecycler"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="26dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                 </androidx.recyclerview.widget.RecyclerView>
-            </LinearLayout>
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 

@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,7 @@ public class RecipePageFragment extends Fragment {
     DBHandler dbHandler;
     TextView recipeTitle;
     ImageView recipeImage;
-    LinearLayout ingredientLayout;
+    RelativeLayout ingredientLayout;
     TextView instructions;
 
     //Infos
@@ -204,6 +205,7 @@ public class RecipePageFragment extends Fragment {
                 SR_RecyclerViewAdapter_Recipe_Ingredients ingredientsAdapter = new SR_RecyclerViewAdapter_Recipe_Ingredients(getContext(), recipe.getIngredientList());
                 ingredientRecyclerView.setAdapter(ingredientsAdapter);
                 ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                //ingredientRecyclerView.setNestedScrollingEnabled(false);
 
                 /**
                  * Sets up an Option Menu in the top ActionBar.
