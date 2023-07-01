@@ -266,7 +266,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:padding="16dp"
-                android:text="" />
+                android:text="Instructions" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView

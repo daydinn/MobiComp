@@ -45,7 +45,10 @@ public class SR_RecyclerViewAdapter_Latest extends RecyclerView.Adapter<SR_Recyc
 
         holder.tvID.setText(String.valueOf(shortInfoList.get(position).getId()));
         holder.tvTitle.setText(shortInfoList.get(position).getTitle());
-        Picasso.get().load(shortInfoList.get(position).getImage()).into(holder.imageView);
+        if(MainActivity.isOnline)
+            Picasso.get().load(shortInfoList.get(position).getImage()).into(holder.imageView);
+        else
+            holder.imageView.setImageResource(R.drawable.offline_image);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

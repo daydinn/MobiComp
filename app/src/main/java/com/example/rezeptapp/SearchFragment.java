@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
@@ -13,6 +15,9 @@ import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,6 +28,8 @@ import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.Space;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -169,6 +176,27 @@ public class SearchFragment extends Fragment {
         //Timepicker
         timePicker = view.findViewById(R.id.minutePicker);
         minuteText = view.findViewById(R.id.minutesTextView);
+
+        //Online-Offline Mode
+        CardView nameCard = view.findViewById(R.id.searchNameCard);
+        CardView ingredientCard = view.findViewById(R.id.searchIngredientCard);
+        CardView excludedIngredientCard = view.findViewById(R.id.searchExcludedIngredientCard);
+        CardView selectableCard = view.findViewById(R.id.searchselectableCard);
+        TextView offlineText = view.findViewById(R.id.noSearchAvailable);
+
+        if(!MainActivity.isOnline){
+            nameCard.setVisibility(View.GONE);
+            ingredientCard.setVisibility(View.GONE);
+            excludedIngredientCard.setVisibility(View.GONE);
+            selectableCard.setVisibility(View.GONE);
+            macroLayout.setVisibility(View.GONE);
+            microLayout.setVisibility(View.GONE);
+            vitaminLayout.setVisibility(View.GONE);
+            searchButton.setVisibility(View.GONE);
+            offlineText.setVisibility(View.VISIBLE);
+        }
+
+        setUpOptionMenu();
 
         view.post(new Runnable() {
             @Override
@@ -664,6 +692,54 @@ public class SearchFragment extends Fragment {
 //End of Create View
 
         return view;
+    }
+
+    /**
+     * Sets up an Option Menu in the top ActionBar.
+     * Includes options to switch between offline and online mode.
+     * @Author Rene Wentzel
+     */
+    private void setUpOptionMenu() {
+
+        requireActivity().addMenuProvider(new MenuProvider() {
+              @Override
+              public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                  menu.clear();
+                  menuInflater.inflate(R.menu.recipe_menu, menu);
+                  if(MainActivity.isOnline){
+                      menu.findItem(R.id.onlineModeItem).setVisible(false);
+                      menu.findItem(R.id.offlineModeItem).setVisible(true);
+                  }
+                  else{
+                      menu.findItem(R.id.onlineModeItem).setVisible(true);
+                      menu.findItem(R.id.offlineModeItem).setVisible(false);
+                  }
+                  menu.findItem(R.id.recipeSaveItem).setVisible(false);
+                  menu.findItem(R.id.recipeDeleteItem).setVisible(false);
+                  menu.findItem(R.id.recipeSaveOfflineItem).setVisible(false);
+                  menu.findItem(R.id.recipeDeleteOfflineItem).setVisible(false);
+                  menu.findItem(R.id.recipeShareItem).setVisible(false);
+                  menu.findItem(R.id.favoriteItem).setVisible(false);
+              }
+
+              @Override
+              public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                  if(menuItem.getItemId()==R.id.offlineModeItem){
+                      MainActivity.isOnline=false;
+                      Snackbar.make(getView(), "You are in Offline Mode now", Snackbar.LENGTH_SHORT).show();
+                  }
+                  else if(menuItem.getItemId()==R.id.onlineModeItem){
+                      MainActivity.isOnline=true;
+                      Snackbar.make(getView(), "You are in Online Mode now", Snackbar.LENGTH_SHORT).show();
+                  }
+                  requireActivity().invalidateOptionsMenu();
+                  getActivity().getSupportFragmentManager().popBackStack(null, getActivity().getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+                  getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).addToBackStack(null).commit();
+
+                  return true;
+              }
+          }, getViewLifecycleOwner()
+        );
     }
 
     //Create Nutrient Fields-----------------------------------------------------------------------------------------------

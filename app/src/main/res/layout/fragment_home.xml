@@ -33,7 +33,7 @@
 
 
     <TextView
-        android:id="@+id/RecipieTitel"
+        android:id="@+id/RandomTitel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/simpleSearchView"
@@ -47,7 +47,7 @@
         android:id="@+id/randomRecipeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/RecipieTitel" />
+        android:layout_below="@+id/RandomTitel" />
 
     <TextView
         android:id="@+id/LatestRecipieTitel"

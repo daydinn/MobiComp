@@ -45,7 +45,10 @@ public class SR_RecyclerViewAdapter_Cookingbook extends RecyclerView.Adapter<SR_
 
         holder.tvID.setText(String.valueOf(shortInfoList.get(position).getId()));
         holder.tvTitle.setText(shortInfoList.get(position).getTitle());
+        if(MainActivity.isOnline)
         Picasso.get().load(shortInfoList.get(position).getImage()).into(holder.imageView);
+        else
+            holder.imageView.setImageResource(R.drawable.offline_image);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,21 +9,22 @@ android:orientation="horizontal">
 <!-- First TextView (RecipeIngredient) -->
 <TextView
     android:id="@+id/RecyclerRecipeIngredientName"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:gravity="start"
-    android:paddingLeft="32dp"
+    android:paddingStart="32dp"
+    android:paddingEnd="16dp"
     android:text="ingredient" />
 
 <!-- Second TextView (RecipeMeasure) -->
 <TextView
     android:id="@+id/RecyclerRecipeIngredientAmount"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:gravity="end"
-    android:paddingRight="32dp"
+    android:paddingEnd="32dp"
     android:text="measure unit" />
 
 </LinearLayout>

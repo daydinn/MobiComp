@@ -35,8 +35,9 @@ public class SearchManager {
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private OkHttpClient client;
     private Request request;
-    //private String apiKey = "?apiKey=3a12fe000cda4985aec81ce863d180d9";
-    private String apiKey = "?apiKey=45f6a0cce7b04513bab4ecef0cb5a2d7";
+    private String apiKey = "?apiKey=3a12fe000cda4985aec81ce863d180d9";
+    //private String apiKey = "?apiKey=45f6a0cce7b04513bab4ecef0cb5a2d7";
+    //private String apiKey = "?apiKey=5";
 
     /**
      * Resets the OkHttpClient and starts a request to the given URL.
@@ -115,6 +116,10 @@ public class SearchManager {
                     response.close();
                     countDownLatch.countDown();
                 }
+                else{
+                    shortInfoList = new ArrayList<>();
+                    countDownLatch.countDown();
+                }
             }
         });
         countDownLatch.await();
@@ -162,6 +167,10 @@ public class SearchManager {
                     response.close();
                     countDownLatch.countDown();
                 }
+                else{
+                    recipe = new Recipe();
+                    countDownLatch.countDown();
+                }
             }
         });
         countDownLatch.await();
@@ -203,6 +212,10 @@ public class SearchManager {
                     response.close();
                     countDownLatch.countDown();
                 }
+                else{
+                    recipe = new Recipe();
+                    countDownLatch.countDown();
+                }
             }
         });
         countDownLatch.await();
@@ -238,7 +251,6 @@ public class SearchManager {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful() && response.body() != null) {
                     String myResponse = response.body().string();
-                    //shortInfoList=parseShortRecipe(myResponse);
                     JsonObject jo = (JsonObject) JsonParser.parseString(myResponse);
                     Gson gson = new Gson();
                     recipeList = gson.fromJson(jo.getAsJsonArray("recipes"), new TypeToken<ArrayList<Recipe>>(){}.getType());
@@ -248,10 +260,11 @@ public class SearchManager {
                         Log.d("Json Parse", recipeList.get(i).getImage());
                         Log.d("Json Parse", String.valueOf(recipeList.get(i).getHealthScore()));
                     }*/
-
-
-
                     response.close();
+                    countDownLatch.countDown();
+                }
+                else{
+                    recipe = new Recipe();
                     countDownLatch.countDown();
                 }
             }

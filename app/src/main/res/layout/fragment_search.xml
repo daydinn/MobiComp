@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 <ScrollView
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/recipe_background">
@@ -21,6 +21,7 @@
             android:layout_height="85dp" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/searchNameCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -44,7 +45,18 @@
             android:gravity="center"/>
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/noSearchAvailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No search available in offline mode"
+            android:textColor="#FF0000"
+            android:visibility="gone"
+            android:textSize="20sp"
+            android:gravity="center"/>
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/searchIngredientCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -112,6 +124,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/searchExcludedIngredientCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -121,59 +134,62 @@
             android:outlineProvider="bounds"
             app:cardCornerRadius="24dp"
             app:cardElevation="24dp">
-        <LinearLayout
-            android:id="@+id/excludeIngredientsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="6dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/startPageTitleText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Excluded Ingredients"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:gravity="center_horizontal"/>
-
-            <EditText
-                android:id="@+id/editTextExcludedIngredient"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Excluded Ingredient"
-                android:inputType="text"
-                android:layout_gravity="center_horizontal"/>
-
-            <Space
-                android:id="@+id/spaceExcludeIngredient"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <LinearLayout
+                android:id="@+id/excludeIngredientsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end">
-                <ImageView
-                    android:id="@+id/removeExcludeIngredientButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:background="@drawable/baseline_remove_circle_24"
-                    android:visibility="gone"
-                    android:layout_gravity="end"/>
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="6dp">
 
-                <ImageView
-                    android:id="@+id/addExcludeIngredientButton"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/startPageTitleText"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/baseline_add_circle_24"
-                    android:layout_gravity="end"/>
+                    android:gravity="center_horizontal"
+                    android:text="Excluded Ingredients"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/editTextExcludedIngredient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:hint="Excluded Ingredient"
+                    android:inputType="text" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end">
+
+                    <ImageView
+                        android:id="@+id/removeExcludeIngredientButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:background="@drawable/baseline_remove_circle_24"
+                        android:enabled="false"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/addExcludeIngredientButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:background="@drawable/baseline_add_circle_24" />
+
+                </LinearLayout>
+
+                <Space
+                    android:id="@+id/spaceExcludeIngredient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
 
             </LinearLayout>
-
-        </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -182,6 +198,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/searchselectableCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"

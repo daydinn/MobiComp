@@ -1,24 +1,30 @@
 package com.example.rezeptapp;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Objects;
 
 
@@ -36,14 +42,24 @@ public class HomeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try {
-            randomList = searchManager.getRandomRecipe(10);
-        } catch (InterruptedException e) {
-
-            throw new RuntimeException(e);
-        }
         dbHandler = new DBHandler(getContext());
-        latestList = dbHandler.getLatestShortInfos(10);
+        if(MainActivity.isOnline){
+            Log.d("offline5","online");
+            Log.d("offline5", String.valueOf(MainActivity.isOnline));
+            try {
+                randomList = searchManager.getRandomRecipe(10);
+            } catch (InterruptedException e) {
+
+                throw new RuntimeException(e);
+            }
+            latestList = dbHandler.getLatestShortInfos(10);
+        }
+        else{
+            Log.d("offline5","offline");
+            Log.d("offline5", String.valueOf(MainActivity.isOnline));
+            latestList = dbHandler.getLatestOfflineRecipes(10);
+        }
+
 
     }
 
@@ -59,15 +75,28 @@ public class HomeFragment extends Fragment {
         assert appCompatActivity != null;
         Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
         appCompatActivity.getSupportActionBar().setHomeButtonEnabled(false);
+        if(MainActivity.isOnline)
+            getActivity().findViewById(R.id.myToolbar).setBackgroundColor(Color.parseColor("#40CA15"));
+        else
+            getActivity().findViewById(R.id.myToolbar).setBackgroundColor(Color.parseColor("#C4DD56"));
 
         RecyclerView randomView = view.findViewById(R.id.randomRecipeView);
         RecyclerView myView = view.findViewById(R.id.myRecipeView);
         searchView = view.findViewById(R.id.simpleSearchView);
+        TextView randomTitle = view.findViewById(R.id.RandomTitel);
+        TextView latestTitle = view.findViewById(R.id.LatestRecipieTitel);
+        if(!MainActivity.isOnline){
+            randomTitle.setVisibility(View.INVISIBLE);
+        }
+        if(latestList.isEmpty()){
+            latestTitle.setVisibility(View.INVISIBLE);
+        }
 
-        //loadSuggestedRecipes();
+        setUpOptionMenu();
         view.post(new Runnable() {
             @Override
             public void run() {
+
                 SR_RecyclerViewAdapter randomAdapter = new SR_RecyclerViewAdapter(getContext(), randomList);
                 randomView.setAdapter(randomAdapter);
                 LinearLayoutManager horizontalLayoutManagerRandom = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -106,6 +135,55 @@ public class HomeFragment extends Fragment {
 
 
         return view;
+    }
+
+
+    /**
+     * Sets up an Option Menu in the top ActionBar.
+     * Includes options to switch between offline and online mode.
+     * @Author Rene Wentzel
+     */
+    private void setUpOptionMenu() {
+
+        requireActivity().addMenuProvider(new MenuProvider() {
+              @Override
+              public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                  menu.clear();
+                  menuInflater.inflate(R.menu.recipe_menu, menu);
+                  if(MainActivity.isOnline){
+                      menu.findItem(R.id.onlineModeItem).setVisible(false);
+                      menu.findItem(R.id.offlineModeItem).setVisible(true);
+                  }
+                  else{
+                      menu.findItem(R.id.onlineModeItem).setVisible(true);
+                      menu.findItem(R.id.offlineModeItem).setVisible(false);
+                  }
+                  menu.findItem(R.id.recipeSaveItem).setVisible(false);
+                  menu.findItem(R.id.recipeDeleteItem).setVisible(false);
+                  menu.findItem(R.id.recipeSaveOfflineItem).setVisible(false);
+                  menu.findItem(R.id.recipeDeleteOfflineItem).setVisible(false);
+                  menu.findItem(R.id.recipeShareItem).setVisible(false);
+                  menu.findItem(R.id.favoriteItem).setVisible(false);
+              }
+
+              @Override
+              public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                  if(menuItem.getItemId()==R.id.offlineModeItem){
+                      MainActivity.isOnline=false;
+                      Snackbar.make(getView(), "You are in Offline Mode now", Snackbar.LENGTH_SHORT).show();
+                  }
+                  else if(menuItem.getItemId()==R.id.onlineModeItem){
+                      MainActivity.isOnline=true;
+                      Snackbar.make(getView(), "You are in Online Mode now", Snackbar.LENGTH_SHORT).show();
+                  }
+                  requireActivity().invalidateOptionsMenu();
+                  getActivity().getSupportFragmentManager().popBackStack(null, getActivity().getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+                  getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+
+                  return true;
+              }
+          }, getViewLifecycleOwner()
+        );
     }
 
     private void loadSuggestedRecipes() {

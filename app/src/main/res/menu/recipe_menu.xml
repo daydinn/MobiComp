@@ -11,14 +11,29 @@
         android:title="Delete Recipe"
         app:showAsAction="never"
         />
+    <item android:id="@+id/recipeSaveOfflineItem"
+        android:title="Save Offline"
+        app:showAsAction="never"
+        />
+    <item android:id="@+id/recipeDeleteOfflineItem"
+        android:title="Delete Offline"
+        app:showAsAction="never"
+        />
     <item android:id="@+id/recipeShareItem"
         android:title="Share"
+        app:showAsAction="never"
+        />
+    <item android:id="@+id/offlineModeItem"
+        android:title="Switch to Offline Mode"
+        app:showAsAction="never"
+        />
+    <item android:id="@+id/onlineModeItem"
+        android:title="Switch to Online Mode"
         app:showAsAction="never"
         />
 
     <item android:id="@+id/favoriteItem"
         android:icon="@drawable/favorite_off"
         android:title="Favorite"
-
         app:showAsAction="ifRoom"/>
 </menu>

@@ -1,9 +1,13 @@
 package com.example.rezeptapp;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 
 public class Recipe implements Serializable {
@@ -21,14 +25,14 @@ public class Recipe implements Serializable {
     private int servings;
     private String sourceUrl;
     private String image;
-    private ArrayList<String> cuisines;
-    private ArrayList<String> dishTypes;
-    private ArrayList<String> diets;
+    private ArrayList<String> cuisines = new ArrayList<>();
+    private ArrayList<String> dishTypes = new ArrayList<>();
+    private ArrayList<String> diets = new ArrayList<>();
     private String instructions;
     @SerializedName("nutrition")
-    private Nutrition nutrition;
+    private Nutrition nutrition = new Nutrition();
     @SerializedName("extendedIngredients")
-    private ArrayList<Ingredient> ingredientList;
+    private ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
     public Recipe() {
     }
@@ -241,10 +245,6 @@ public class Recipe implements Serializable {
         return ingredientList;
     }
 
-    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
-        this.ingredientList = ingredientList;
-    }
-
 
     public Nutrition getNutrition() {
         return nutrition;
@@ -293,7 +293,7 @@ public class Recipe implements Serializable {
     //Inner Nutrition class _______________________________________________
 
     public static class Nutrition{
-        private ArrayList<Nutrient> nutrients;
+        private ArrayList<Nutrient> nutrients = new ArrayList<>();
         public ArrayList<Nutrient> getNutrients(){
             return nutrients;
         }
@@ -301,11 +301,8 @@ public class Recipe implements Serializable {
             this.nutrients=nutrients;
         }
         public  class Nutrient {
-            @SerializedName("name")
             private String name;
-            @SerializedName("amount")
             private float amount;
-            @SerializedName("unit")
             private String unit;
 
             public String getName() {
