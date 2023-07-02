@@ -298,7 +298,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="16sp"
-                    android:text="Macronutrients" />
+                    android:text="Macronutrients (per portion)" />
 
                 <ImageView
                     android:id="@+id/RecipeMacroButton"
@@ -358,7 +358,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="16sp"
-                    android:text="Micronutrients" />
+                    android:text="Micronutrients (per portion)" />
 
 
                 <ImageView
@@ -417,7 +417,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="16sp"
-                    android:text="Vitamins" />
+                    android:text="Vitamins (per portion)" />
 
 
                 <ImageView

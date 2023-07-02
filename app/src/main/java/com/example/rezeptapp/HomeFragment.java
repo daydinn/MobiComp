@@ -44,8 +44,6 @@ public class HomeFragment extends Fragment {
 
         dbHandler = new DBHandler(getContext());
         if(MainActivity.isOnline){
-            Log.d("offline5","online");
-            Log.d("offline5", String.valueOf(MainActivity.isOnline));
             try {
                 randomList = searchManager.getRandomRecipe(10);
             } catch (InterruptedException e) {
@@ -55,8 +53,6 @@ public class HomeFragment extends Fragment {
             latestList = dbHandler.getLatestShortInfos(10);
         }
         else{
-            Log.d("offline5","offline");
-            Log.d("offline5", String.valueOf(MainActivity.isOnline));
             latestList = dbHandler.getLatestOfflineRecipes(10);
         }
 
@@ -87,6 +83,7 @@ public class HomeFragment extends Fragment {
         TextView latestTitle = view.findViewById(R.id.LatestRecipieTitel);
         if(!MainActivity.isOnline){
             randomTitle.setVisibility(View.INVISIBLE);
+            searchView.setVisibility(View.INVISIBLE);
         }
         if(latestList.isEmpty()){
             latestTitle.setVisibility(View.INVISIBLE);

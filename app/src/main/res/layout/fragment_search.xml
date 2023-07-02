@@ -343,7 +343,7 @@
                         android:gravity="center"
                         android:textColor="#000000"
                         android:textSize="18sp"
-                        android:text="Macronutrients" />
+                        android:text="Macronutrients (per portion)" />
 
                     <ImageView
                         android:id="@+id/macroButton"
@@ -391,7 +391,7 @@
                         android:gravity="center"
                         android:textColor="#000000"
                         android:textSize="18sp"
-                        android:text="Macronutrients" />
+                        android:text="Macronutrients (per portion)" />
 
                     <ImageView
                         android:id="@+id/microButton"
@@ -440,7 +440,7 @@
                         android:gravity="center"
                         android:textColor="#000000"
                         android:textSize="18sp"
-                        android:text="Macronutrients" />
+                        android:text="Vitamins  (per portion)" />
 
                     <ImageView
                         android:id="@+id/vitaminButton"
