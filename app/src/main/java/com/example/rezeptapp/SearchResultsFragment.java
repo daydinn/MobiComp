@@ -26,22 +26,14 @@ import java.util.Random;
 public class SearchResultsFragment extends Fragment {
 
     ImageView recipeImage;
-
     TextView recipeMinutes;
     TextView recipeHealthScore;
-
     TextView recipeIngredients;
-
     TextView recipeTitel;
-
     ImageButton reloadButton;
-
     Space spaceNewRecipe;
-
     TextView result;
-
     TextView ofresults;
-
     TextView NoRecipeFound;
 
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
@@ -65,12 +57,12 @@ public class SearchResultsFragment extends Fragment {
 
         //Takes the given bundle. If bundle contains data, casts them into searchResult object.             Rene Wentzel
         Bundle bundle = getArguments();
-        if(bundle!=null){
+        if (bundle != null) {
             searchResults = (ArrayList<ShortInfo>) bundle.getSerializable("searchResults");
         }
         //Set Optionbar Title
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Found Recipes");
-        AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
+        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
         assert appCompatActivity != null;
         Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
@@ -83,9 +75,6 @@ public class SearchResultsFragment extends Fragment {
         NoRecipeFound = view.findViewById(R.id.NoRecipeFound);
 
 
-
-
-
         loadFoundRecipe();
 
 
@@ -94,10 +83,8 @@ public class SearchResultsFragment extends Fragment {
 
     }
 
-    //random zahl generator
+    //random number generator for testing purpose
     public int RandInt() {
-
-
 
 
         Random rand = new Random();
@@ -107,55 +94,48 @@ public class SearchResultsFragment extends Fragment {
     }
 
 
-
     private void loadFoundRecipe() {
-
-
 
 
         Thread thread = new Thread() {
 
-                public void run() {
-
-                    //try {
-
-                    shortInfoList = searchManager.getTestData();
-                    Log.d("test", "nachricht");
-                    //Write first recipe into activity
-
-
-                    getActivity().runOnUiThread(new Runnable() {
-
-
-                        public void run() {
-
-                                ShortInfo shortinfo = shortInfoList.get(RandInt());
-                                //noch nicht fertig
-                                String id = String.valueOf(shortinfo.getId());
-                                //recipeMinutes.setText(id);
+            public void run() {
 
 
 
-                                String sizeofList= String.valueOf(shortInfoList.size());
-                                //ofresults.setText(sizeofList);
-
-                             if(searchResults.size() == 0){
-                                 NoRecipeFound.setVisibility(View.VISIBLE);
-                             }
-
-                            }
+                shortInfoList = searchManager.getTestData();
+                Log.d("test", "nachricht");
 
 
-                    });
-                    // } catch (InterruptedException e) {
-                    //    throw new RuntimeException(e);
-                    // }
-                }
-            };
-            thread.start();
+
+                getActivity().runOnUiThread(new Runnable() {
 
 
-        }
+                    public void run() {
+
+                        ShortInfo shortinfo = shortInfoList.get(RandInt());
+                        String id = String.valueOf(shortinfo.getId());
+                        //recipeMinutes.setText(id);
+
+
+                        String sizeofList = String.valueOf(shortInfoList.size());
+
+
+                        if (searchResults.size() == 0) {
+                            NoRecipeFound.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+
+
+                });
+
+            }
+        };
+        thread.start();
+
+
+    }
 
     private void loadSuggestedRecipes() {
         Thread thread = new Thread() {
@@ -168,4 +148,4 @@ public class SearchResultsFragment extends Fragment {
     }
 
 
-    }
+}
