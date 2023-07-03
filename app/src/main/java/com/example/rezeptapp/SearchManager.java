@@ -317,15 +317,13 @@ public class SearchManager {
      * @return Returns an ArrayList of created ShortInfo objects.
      */
     public ArrayList<ShortInfo> getTestData(){
-
         ArrayList<ShortInfo> testdata = new ArrayList<>();
         for(int i=0; i<10; i++){
             testdata.add(new ShortInfo(i, ("Recipe "+i), "https://spoonacular.com/recipeImages/638148-312x231.jpg"));
         }
         return testdata;
-
     }
-
+    //Not needed anymore
 
 }
 
