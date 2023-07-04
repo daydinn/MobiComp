@@ -40,6 +40,7 @@ public class SearchResultsFragment extends Fragment {
     private ArrayList<ShortInfo> searchResults = new ArrayList<>();
     private SearchManager searchManager = new SearchManager();
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +68,14 @@ public class SearchResultsFragment extends Fragment {
         Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
 
+        // creates a RcyclerView object to display recipes dynamically
         RecyclerView recyclerView = view.findViewById(R.id.myRecyclerview);
+        //attaches recipes to the RcyclerView Adapter
         SR2_RecyclerViewAdapter adapter = new SR2_RecyclerViewAdapter(this.getContext(), searchResults);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // text if recipes are not found
         NoRecipeFound = view.findViewById(R.id.NoRecipeFound);
 
 
@@ -83,17 +87,26 @@ public class SearchResultsFragment extends Fragment {
 
     }
 
-    //random number generator for testing purpose
+    /**
+     * a method for loading random recipes and updating the text view for testing purposes
+     *
+     * @return random number in range [0.. size of shortInfoList]
+     * @Author Diyar Aydin
+     */
     public int RandInt() {
 
 
         Random rand = new Random();
-        int i = rand.nextInt(shortInfoList.size()); //gives random in range [0..9]
+        int i = rand.nextInt(shortInfoList.size());
         return i;
 
     }
 
-
+    /**
+     * a method for loading the found recipes and updating the text view
+     *
+     * @Author Diyar Aydin
+     */
     private void loadFoundRecipe() {
 
 
@@ -102,10 +115,8 @@ public class SearchResultsFragment extends Fragment {
             public void run() {
 
 
-
                 shortInfoList = searchManager.getTestData();
                 Log.d("test", "nachricht");
-
 
 
                 getActivity().runOnUiThread(new Runnable() {
@@ -137,6 +148,11 @@ public class SearchResultsFragment extends Fragment {
 
     }
 
+    /**
+     * a method for loading random recipes and updating the text view for testing purposes
+     *
+     * @Author Diyar Aydin
+     */
     private void loadSuggestedRecipes() {
         Thread thread = new Thread() {
             public void run() {

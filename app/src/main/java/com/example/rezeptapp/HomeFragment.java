@@ -182,7 +182,11 @@ public class HomeFragment extends Fragment {
           }, getViewLifecycleOwner()
         );
     }
-
+    /**
+     * returns random recipes for Testing purposes
+     *
+     * @Author Diyar Aydin
+     */
     private void loadSuggestedRecipes() {
         Thread thread = new Thread() {
             public void run() {

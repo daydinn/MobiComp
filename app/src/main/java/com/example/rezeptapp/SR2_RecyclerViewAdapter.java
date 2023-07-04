@@ -2,7 +2,6 @@ package com.example.rezeptapp;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,30 +18,40 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class SR2_RecyclerViewAdapter extends RecyclerView.Adapter<SR2_RecyclerViewAdapter.SR2_ViewHolder>{
+public class SR2_RecyclerViewAdapter extends RecyclerView.Adapter<SR2_RecyclerViewAdapter.SR2_ViewHolder> {
 
     Context context;
     ArrayList<ShortInfo> shortInfoList;
 
-    public SR2_RecyclerViewAdapter(Context context, ArrayList<ShortInfo> shortInfoList){
+    public SR2_RecyclerViewAdapter(Context context, ArrayList<ShortInfo> shortInfoList) {
         this.context = context;
         this.shortInfoList = shortInfoList;
     }
 
+    /**
+     * a method for inflating the layout
+     *
+     * @return new RecyclerViewAdapter
+     * @Author Diyar Aydin
+     */
     @NonNull
     @Override
     public SR2_RecyclerViewAdapter.SR2_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       //This is where you inflate the layout(Giving a look to our rows)
+
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recler_view_row2, parent, false);
         return new SR2_RecyclerViewAdapter.SR2_ViewHolder(view);
     }
 
+    /**
+     * a method for assigning the values based on the position of recycler view, which has been created in the recycler_view_row layout file
+     *
+     * @Author Diyar Aydin, Rene Wentzel
+     */
     @Override
     public void onBindViewHolder(@NonNull SR2_RecyclerViewAdapter.SR2_ViewHolder holder, int position) {
-        //assigning values to the view we created in the recycler_view_row layout file
-        //based on the position of the recycler view
+
 
         holder.tvID.setText(String.valueOf(shortInfoList.get(position).getId()));
         holder.tvTitle.setText(shortInfoList.get(position).getTitle());
@@ -67,6 +76,12 @@ public class SR2_RecyclerViewAdapter extends RecyclerView.Adapter<SR2_RecyclerVi
         });
     }
 
+    /**
+     * returns the number of recipes to Recyclerview
+     *
+     * @return int
+     * @Author Diyar Aydin
+     */
     @Override
     public int getItemCount() {
         //the recycler view just wants to know the number of the items
@@ -74,15 +89,12 @@ public class SR2_RecyclerViewAdapter extends RecyclerView.Adapter<SR2_RecyclerVi
         return shortInfoList.size();
     }
 
-
-
-
-
-
-    public static class SR2_ViewHolder extends RecyclerView.ViewHolder{
-        //grabbing the views from our recycler_view_row layout file
-        //Kinda like in the onCreate method
-
+    /**
+     * grabbing the views from recycler_view_row layout file, kinda like in the onCreate method
+     *
+     * @Author Diyar Aydin
+     */
+    public static class SR2_ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvID;
         TextView tvTitle;

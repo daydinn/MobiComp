@@ -21,14 +21,6 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isOnline = true;
 
 
-/*
-    ImageView homeButton;
-    ImageView recipiesButton;
-    ImageView favoritesButton;
-    ImageView searchButton;
-
-    
- */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).addToBackStack(null).commit(); //erste Page muss immer unten sein
 
+        /**
+         * A SelectedListener method for navigating between fragments via Tabfragment
+         * @Author Diyar Aydin
+         * @return boolean
+         */
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
