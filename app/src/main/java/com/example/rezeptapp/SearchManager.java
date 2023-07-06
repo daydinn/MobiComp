@@ -159,11 +159,11 @@ public class SearchManager {
                     Log.d("Json Parse", myResponse);
                     Gson gson = new Gson();
                     shortInfoList = gson.fromJson(myResponse, new TypeToken<ArrayList<ShortInfo>>() {
-                    }.getType());
+                    }.getType());/*
                     for (int i = 0; i < shortInfoList.size(); i++) {
                         Log.d("Json Parse", shortInfoList.get(i).getTitle());
                         Log.d("Json Parse", String.valueOf(shortInfoList.get(i).getId()));
-                    }
+                    }*/
                     response.close();
                     countDownLatch.countDown();
                 }
