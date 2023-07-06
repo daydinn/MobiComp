@@ -1,32 +1,23 @@
 package com.example.rezeptapp;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -65,7 +56,7 @@ public class CookingBookFragment extends Fragment {
             Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("My Favorite Recipes");
         AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
         assert appCompatActivity != null;
-        Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        //Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
 
         recyclerView = view.findViewById(R.id.CookingBookRecycler);
@@ -73,11 +64,17 @@ public class CookingBookFragment extends Fragment {
 
         setUpOptionMenu();
 
-        //Setting up recipe cards
-
+        //Setting up recipe cards (card views) after fragment is created
+        /**
+         * Loads saved recipes from database depending on Online/Offline mode.
+         * Sets up a recycler view with card views for each recipe.
+         * Is executed after other pending tasks are finished.
+         * @Author Rene Wentzel
+         */
         view.post(new Runnable() {
             @Override
             public void run() {
+                //Gets list of saved recipes depending on online/offline mode
                 if(MainActivity.isOnline){
                     if(isFavorite)
                         dbResults = dbHandler.getAllFavoriteShortInfo();
@@ -90,7 +87,7 @@ public class CookingBookFragment extends Fragment {
                     else
                         dbResults=dbHandler.getAllOfflineRecipes();
                 }
-
+                //Sets recycler view for recipe cards
                 SR_RecyclerViewAdapter_Cookingbook myAdapter = new SR_RecyclerViewAdapter_Cookingbook(getContext(), dbResults);
                 recyclerView.setAdapter(myAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -102,7 +99,7 @@ public class CookingBookFragment extends Fragment {
     }
 
     /**
-     * Sets up an Option Menu in the top ActionBar.
+     * Sets up an Option Menu in the top Toolbar.
      * Includes options to switch between offline and online mode.
      * @Author Rene Wentzel
      */
@@ -131,14 +128,17 @@ public class CookingBookFragment extends Fragment {
 
               @Override
               public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                  //Switch to Offline Mode
                   if(menuItem.getItemId()==R.id.offlineModeItem){
                       MainActivity.isOnline=false;
                       Snackbar.make(getView(), "You are in Offline Mode now", Snackbar.LENGTH_SHORT).show();
                   }
+                  //Switch to Online Mode
                   else if(menuItem.getItemId()==R.id.onlineModeItem){
                       MainActivity.isOnline=true;
                       Snackbar.make(getView(), "You are in Online Mode now", Snackbar.LENGTH_SHORT).show();
                   }
+                  //Updates the toolbar, pops the backstack and navigates to the home page
                   requireActivity().invalidateOptionsMenu();
                   getActivity().getSupportFragmentManager().popBackStack(null, getActivity().getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
                   getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();

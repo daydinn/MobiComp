@@ -21,14 +21,26 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isOnline = true;
 
 
-
+    /**
+     * Creates a toolbar at the top of the app.
+     * Adds a customized icon for the overflow menu.
+     * Sets up a back button to the toolbar.
+     * Creates a navigation bat at the bottom of the app.
+     * Sets up listener to the items of the navigation bar.
+     * Loads a new HomeFragment and add it to the backstack.
+     * @Author Rene Wentzel, Diyar Aydin
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        //Setup for the top ActionBar           René Wentzel
+        //Setup for the top Toolbar
         myToolbar = findViewById(R.id.myToolbar);
         myToolbar.setOverflowIcon(getDrawable(R.drawable.baseline_menu_24));
         myToolbar.setNavigationIcon(getDrawable(R.drawable.baseline_arrow_24));

@@ -30,7 +30,6 @@ import java.util.Objects;
 
 public class HomeFragment extends Fragment {
 
-
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
     private ArrayList<Recipe> randomList = new ArrayList<>();
     private ArrayList<ShortInfo> latestList = new ArrayList<>();
@@ -38,6 +37,13 @@ public class HomeFragment extends Fragment {
     DBHandler dbHandler;
     SearchView searchView;
 
+    /**
+     * Requests random recipes from SearchManager, if in Online mode
+     * Loads list of recently added Recipes depending on Offline/Online mode.
+     * @Author Rene Wentzel
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,13 +65,29 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /**
+     * Sets Toolbar color depending on Online/Offline mode.
+     * Creates recyclerview of random recipes, if in Online mode.
+     * Creates recyclerview of recently added recipes depending on Online/Offline mode.
+     * Creates a searchview listener, if in Online mode.
+     * @Author Rene Wentzel
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-        //Change Optionbar                              Rene Wentzel
+        //Change Toolbar                              Rene Wentzel
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Recipe Rhapsody");
         AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
         assert appCompatActivity != null;
@@ -136,7 +158,7 @@ public class HomeFragment extends Fragment {
 
 
     /**
-     * Sets up an Option Menu in the top ActionBar.
+     * Sets up an Option Menu in the top Toolbar.
      * Includes options to switch between offline and online mode.
      * @Author Rene Wentzel
      */
@@ -165,14 +187,17 @@ public class HomeFragment extends Fragment {
 
               @Override
               public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                  //Switch to Offline mode
                   if(menuItem.getItemId()==R.id.offlineModeItem){
                       MainActivity.isOnline=false;
                       Snackbar.make(getView(), "You are in Offline Mode now", Snackbar.LENGTH_SHORT).show();
                   }
                   else if(menuItem.getItemId()==R.id.onlineModeItem){
+                      //Switch to Online mode
                       MainActivity.isOnline=true;
                       Snackbar.make(getView(), "You are in Online Mode now", Snackbar.LENGTH_SHORT).show();
                   }
+                  //Updates the toolbar, pops the backstack and navigates to the home page
                   requireActivity().invalidateOptionsMenu();
                   getActivity().getSupportFragmentManager().popBackStack(null, getActivity().getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
                   getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();

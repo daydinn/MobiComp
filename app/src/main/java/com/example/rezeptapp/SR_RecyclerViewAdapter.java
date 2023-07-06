@@ -48,6 +48,10 @@ public class SR_RecyclerViewAdapter extends RecyclerView.Adapter<SR_RecyclerView
         holder.tvTitle.setText(shortInfoList.get(position).getTitle());
         Picasso.get().load(shortInfoList.get(position).getImage()).into(holder.imageView);
 
+        /**
+         * Navigates to the chosen recipe.
+         * @Author Rene Wentzel
+         */
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

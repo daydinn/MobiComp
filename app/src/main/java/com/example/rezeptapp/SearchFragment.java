@@ -111,7 +111,22 @@ public class SearchFragment extends Fragment {
     SeekBar timePicker;
     TextView minuteText;
 
-
+    /**
+     * Sets up all fields of the page.
+     * Sets button to add/Remove ingredient and excluded-ingredient editTextViews.
+     * Sets up dialogues for cuisine, diet, intolerace and dysh type selection.
+     * Sets up listener for search button.
+     * @Author Rene Wentzel
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -1066,7 +1081,12 @@ public class SearchFragment extends Fragment {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-
+    /**
+     * Translates dp value to pixel value.
+     * @Author Rene Wentzel
+     * @param dp
+     * @return returns dp value in pixel
+     */
     private int dpToPx(int dp) {
         float density = getResources().getDisplayMetrics().density;
         return (int) (dp * density);

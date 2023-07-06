@@ -155,15 +155,10 @@ public class SearchManager {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful() && response.body() != null) {
                     String myResponse = response.body().string();
-                    //shortInfoList=parseShortRecipe(myResponse);
                     Log.d("Json Parse", myResponse);
                     Gson gson = new Gson();
                     shortInfoList = gson.fromJson(myResponse, new TypeToken<ArrayList<ShortInfo>>() {
-                    }.getType());/*
-                    for (int i = 0; i < shortInfoList.size(); i++) {
-                        Log.d("Json Parse", shortInfoList.get(i).getTitle());
-                        Log.d("Json Parse", String.valueOf(shortInfoList.get(i).getId()));
-                    }*/
+                    }.getType());
                     response.close();
                     countDownLatch.countDown();
                 }
@@ -254,12 +249,6 @@ public class SearchManager {
                     JsonObject jo = (JsonObject) JsonParser.parseString(myResponse);
                     Gson gson = new Gson();
                     recipeList = gson.fromJson(jo.getAsJsonArray("recipes"), new TypeToken<ArrayList<Recipe>>(){}.getType());
-                    /*for (int i = 0; i < recipeList.size(); i++) {
-                        Log.d("Json Parse", recipeList.get(i).getTitle());
-                        Log.d("Json Parse", String.valueOf(recipeList.get(i).getId()));
-                        Log.d("Json Parse", recipeList.get(i).getImage());
-                        Log.d("Json Parse", String.valueOf(recipeList.get(i).getHealthScore()));
-                    }*/
                     response.close();
                     countDownLatch.countDown();
                 }

@@ -73,7 +73,14 @@ public class RecipePageFragment extends Fragment {
 
     boolean isValid = false;
 
-
+    /**
+     * Requests recipe from API when in Online mode.
+     * Requests recipe from Database when in Offline mode.
+     * Sets recipe to invalid and load no data, if no id is given via bundle.
+     * @Author Rene Wentzel
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +117,22 @@ public class RecipePageFragment extends Fragment {
     }
 
 
-
+    /**
+     * Sets up recipe, if recipe is valid.
+     * Changes title of the toolbar and fills all views with respective recipe values.
+     * Sets icons for diets/intolerances.
+     * Sets up show/hide button for nutrient card views.
+     * @Author Rene Wentzel
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -268,15 +290,12 @@ public class RecipePageFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Sets up an Option Menu in the top ActionBar.
+     * Includes saving/deleting a recipe to the local storage and setting/removing saved recipes to/from favorite.
+     * @Author Rene Wentzel
+     */
     private void setUpOptionMenu() {
-
-
-        /**
-         * Sets up an Option Menu in the top ActionBar.
-         * Includes saving/deleting a recipe to the local storage and setting/removing saved recipes to/from favorite.
-         * To do: Erweitern sobald fertig
-         * @Author Rene Wentzel
-         */
         requireActivity().addMenuProvider(new MenuProvider() {
               @Override
               public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
@@ -439,7 +458,12 @@ public class RecipePageFragment extends Fragment {
         );
     }
 
-
+    /**
+     * Translates dp value to pixel value.
+     * @Author Rene Wentzel
+     * @param dp
+     * @return returns dp value in pixel
+     */
     private int dpToPx(int dp) {
         float density = getResources().getDisplayMetrics().density;
         return (int) (dp * density);

@@ -37,81 +37,39 @@ public class Recipe implements Serializable {
     public Recipe() {
     }
 
-    /**
-     * Returns whether the recipe is vegetarian or not.
-     * @Author Rene Wentzel
-     * @return boolean
-     */
     public boolean isVegetarian() {
         return vegetarian;
     }
 
-    /**
-     * Sets the state of the recipe being vegetarian or not.
-     * @Author Rene Wentzel
-     * @param vegetarian boolean
-     */
-    public void setVegetarian(boolean vegetarian) {
-        this.vegetarian = vegetarian;
-    }
-
-    /**
-     * Returns whether the recipe is vegean or not.
-     * @Author Rene Wentzel
-     * @return boolean
-     */
     public boolean isVegan() {
         return vegan;
     }
 
-    /**
-     * Sets the state of the recipe being vegan or not.
-     * @Author Rene Wentzel
-     * @param vegan boolean
-     */
-    public void setVegan(boolean vegan) {
-        this.vegan = vegan;
-    }
 
     public boolean isGlutenFree() {
         return glutenFree;
     }
 
-    public void setGlutenFree(boolean glutenFree) {
-        this.glutenFree = glutenFree;
-    }
 
     public boolean isDairyFree() {
         return dairyFree;
     }
 
-    public void setDairyFree(boolean dairyFree) {
-        this.dairyFree = dairyFree;
-    }
 
     public boolean isSustainable() {
         return sustainable;
     }
 
-    public void setSustainable(boolean sustainable) {
-        this.sustainable = sustainable;
-    }
 
     public boolean isLowFodmap() {
         return lowFodmap;
     }
 
-    public void setLowFodmap(boolean lowFodmap) {
-        this.lowFodmap = lowFodmap;
-    }
 
     public int getHealthScore() {
         return healthScore;
     }
 
-    public void setHealthScore(int healthScore) {
-        this.healthScore = healthScore;
-    }
 
     public int getId() {
         return id;
@@ -133,65 +91,31 @@ public class Recipe implements Serializable {
         return readyInMinutes;
     }
 
-    public void setReadyInMinutes(int readyInMinutes) {
-        this.readyInMinutes = readyInMinutes;
-    }
 
     public int getServings() {
         return servings;
     }
 
-    public void setServings(int servings) {
-        this.servings = servings;
-    }
 
     public String getSourceUrl() {
         return sourceUrl;
     }
 
-    public void setSourceUrl(String sourceUrl) {
-        this.sourceUrl = sourceUrl;
-    }
 
     public String getImage() {
         return image;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public ArrayList<String> getCuisines() {
         return cuisines;
     }
 
-    public void setCuisines(ArrayList<String> cuisines) {
-        this.cuisines = cuisines;
-    }
-
-    public ArrayList<String> getDishTypes() {
-        return dishTypes;
-    }
-
-    public void setDishTypes(ArrayList<String> dishTypes) {
-        this.dishTypes = dishTypes;
-    }
-
-    public ArrayList<String> getDiets() {
-        return diets;
-    }
-
-    public void setDiets(ArrayList<String> diets) {
-        this.diets = diets;
-    }
 
     public String getInstructions() {
         return instructions;
     }
 
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
-    }
 
     public boolean isFavorite() {
         return favorite;
@@ -201,6 +125,11 @@ public class Recipe implements Serializable {
         this.favorite = favorite;
     }
 
+    /**
+     * Filters classes nutrient value by macro nutrients and returns them.
+     * @Author Rene Wentzel
+     * @return Returns an Arraylist of Nutrient objects (ArrayList<Nutrition.Nutrient>) of macro nutrients.
+     */
     public ArrayList<Nutrition.Nutrient> getMacroNutrients(){
         ArrayList<Nutrition.Nutrient> macroNutrients = new ArrayList<>();
         String[] searched = {"Fat", "Saturated Fat", "Carbohydrates", "Net Carbohydrates", "Sugar"};
@@ -214,6 +143,12 @@ public class Recipe implements Serializable {
         }
         return macroNutrients;
     }
+
+    /**
+     * Filters classes nutrient value by micro nutrients and returns them.
+     * @Author Rene Wentzel
+     * @return Returns an Arraylist of Nutrient objects (ArrayList<Nutrition.Nutrient>) of micro nutrients.
+     */
     public ArrayList<Nutrition.Nutrient> getMicroNutrients(){
         ArrayList<Nutrition.Nutrient> microNutrients = new ArrayList<>();
         String[] searched = {"Cholesterol", "Sodium", "Protein", "Selenium", "Phosphorus", "Iron", "Potassium", "Folate", "Magnesium", "Zinc", "Copper", "Manganese", "Fiber", "Calcium"};
@@ -227,6 +162,12 @@ public class Recipe implements Serializable {
         }
         return microNutrients;
     }
+
+    /**
+     * Filters classes nutrient value by vitamins and returns them.
+     * @Author Rene Wentzel
+     * @return Returns an Arraylist of Nutrient objects (ArrayList<Nutrition.Nutrient>) of vitamins.
+     */
     public ArrayList<Nutrition.Nutrient> getVitamins(){
         ArrayList<Nutrition.Nutrient> vitamins = new ArrayList<>();
         String[] searched = {"Vitamin A", "Vitamin B1", "Vitamin B2", "Vitamin B3", "Vitamin B5", "Vitamin B6", "Vitamin B12", "Vitamin C", "Vitamin D", "Vitamin E", "Vitamin K"};
@@ -245,14 +186,6 @@ public class Recipe implements Serializable {
         return ingredientList;
     }
 
-
-    public Nutrition getNutrition() {
-        return nutrition;
-    }
-
-    public void setNutrition(Nutrition nutrition) {
-        this.nutrition = nutrition;
-    }
 
 
     // Inner Ingredient class __________________________________________________________________
@@ -276,16 +209,9 @@ public class Recipe implements Serializable {
             return amount;
         }
 
-        public void setAmount(double amount) {
-            this.amount = amount;
-        }
 
         public String getUnit() {
             return unit;
-        }
-
-        public void setUnit(String unit) {
-            this.unit = unit;
         }
     }
 
@@ -296,9 +222,6 @@ public class Recipe implements Serializable {
         private ArrayList<Nutrient> nutrients = new ArrayList<>();
         public ArrayList<Nutrient> getNutrients(){
             return nutrients;
-        }
-        public void setNutrients(ArrayList<Nutrient> nutrients){
-            this.nutrients=nutrients;
         }
         public  class Nutrient {
             private String name;
@@ -317,17 +240,11 @@ public class Recipe implements Serializable {
                 return amount;
             }
 
-            public void setAmount(float amount) {
-                this.amount = amount;
-            }
 
             public String getUnit() {
                 return unit;
             }
 
-            public void setUnit(String unit) {
-                this.unit = unit;
-            }
         }
     }
 

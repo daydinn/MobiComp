@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
+//Table for online recipes
     private static final String DB_NAME =  "recipe_rhapsody_db";
     private static final int DB_VERSION = 1;
     private static final String TABLE_NAME = "myRecipes";
@@ -21,7 +22,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String IMAGE_COL = "image";
     private static final String FAVORITE_COL = "favorite";
 
-
+//Table for offline recipes
     private static final String TABLE_NAME_OFFLINE = "myOfflineRecipes";
     private static final String INDEX_COL_OFFLINE = "indexcol";
     private static final String ID_COL_OFFLINE = "id";
@@ -33,6 +34,12 @@ public class DBHandler extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+    /**
+     * Creates the database, if not already existent.
+     * Creates two tables, one for online recipes and one for offline recipes.
+     * @Author Rene Wentzel
+     * @param db The database.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -76,7 +83,7 @@ public class DBHandler extends SQLiteOpenHelper {
         // Open Database in Write Mode
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //Create new Conten values
+        //Create new Content values
         ContentValues values = new ContentValues();
 
         //Serialize the Recipe object with Gson

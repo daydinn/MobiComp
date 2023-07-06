@@ -25,15 +25,6 @@ import java.util.Random;
 
 public class SearchResultsFragment extends Fragment {
 
-    ImageView recipeImage;
-    TextView recipeMinutes;
-    TextView recipeHealthScore;
-    TextView recipeIngredients;
-    TextView recipeTitel;
-    ImageButton reloadButton;
-    Space spaceNewRecipe;
-    TextView result;
-    TextView ofresults;
     TextView NoRecipeFound;
 
     private ArrayList<ShortInfo> shortInfoList = new ArrayList<>();
@@ -48,7 +39,20 @@ public class SearchResultsFragment extends Fragment {
 
     }
 
-
+    /**
+     * Sets up toolbar title
+     * Takes the given ShortInfo objects and displays them in recycler view.
+     * @Author Rene Wentzel Diyar Aydin
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -65,7 +69,6 @@ public class SearchResultsFragment extends Fragment {
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("Found Recipes");
         AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
         assert appCompatActivity != null;
-        Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
 
         // creates a RcyclerView object to display recipes dynamically
